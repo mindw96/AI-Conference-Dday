@@ -18,6 +18,7 @@ enum DdayCoreChecks {
         try checkUnknownConferenceDataValuesUseFallbacks()
         try checkConferenceDataUpdaterFallsBackWhenCacheIsInvalid()
         try checkLoadsProjectConferenceData()
+        try checkBundledMacConferenceDataMatchesPublicData()
 
         print("DdayCoreChecks passed")
     }
@@ -361,6 +362,20 @@ enum DdayCoreChecks {
         )
 
         try checkProjectConferenceDataUsesStableFeedSchema(url: url)
+    }
+
+    private static func checkBundledMacConferenceDataMatchesPublicData() throws {
+        let root = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+        let publicURL = root.appendingPathComponent("data/conferences.json")
+        let bundledURL = root.appendingPathComponent("Sources/DdayApp/Resources/conferences.json")
+
+        let publicData = try Data(contentsOf: publicURL)
+        let bundledData = try Data(contentsOf: bundledURL)
+
+        try expect(
+            publicData == bundledData,
+            "Sources/DdayApp/Resources/conferences.json must match data/conferences.json"
+        )
     }
 
     private static func checkProjectConferenceDataUsesStableFeedSchema(url: URL) throws {

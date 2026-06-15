@@ -748,7 +748,7 @@ private final class DeadlineMenuSelection: NSObject {
 }
 
 private extension ConferenceSubcategory {
-    static let menuOrder: [ConferenceSubcategory] = [.ml, .cv, .nlp, .generalAI]
+    static let menuOrder: [ConferenceSubcategory] = Self.allCases
 }
 
 private extension Array where Element == Conference {
