@@ -53,6 +53,11 @@ xcrun notarytool submit "$DMG_PATH" \
 xcrun stapler staple "$DMG_PATH"
 xcrun stapler validate "$DMG_PATH"
 
+xattr -d com.apple.FinderInfo "$DMG_PATH" 2>/dev/null || true
+xattr -d "com.apple.fileprovider.fpfs#P" "$DMG_PATH" 2>/dev/null || true
+xattr -d com.apple.FinderInfo "$ZIP_PATH" 2>/dev/null || true
+xattr -d "com.apple.fileprovider.fpfs#P" "$ZIP_PATH" 2>/dev/null || true
+
 shasum -a 256 "$ZIP_PATH" > "$ZIP_PATH.sha256"
 shasum -a 256 "$DMG_PATH" > "$DMG_PATH.sha256"
 
