@@ -8,12 +8,13 @@ fi
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 TAG="$1"
-APP_DIR="$ROOT/build/Dday.app"
+APP_DIR="${DDAY_APP_DIR:-$ROOT/build/Dday.app}"
 DIST_DIR="$ROOT/dist"
-DMG_ROOT="$ROOT/build/dmg-root"
-RW_DMG="$ROOT/build/Dday-${TAG}-rw.dmg"
+WORK_ROOT="$(mktemp -d /private/tmp/dday-package.XXXXXX)"
+DMG_ROOT="$WORK_ROOT/dmg-root"
+RW_DMG="$WORK_ROOT/Dday-${TAG}-rw.dmg"
 MOUNT_DIR=""
-ATTACH_PLIST="$ROOT/build/Dday-${TAG}-attach.plist"
+ATTACH_PLIST="$WORK_ROOT/Dday-${TAG}-attach.plist"
 DMG_PATH="$DIST_DIR/Dday-${TAG}.dmg"
 ZIP_PATH="$DIST_DIR/Dday-${TAG}.zip"
 BACKGROUND_PATH="$DMG_ROOT/.background/dmg-background.png"
@@ -74,6 +75,7 @@ cleanup() {
   if [[ -n "$MOUNT_DIR" ]]; then
     hdiutil detach "$MOUNT_DIR" -quiet || true
   fi
+  rm -rf "$WORK_ROOT"
 }
 trap cleanup EXIT
 
@@ -141,6 +143,7 @@ hdiutil convert "$RW_DMG" \
   -o "$DMG_PATH"
 
 rm -f "$RW_DMG"
+rm -rf "$WORK_ROOT"
 
 shasum -a 256 "$ZIP_PATH" > "$ZIP_PATH.sha256"
 shasum -a 256 "$DMG_PATH" > "$DMG_PATH.sha256"

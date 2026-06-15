@@ -9,14 +9,20 @@ fi
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 TAG="$1"
 VERSION="${TAG#v}"
-APP_DIR="$ROOT/build/Dday.app"
 DIST_DIR="$ROOT/dist"
 DMG_PATH="$DIST_DIR/Dday-${TAG}.dmg"
 ZIP_PATH="$DIST_DIR/Dday-${TAG}.zip"
 NOTARY_ZIP="$ROOT/build/Dday-${TAG}-notary.zip"
+RELEASE_ROOT="$(mktemp -d /private/tmp/dday-release.XXXXXX)"
+APP_DIR="$RELEASE_ROOT/Dday.app"
 
 SIGN_IDENTITY="${MACOS_SIGN_IDENTITY:-${SIGN_IDENTITY:-Developer ID Application}}"
 NOTARY_PROFILE="${NOTARYTOOL_PROFILE:-DdayNotary}"
+
+cleanup() {
+  rm -rf "$RELEASE_ROOT"
+}
+trap cleanup EXIT
 
 cd "$ROOT"
 
@@ -26,7 +32,7 @@ if ! security find-identity -p codesigning -v | grep -Fq "$SIGN_IDENTITY"; then
   exit 65
 fi
 
-APP_VERSION="$VERSION" MACOS_SIGN_IDENTITY="$SIGN_IDENTITY" ./scripts/build_app.sh
+DDAY_APP_DIR="$APP_DIR" APP_VERSION="$VERSION" MACOS_SIGN_IDENTITY="$SIGN_IDENTITY" ./scripts/build_app.sh
 codesign --verify --deep --strict --verbose=2 "$APP_DIR"
 spctl -a -vv "$APP_DIR" || true
 
@@ -38,7 +44,7 @@ xcrun notarytool submit "$NOTARY_ZIP" \
 xcrun stapler staple "$APP_DIR"
 xcrun stapler validate "$APP_DIR"
 
-./scripts/package_release.sh "$TAG"
+DDAY_APP_DIR="$APP_DIR" ./scripts/package_release.sh "$TAG"
 
 codesign --force --timestamp --sign "$SIGN_IDENTITY" "$DMG_PATH"
 xcrun notarytool submit "$DMG_PATH" \

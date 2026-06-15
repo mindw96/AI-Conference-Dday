@@ -2,10 +2,17 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-APP_DIR="$ROOT/build/Dday.app"
+FINAL_APP_DIR="${DDAY_APP_DIR:-$ROOT/build/Dday.app}"
+STAGING_ROOT="$(mktemp -d /private/tmp/dday-build.XXXXXX)"
+APP_DIR="$STAGING_ROOT/Dday.app"
 SIGN_IDENTITY="${MACOS_SIGN_IDENTITY:-${SIGN_IDENTITY:-}}"
 APP_VERSION="${APP_VERSION:-}"
 APP_BUILD_VERSION="${APP_BUILD_VERSION:-}"
+
+cleanup() {
+  rm -rf "$STAGING_ROOT"
+}
+trap cleanup EXIT
 
 version_to_build_number() {
   local version="${1%%-*}"
@@ -20,6 +27,16 @@ version_to_build_number() {
   else
     printf "%s" "$1"
   fi
+}
+
+clear_macos_metadata() {
+  local target="$1"
+
+  xattr -cr "$target" || true
+  while IFS= read -r item; do
+    xattr -d com.apple.FinderInfo "$item" 2>/dev/null || true
+    xattr -d "com.apple.fileprovider.fpfs#P" "$item" 2>/dev/null || true
+  done < <(find "$target" -print)
 }
 
 if [[ -z "$APP_BUILD_VERSION" && -n "$APP_VERSION" ]]; then
@@ -50,13 +67,20 @@ if [[ -z "$SPARKLE_FRAMEWORK" ]]; then
 fi
 ditto "$SPARKLE_FRAMEWORK" "$APP_DIR/Contents/Frameworks/Sparkle.framework"
 chmod +x "$APP_DIR/Contents/MacOS/Dday"
+clear_macos_metadata "$APP_DIR"
 
 if [[ -n "$SIGN_IDENTITY" ]]; then
   codesign --force --deep --options runtime --timestamp --sign "$SIGN_IDENTITY" "$APP_DIR/Contents/Frameworks/Sparkle.framework"
+  clear_macos_metadata "$APP_DIR"
   codesign --force --options runtime --timestamp --sign "$SIGN_IDENTITY" "$APP_DIR"
 else
   codesign --force --deep --sign - "$APP_DIR/Contents/Frameworks/Sparkle.framework"
+  clear_macos_metadata "$APP_DIR"
   codesign --force --sign - "$APP_DIR"
 fi
 
-echo "Built $APP_DIR"
+rm -rf "$FINAL_APP_DIR"
+mkdir -p "$(dirname "$FINAL_APP_DIR")"
+ditto --norsrc "$APP_DIR" "$FINAL_APP_DIR"
+
+echo "Built $FINAL_APP_DIR"
