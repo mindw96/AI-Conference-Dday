@@ -23,11 +23,13 @@
 		A10000000000000000000039 /* MobileNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000038 /* MobileNotificationScheduler.swift */; };
 		A1000000000000000000003B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000003A /* Assets.xcassets */; };
 		A1000000000000000000003D /* MobileCalendarEventWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000003C /* MobileCalendarEventWriter.swift */; };
+		A1000000000000000000003F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000003E /* PrivacyInfo.xcprivacy */; };
 		A20000000000000000000001 /* MobileWidgetSnapshotStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000011 /* MobileWidgetSnapshotStore.swift */; };
 		A20000000000000000000002 /* MobileWidgetSnapshotStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000011 /* MobileWidgetSnapshotStore.swift */; };
 		A20000000000000000000003 /* DdayWidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000012 /* DdayWidgetsBundle.swift */; };
 		A20000000000000000000004 /* DeadlineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000013 /* DeadlineWidget.swift */; };
 		A20000000000000000000005 /* DdayWidgets.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A20000000000000000000010 /* DdayWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A20000000000000000000006 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000003E /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,7 @@
 		A10000000000000000000038 /* MobileNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileNotificationScheduler.swift; sourceTree = "<group>"; };
 		A1000000000000000000003A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1000000000000000000003C /* MobileCalendarEventWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileCalendarEventWriter.swift; sourceTree = "<group>"; };
+		A1000000000000000000003E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		A20000000000000000000010 /* DdayWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DdayWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A20000000000000000000011 /* MobileWidgetSnapshotStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileWidgetSnapshotStore.swift; sourceTree = "<group>"; };
 		A20000000000000000000012 /* DdayWidgetsBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DdayWidgetsBundle.swift; sourceTree = "<group>"; };
@@ -124,6 +127,7 @@
 			children = (
 				A10000000000000000000020 /* DdayMobileApp.swift */,
 				A20000000000000000000015 /* DdayMobile.entitlements */,
+				A1000000000000000000003E /* PrivacyInfo.xcprivacy */,
 				A10000000000000000000004 /* App */,
 				A10000000000000000000005 /* Models */,
 				A10000000000000000000006 /* Screens */,
@@ -291,6 +295,7 @@
 			files = (
 				A1000000000000000000003B /* Assets.xcassets in Resources */,
 				A10000000000000000000031 /* conferences.json in Resources */,
+				A1000000000000000000003F /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +303,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A20000000000000000000006 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,7 +474,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_ENTITLEMENTS = DdayMobile/DdayMobile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 4J7HGK26PF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -505,7 +511,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_ENTITLEMENTS = DdayMobile/DdayMobile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 4J7HGK26PF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -543,7 +549,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_ENTITLEMENTS = DdayWidgets/DdayWidgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 4J7HGK26PF;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = DdayWidgets/Info.plist;
@@ -575,7 +581,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_ENTITLEMENTS = DdayWidgets/DdayWidgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 4J7HGK26PF;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = DdayWidgets/Info.plist;

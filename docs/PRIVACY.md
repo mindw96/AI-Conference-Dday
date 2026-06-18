@@ -9,6 +9,9 @@ Dday is local-first and does not collect personal data.
 - User settings are stored locally with `UserDefaults`.
 - Custom D-Days are stored locally on the device.
 - Selected conference settings are stored locally on the device.
+- When the user chooses to add a deadline or conference period to Calendar,
+  Dday writes only that selected event to the device calendar. Dday does not
+  read existing calendar events, and calendar data is not sent anywhere.
 
 The app can manually fetch the latest public conference list from this project's
 GitHub repository when the user chooses `Check Conference List Updates`. That
