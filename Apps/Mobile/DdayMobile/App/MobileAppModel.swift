@@ -277,6 +277,34 @@ final class MobileAppModel: ObservableObject {
         try? calculator.display(for: deadline)
     }
 
+    func calendarEventDraft(for summary: MobileDeadlineSummary) -> MobileCalendarEventDraft? {
+        switch summary.source {
+        case .conference(let conferenceID, let deadlineID):
+            guard let conference = store?.conference(id: conferenceID),
+                  let deadline = conference.deadline(id: deadlineID) else {
+                return nil
+            }
+
+            if deadline.type == .conferenceStart || deadline.type == .conferenceEnd {
+                return conferencePeriodCalendarEventDraft(for: conference)
+            }
+
+            return deadlineCalendarEventDraft(
+                title: "\(conference.name) - \(deadline.label)",
+                summary: summary
+            )
+        case .custom(let id):
+            guard userDeadlines.contains(where: { $0.id == id }) else {
+                return nil
+            }
+
+            return deadlineCalendarEventDraft(
+                title: "\(summary.title) - \(summary.deadlineLabel)",
+                summary: summary
+            )
+        }
+    }
+
     func setNotificationsEnabled(_ enabled: Bool) async {
         if enabled {
             let granted = await notificationScheduler.requestAuthorization()
@@ -328,6 +356,93 @@ final class MobileAppModel: ObservableObject {
         } catch {
             notificationMessage = text.notificationSchedulingFailed(error.localizedDescription)
         }
+    }
+
+    private func deadlineCalendarEventDraft(
+        title: String,
+        summary: MobileDeadlineSummary
+    ) -> MobileCalendarEventDraft {
+        let startDate = summary.display.deadlineDate
+        let endDate = startDate.addingTimeInterval(30 * 60)
+
+        return MobileCalendarEventDraft(
+            title: title,
+            startDate: startDate,
+            endDate: endDate,
+            isAllDay: false,
+            notes: calendarNotes(for: summary),
+            url: summary.websiteURL
+        )
+    }
+
+    private func conferencePeriodCalendarEventDraft(for conference: Conference) -> MobileCalendarEventDraft? {
+        let startDeadline = conference.deadlines.first { $0.type == .conferenceStart }
+        let endDeadline = conference.deadlines.first { $0.type == .conferenceEnd }
+        guard let anchorDeadline = startDeadline ?? endDeadline,
+              let startDate = allDayDate(for: (startDeadline ?? anchorDeadline).date),
+              let endDate = allDayDate(for: (endDeadline ?? anchorDeadline).date) else {
+            return nil
+        }
+
+        let calendar = Calendar(identifier: .gregorian)
+        let orderedStart = min(startDate, endDate)
+        let orderedEnd = max(startDate, endDate)
+        guard let exclusiveEnd = calendar.date(byAdding: .day, value: 1, to: orderedEnd) else {
+            return nil
+        }
+
+        let notes = [
+            conference.fullName,
+            conference.location,
+            "\(text.conferenceWebsite): \(conference.websiteUrl.absoluteString)"
+        ]
+        .filter { !$0.isEmpty }
+        .joined(separator: "\n")
+
+        return MobileCalendarEventDraft(
+            title: "\(conference.name) - \(text.conferencePeriod)",
+            startDate: orderedStart,
+            endDate: exclusiveEnd,
+            isAllDay: true,
+            notes: notes,
+            url: conference.websiteUrl
+        )
+    }
+
+    private func allDayDate(for rawDate: String) -> Date? {
+        let parts = rawDate.split(separator: "-").compactMap { Int($0) }
+        guard parts.count == 3 else {
+            return nil
+        }
+
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = .current
+
+        var components = DateComponents()
+        components.calendar = calendar
+        components.timeZone = .current
+        components.year = parts[0]
+        components.month = parts[1]
+        components.day = parts[2]
+
+        guard components.isValidDate(in: calendar) else {
+            return nil
+        }
+
+        return components.date
+    }
+
+    private func calendarNotes(for summary: MobileDeadlineSummary) -> String {
+        var lines = [
+            "\(text.localTime): \(summary.localDateText)",
+            "\(text.sourceTime): \(summary.sourceDateText)"
+        ]
+
+        if let websiteURL = summary.websiteURL {
+            lines.append("\(text.conferenceWebsite): \(websiteURL.absoluteString)")
+        }
+
+        return lines.joined(separator: "\n")
     }
 
     private func nextSummary(for conference: Conference) -> MobileDeadlineSummary? {

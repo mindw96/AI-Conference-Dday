@@ -2,6 +2,8 @@ import SwiftUI
 
 struct HomeScreen: View {
     @EnvironmentObject private var model: MobileAppModel
+    @StateObject private var calendarWriter = MobileCalendarEventWriter()
+    @State private var calendarAlert: CalendarAddAlert?
 
     var body: some View {
         NavigationStack {
@@ -30,15 +32,58 @@ struct HomeScreen: View {
                                 systemImage: "calendar.badge.exclamationmark"
                             )
                         } else {
-                            UpcomingDeadlinesSection()
+                            UpcomingDeadlinesSection(onAddToCalendar: addToCalendar)
                         }
                     }
                 }
                 .padding()
             }
             .navigationTitle(model.text.homeTitle)
+            .alert(item: $calendarAlert) { alert in
+                Alert(
+                    title: Text(alert.title),
+                    message: Text(alert.message),
+                    dismissButton: .default(Text(model.text.ok))
+                )
+            }
         }
     }
+
+    private func addToCalendar(_ summary: MobileDeadlineSummary) {
+        guard let draft = model.calendarEventDraft(for: summary) else {
+            calendarAlert = CalendarAddAlert(
+                title: model.text.calendarEventAddFailed,
+                message: model.text.conferenceDataUnavailable
+            )
+            return
+        }
+
+        Task { @MainActor in
+            do {
+                try await calendarWriter.add(draft)
+                calendarAlert = CalendarAddAlert(
+                    title: model.text.calendarEventAdded,
+                    message: draft.title
+                )
+            } catch MobileCalendarEventWriterError.accessDenied {
+                calendarAlert = CalendarAddAlert(
+                    title: model.text.calendarEventAddFailed,
+                    message: model.text.calendarAccessDenied
+                )
+            } catch {
+                calendarAlert = CalendarAddAlert(
+                    title: model.text.calendarEventAddFailed,
+                    message: error.localizedDescription
+                )
+            }
+        }
+    }
+}
+
+private struct CalendarAddAlert: Identifiable {
+    let id = UUID()
+    let title: String
+    let message: String
 }
 
 private struct DeadlineHero: View {
@@ -75,6 +120,7 @@ private struct DeadlineHero: View {
 private struct UpcomingDeadlinesSection: View {
     @EnvironmentObject private var model: MobileAppModel
     @State private var collapsedGroupIDs: Set<String> = []
+    let onAddToCalendar: (MobileDeadlineSummary) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -88,7 +134,8 @@ private struct UpcomingDeadlinesSection: View {
                     id: "custom",
                     title: model.text.customTitle,
                     summaries: customSummaries,
-                    collapsedGroupIDs: $collapsedGroupIDs
+                    collapsedGroupIDs: $collapsedGroupIDs,
+                    onAddToCalendar: onAddToCalendar
                 )
             }
 
@@ -99,7 +146,8 @@ private struct UpcomingDeadlinesSection: View {
                         id: subcategory.rawValue,
                         title: model.text.subcategoryTitle(subcategory),
                         summaries: summaries,
-                        collapsedGroupIDs: $collapsedGroupIDs
+                        collapsedGroupIDs: $collapsedGroupIDs,
+                        onAddToCalendar: onAddToCalendar
                     )
                 }
             }
@@ -112,6 +160,7 @@ private struct UpcomingDeadlineGroup: View {
     let title: String
     let summaries: [MobileDeadlineSummary]
     @Binding var collapsedGroupIDs: Set<String>
+    let onAddToCalendar: (MobileDeadlineSummary) -> Void
 
     private var isExpanded: Bool {
         !collapsedGroupIDs.contains(id)
@@ -156,7 +205,10 @@ private struct UpcomingDeadlineGroup: View {
 
             if isExpanded {
                 ForEach(summaries) { summary in
-                    UpcomingDeadlineRow(summary: summary)
+                    UpcomingDeadlineRow(
+                        summary: summary,
+                        onAddToCalendar: onAddToCalendar
+                    )
                 }
             }
         }
@@ -166,28 +218,42 @@ private struct UpcomingDeadlineGroup: View {
 private struct UpcomingDeadlineRow: View {
     @EnvironmentObject private var model: MobileAppModel
     let summary: MobileDeadlineSummary
+    let onAddToCalendar: (MobileDeadlineSummary) -> Void
 
     var body: some View {
-        Button {
-            model.select(summary.source)
-        } label: {
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(summary.title)
-                        .fontWeight(.semibold)
-                    Text(summary.deadlineLabel)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+        HStack(spacing: 10) {
+            Button {
+                model.select(summary.source)
+            } label: {
+                HStack {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(summary.title)
+                            .fontWeight(.semibold)
+                        Text(summary.deadlineLabel)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+
+                    Spacer()
+
+                    Text(summary.display.text)
+                        .font(.headline.monospacedDigit())
                 }
-
-                Spacer()
-
-                Text(summary.display.text)
-                    .font(.headline.monospacedDigit())
+                .contentShape(Rectangle())
             }
-            .contentShape(Rectangle())
+            .buttonStyle(.plain)
+
+            Button {
+                onAddToCalendar(summary)
+            } label: {
+                Image(systemName: "calendar.badge.plus")
+                    .font(.title3.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                    .frame(width: 34, height: 34)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(model.text.addToCalendar)
         }
-        .buttonStyle(.plain)
         .padding()
         .background(Color(.secondarySystemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 8))

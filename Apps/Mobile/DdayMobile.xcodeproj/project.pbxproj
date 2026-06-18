@@ -22,6 +22,7 @@
 		A10000000000000000000037 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000036 /* SettingsScreen.swift */; };
 		A10000000000000000000039 /* MobileNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000038 /* MobileNotificationScheduler.swift */; };
 		A1000000000000000000003B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000003A /* Assets.xcassets */; };
+		A1000000000000000000003D /* MobileCalendarEventWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000003C /* MobileCalendarEventWriter.swift */; };
 		A20000000000000000000001 /* MobileWidgetSnapshotStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000011 /* MobileWidgetSnapshotStore.swift */; };
 		A20000000000000000000002 /* MobileWidgetSnapshotStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000011 /* MobileWidgetSnapshotStore.swift */; };
 		A20000000000000000000003 /* DdayWidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000012 /* DdayWidgetsBundle.swift */; };
@@ -69,6 +70,7 @@
 		A10000000000000000000036 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		A10000000000000000000038 /* MobileNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileNotificationScheduler.swift; sourceTree = "<group>"; };
 		A1000000000000000000003A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A1000000000000000000003C /* MobileCalendarEventWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileCalendarEventWriter.swift; sourceTree = "<group>"; };
 		A20000000000000000000010 /* DdayWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DdayWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A20000000000000000000011 /* MobileWidgetSnapshotStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileWidgetSnapshotStore.swift; sourceTree = "<group>"; };
 		A20000000000000000000012 /* DdayWidgetsBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DdayWidgetsBundle.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				A10000000000000000000024 /* MobileConferenceLoader.swift */,
 				A10000000000000000000032 /* MobileAppText.swift */,
 				A10000000000000000000038 /* MobileNotificationScheduler.swift */,
+				A1000000000000000000003C /* MobileCalendarEventWriter.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				A10000000000000000000035 /* CustomDeadlinesScreen.swift in Sources */,
 				A10000000000000000000037 /* SettingsScreen.swift in Sources */,
 				A10000000000000000000039 /* MobileNotificationScheduler.swift in Sources */,
+				A1000000000000000000003D /* MobileCalendarEventWriter.swift in Sources */,
 				A20000000000000000000001 /* MobileWidgetSnapshotStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,12 +468,13 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_ENTITLEMENTS = DdayMobile/DdayMobile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 4J7HGK26PF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Dday;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription = "Dday adds selected conference deadlines and conference periods to Calendar.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -479,7 +484,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mindw.DdayMobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -500,12 +505,13 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_ENTITLEMENTS = DdayMobile/DdayMobile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 4J7HGK26PF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Dday;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription = "Dday adds selected conference deadlines and conference periods to Calendar.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -515,7 +521,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mindw.DdayMobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -537,7 +543,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_ENTITLEMENTS = DdayWidgets/DdayWidgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 4J7HGK26PF;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = DdayWidgets/Info.plist;
@@ -547,7 +553,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mindw.DdayMobile.DdayWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -569,7 +575,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_ENTITLEMENTS = DdayWidgets/DdayWidgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 4J7HGK26PF;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = DdayWidgets/Info.plist;
@@ -579,7 +585,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mindw.DdayMobile.DdayWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

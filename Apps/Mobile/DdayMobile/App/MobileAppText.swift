@@ -54,6 +54,19 @@ struct MobileAppText {
     var save: String { korean ? "저장" : "Save" }
     var cancel: String { korean ? "취소" : "Cancel" }
     var delete: String { korean ? "삭제" : "Delete" }
+    var ok: String { korean ? "확인" : "OK" }
+    var addToCalendar: String { korean ? "캘린더에 추가" : "Add to Calendar" }
+    var calendarEventAdded: String { korean ? "캘린더에 추가했습니다." : "Added to Calendar." }
+    var calendarAccessDenied: String {
+        korean
+            ? "캘린더 권한이 허용되지 않았습니다. iOS 설정에서 Dday 캘린더 접근을 허용해 주세요."
+            : "Calendar access was not granted. Please allow Dday calendar access in iOS Settings."
+    }
+    var calendarEventAddFailed: String { korean ? "캘린더 추가 실패" : "Could not add to Calendar" }
+    var conferencePeriod: String { korean ? "학회 기간" : "Conference Period" }
+    var localTime: String { korean ? "로컬 시간" : "Local Time" }
+    var sourceTime: String { korean ? "원본 시간" : "Source Time" }
+    var conferenceWebsite: String { korean ? "학회 홈페이지" : "Conference Website" }
 
     var languageLabel: String { korean ? "언어" : "Language" }
     var systemLanguage: String { korean ? "시스템" : "System" }
