@@ -1,0 +1,2052 @@
+[
+  {
+    "id": "acml-2026",
+    "name": "ACML",
+    "fullName": "Asian Conference on Machine Learning",
+    "year": 2026,
+    "field": [
+      "machine-learning"
+    ],
+    "subcategory": "ml",
+    "location": "Melbourne, Australia",
+    "websiteUrl": "https://www.acml-conf.org/2026/",
+    "sourceUrl": "https://www.acml-conf.org/2026/calls/papers/",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "full-paper",
+        "label": "Conference Track Submission Deadline",
+        "date": "2026-06-26",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "reviews-released",
+        "label": "Reviews Released to Authors",
+        "date": "2026-08-10",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Acceptance Notification",
+        "date": "2026-09-15",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready Submission Deadline",
+        "date": "2026-09-29",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2026-12-01",
+        "time": null,
+        "timezone": "Australia/Melbourne",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2026-12-04",
+        "time": null,
+        "timezone": "Australia/Melbourne",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "aistats-2026",
+    "name": "AISTATS",
+    "fullName": "International Conference on Artificial Intelligence and Statistics",
+    "year": 2026,
+    "field": [
+      "machine-learning",
+      "statistics",
+      "artificial-intelligence"
+    ],
+    "subcategory": "ml",
+    "location": "Tangier, Morocco",
+    "websiteUrl": "https://aistats.org/aistats2026/",
+    "sourceUrl": "https://virtual.aistats.org/Conferences/2026/Dates",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstract Submission Deadline",
+        "date": "2025-09-25",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Full Paper Submission Deadline",
+        "date": "2025-10-02",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "supplementary",
+        "label": "Supplemental Material Submission Deadline",
+        "date": "2025-10-09",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "supplementary",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Paper Decision Notifications",
+        "date": "2026-01-22",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready Version Deadline",
+        "date": "2026-03-31",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2026-05-02",
+        "time": null,
+        "timezone": "Africa/Casablanca",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2026-05-05",
+        "time": null,
+        "timezone": "Africa/Casablanca",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "alt-2026",
+    "name": "ALT",
+    "fullName": "International Conference on Algorithmic Learning Theory",
+    "year": 2026,
+    "field": [
+      "machine-learning",
+      "learning-theory"
+    ],
+    "subcategory": "ml",
+    "location": "Toronto, Canada",
+    "websiteUrl": "https://algorithmiclearningtheory.org/alt2026/",
+    "sourceUrl": "https://algorithmiclearningtheory.org/alt2026/call-for-papers/",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "full-paper",
+        "label": "Paper Submission Deadline",
+        "date": "2025-10-02",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "notification",
+        "label": "Author Notification",
+        "date": "2025-12-18",
+        "time": null,
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2026-02-23",
+        "time": null,
+        "timezone": "America/Toronto",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2026-02-26",
+        "time": null,
+        "timezone": "America/Toronto",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "colt-2026",
+    "name": "COLT",
+    "fullName": "Conference on Learning Theory",
+    "year": 2026,
+    "field": [
+      "machine-learning",
+      "learning-theory"
+    ],
+    "subcategory": "ml",
+    "location": "San Diego, CA, USA",
+    "websiteUrl": "https://learningtheory.org/colt2026/",
+    "sourceUrl": "https://learningtheory.org/colt2026/cfp.html",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "full-paper",
+        "label": "Submission Deadline",
+        "date": "2026-02-04",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "notification",
+        "label": "Author Notification",
+        "date": "2026-05-04",
+        "time": null,
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2026-06-29",
+        "time": null,
+        "timezone": "America/Los_Angeles",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2026-07-03",
+        "time": null,
+        "timezone": "America/Los_Angeles",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "ecml-pkdd-2026",
+    "name": "ECML PKDD",
+    "fullName": "European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases",
+    "year": 2026,
+    "field": [
+      "machine-learning",
+      "data-mining",
+      "knowledge-discovery"
+    ],
+    "subcategory": "ml",
+    "location": "Naples, Italy",
+    "websiteUrl": "https://ecmlpkdd.org/2026/",
+    "sourceUrl": "https://ecmlpkdd.org/2026/submissions-research-track/",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstract Submission Deadline",
+        "date": "2026-03-05",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Paper Submission Deadline",
+        "date": "2026-03-12",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "notification",
+        "label": "Author Notification",
+        "date": "2026-05-27",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera Ready Submission",
+        "date": "2026-06-18",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2026-09-07",
+        "time": null,
+        "timezone": "Europe/Rome",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2026-09-11",
+        "time": null,
+        "timezone": "Europe/Rome",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "iclr-2026",
+    "name": "ICLR",
+    "fullName": "International Conference on Learning Representations",
+    "year": 2026,
+    "field": [
+      "machine-learning",
+      "artificial-intelligence"
+    ],
+    "location": "TBA",
+    "websiteUrl": "https://iclr.cc/Conferences/2026",
+    "sourceUrl": "https://iclr.cc/Conferences/2026/Dates",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstract Submission",
+        "date": "2025-09-19",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Full Paper Submission",
+        "date": "2025-09-24",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "notification",
+        "label": "Final Decisions",
+        "date": "2026-01-25",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2026-04-23",
+        "time": null,
+        "timezone": "UTC",
+        "type": "conference-start",
+        "isPrimary": false
+      }
+    ],
+    "subcategory": "ml"
+  },
+  {
+    "id": "icml-2026",
+    "name": "ICML",
+    "fullName": "International Conference on Machine Learning",
+    "year": 2026,
+    "field": [
+      "machine-learning",
+      "artificial-intelligence"
+    ],
+    "location": "Coex Convention & Exhibition Center, Seoul, South Korea",
+    "websiteUrl": "https://icml.cc/Conferences/2026",
+    "sourceUrl": "https://icml.cc/Conferences/2026/Dates",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstract Submission",
+        "date": "2026-01-23",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Full Paper Submission",
+        "date": "2026-01-28",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "notification",
+        "label": "Author Notification",
+        "date": "2026-04-30",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2026-07-06",
+        "time": null,
+        "timezone": "Asia/Seoul",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2026-07-11",
+        "time": null,
+        "timezone": "Asia/Seoul",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ],
+    "subcategory": "ml"
+  },
+  {
+    "id": "kdd-2026",
+    "name": "KDD",
+    "fullName": "ACM SIGKDD Conference on Knowledge Discovery and Data Mining",
+    "year": 2026,
+    "field": [
+      "machine-learning",
+      "data-mining",
+      "artificial-intelligence"
+    ],
+    "subcategory": "ml",
+    "location": "Jeju, South Korea",
+    "websiteUrl": "https://kdd2026.kdd.org/",
+    "sourceUrl": "https://kdd2026.kdd.org/research-track-call-for-papers/",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Research Track Abstract Deadline",
+        "date": "2026-02-01",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Research Track Paper Deadline",
+        "date": "2026-02-08",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "notification",
+        "label": "Notification",
+        "date": "2026-05-16",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready",
+        "date": "2026-06-01",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2026-08-09",
+        "time": null,
+        "timezone": "Asia/Seoul",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2026-08-13",
+        "time": null,
+        "timezone": "Asia/Seoul",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "neurips-2026",
+    "name": "NeurIPS",
+    "fullName": "Conference on Neural Information Processing Systems",
+    "year": 2026,
+    "field": [
+      "machine-learning",
+      "artificial-intelligence"
+    ],
+    "location": "Georgia World Congress Center; International Convention Centre; Palais des Congres de Paris",
+    "websiteUrl": "https://neurips.cc/Conferences/2026",
+    "sourceUrl": "https://neurips.cc/Conferences/2026/Dates",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstract Submission",
+        "date": "2026-05-04",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Full Paper Submission",
+        "date": "2026-05-06",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "notification",
+        "label": "Author Notification",
+        "date": "2026-09-24",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Sessions Start",
+        "date": "2026-12-08",
+        "time": null,
+        "timezone": "UTC",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference Sessions End",
+        "date": "2026-12-10",
+        "time": null,
+        "timezone": "UTC",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ],
+    "subcategory": "ml"
+  },
+  {
+    "id": "uai-2026",
+    "name": "UAI",
+    "fullName": "Conference on Uncertainty in Artificial Intelligence",
+    "year": 2026,
+    "field": [
+      "machine-learning",
+      "uncertainty",
+      "artificial-intelligence"
+    ],
+    "subcategory": "ml",
+    "location": "Amsterdam, Netherlands",
+    "websiteUrl": "https://www.auai.org/uai2026/",
+    "sourceUrl": "https://www.auai.org/uai2026/important_dates",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "full-paper",
+        "label": "Paper Submission Deadline",
+        "date": "2026-02-25",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "reviews-released",
+        "label": "Reviews Released to Authors",
+        "date": "2026-04-23",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Author Notification",
+        "date": "2026-06-01",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready Deadline",
+        "date": "2026-07-08",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-start",
+        "label": "Main Conference Start",
+        "date": "2026-08-18",
+        "time": null,
+        "timezone": "Europe/Amsterdam",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-end",
+        "label": "Main Conference End",
+        "date": "2026-08-20",
+        "time": null,
+        "timezone": "Europe/Amsterdam",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "iccv-2025",
+    "name": "ICCV",
+    "fullName": "International Conference on Computer Vision",
+    "year": 2025,
+    "field": [
+      "computer-vision",
+      "artificial-intelligence"
+    ],
+    "subcategory": "cv",
+    "location": "Honolulu, HI, USA",
+    "websiteUrl": "https://iccv.thecvf.com/Conferences/2025",
+    "sourceUrl": "https://iccv.thecvf.com/Conferences/2025/Dates",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "Pacific/Honolulu",
+    "deadlines": [
+      {
+        "id": "registration",
+        "label": "Paper Registration Deadline",
+        "date": "2025-03-03",
+        "time": "23:59",
+        "timezone": "Pacific/Honolulu",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Submission and Supplementary Materials Deadline",
+        "date": "2025-03-07",
+        "time": "23:59",
+        "timezone": "Pacific/Honolulu",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "notification",
+        "label": "Main Conference Paper Decisions",
+        "date": "2025-06-25",
+        "time": "23:59",
+        "timezone": "Pacific/Honolulu",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-start",
+        "label": "Main Conference Start",
+        "date": "2025-10-21",
+        "time": null,
+        "timezone": "Pacific/Honolulu",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-end",
+        "label": "Main Conference End",
+        "date": "2025-10-23",
+        "time": null,
+        "timezone": "Pacific/Honolulu",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "3dv-2026",
+    "name": "3DV",
+    "fullName": "International Conference on 3D Vision",
+    "year": 2026,
+    "field": [
+      "computer-vision",
+      "3d-vision"
+    ],
+    "subcategory": "cv",
+    "location": "Vancouver, BC, Canada",
+    "websiteUrl": "https://3dvconf.github.io/2026/",
+    "sourceUrl": "https://3dvconf.github.io/2026/dates/",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "America/Los_Angeles",
+    "deadlines": [
+      {
+        "id": "full-paper",
+        "label": "Paper Submission",
+        "date": "2025-08-18",
+        "time": "23:59",
+        "timezone": "America/Los_Angeles",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "supplementary",
+        "label": "Supplementary Material",
+        "date": "2025-08-21",
+        "time": "23:59",
+        "timezone": "America/Los_Angeles",
+        "type": "supplementary",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Paper Notification",
+        "date": "2025-11-05",
+        "time": "23:59",
+        "timezone": "America/Los_Angeles",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Main Conference Start",
+        "date": "2026-03-20",
+        "time": null,
+        "timezone": "America/Vancouver",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Main Conference End",
+        "date": "2026-03-23",
+        "time": null,
+        "timezone": "America/Vancouver",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "accv-2026",
+    "name": "ACCV",
+    "fullName": "Asian Conference on Computer Vision",
+    "year": 2026,
+    "field": [
+      "computer-vision",
+      "artificial-intelligence"
+    ],
+    "subcategory": "cv",
+    "location": "Osaka, Japan",
+    "websiteUrl": "https://accv2026.org/",
+    "sourceUrl": "https://accv2026.org/",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "GMT",
+    "deadlines": [
+      {
+        "id": "registration",
+        "label": "Paper Registration Deadline",
+        "date": "2026-07-03",
+        "time": "23:59",
+        "timezone": "GMT",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Paper Submission Deadline",
+        "date": "2026-07-05",
+        "time": "23:59",
+        "timezone": "GMT",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "supplementary",
+        "label": "Supplementary Material Deadline",
+        "date": "2026-07-08",
+        "time": "23:59",
+        "timezone": "GMT",
+        "type": "supplementary",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Paper Decision Notification",
+        "date": "2026-09-20",
+        "time": "23:59",
+        "timezone": "GMT",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready Deadline",
+        "date": "2026-10-04",
+        "time": "23:59",
+        "timezone": "GMT",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-start",
+        "label": "Main Conference Start",
+        "date": "2026-12-16",
+        "time": null,
+        "timezone": "Asia/Tokyo",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-end",
+        "label": "Main Conference End",
+        "date": "2026-12-18",
+        "time": null,
+        "timezone": "Asia/Tokyo",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "acm-mm-2026",
+    "name": "ACM MM",
+    "fullName": "ACM International Conference on Multimedia",
+    "year": 2026,
+    "field": [
+      "multimedia",
+      "computer-vision",
+      "artificial-intelligence"
+    ],
+    "subcategory": "cv",
+    "location": "Rio de Janeiro, Brazil",
+    "websiteUrl": "https://2026.acmmm.org/",
+    "sourceUrl": "https://2026.acmmm.org/site/important-dates.html",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "registration",
+        "label": "Main Track Contribution Registration",
+        "date": "2026-03-25",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Main Track Contribution Submission",
+        "date": "2026-04-01",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "supplementary",
+        "label": "Supplementary Submission",
+        "date": "2026-04-08",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "supplementary",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Author Notification",
+        "date": "2026-07-09",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready",
+        "date": "2026-08-06",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2026-11-10",
+        "time": null,
+        "timezone": "America/Sao_Paulo",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2026-11-14",
+        "time": null,
+        "timezone": "America/Sao_Paulo",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "bmvc-2026",
+    "name": "BMVC",
+    "fullName": "British Machine Vision Conference",
+    "year": 2026,
+    "field": [
+      "computer-vision",
+      "machine-vision"
+    ],
+    "subcategory": "cv",
+    "location": "Lancaster, UK",
+    "websiteUrl": "https://bmvc2026.bmva.org/",
+    "sourceUrl": "https://bmvc2026.bmva.org/dates/",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstract Submission Deadline",
+        "date": "2026-05-22",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Paper Submission Deadline",
+        "date": "2026-05-29",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "supplementary",
+        "label": "Supplementary Material Submission Deadline",
+        "date": "2026-05-29",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "supplementary",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Author Notifications",
+        "date": "2026-08-07",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera Ready Deadline for Papers",
+        "date": "2026-08-28",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2026-11-23",
+        "time": null,
+        "timezone": "Europe/London",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2026-11-26",
+        "time": null,
+        "timezone": "Europe/London",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "cvpr-2026",
+    "name": "CVPR",
+    "fullName": "IEEE/CVF Conference on Computer Vision and Pattern Recognition",
+    "year": 2026,
+    "field": [
+      "computer-vision",
+      "artificial-intelligence"
+    ],
+    "location": "Denver, CO, USA",
+    "websiteUrl": "https://cvpr.thecvf.com/Conferences/2026",
+    "sourceUrl": "https://cvpr.thecvf.com/Conferences/2026/Dates",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstract Submission",
+        "date": "2025-11-07",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Paper Submission",
+        "date": "2025-11-13",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "supplementary",
+        "label": "Supplementary Materials",
+        "date": "2025-11-20",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "supplementary",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Final Decisions",
+        "date": "2026-02-20",
+        "time": null,
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-start",
+        "label": "Main Conference Start",
+        "date": "2026-06-05",
+        "time": null,
+        "timezone": "America/Denver",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-end",
+        "label": "Main Conference End",
+        "date": "2026-06-07",
+        "time": null,
+        "timezone": "America/Denver",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ],
+    "subcategory": "cv"
+  },
+  {
+    "id": "eccv-2026",
+    "name": "ECCV",
+    "fullName": "European Conference on Computer Vision",
+    "year": 2026,
+    "field": [
+      "computer-vision",
+      "artificial-intelligence"
+    ],
+    "subcategory": "cv",
+    "location": "Malmo, Sweden",
+    "websiteUrl": "https://eccv.ecva.net/Conferences/2026",
+    "sourceUrl": "https://eccv.ecva.net/Conferences/2026/Dates",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "UTC",
+    "deadlines": [
+      {
+        "id": "registration",
+        "label": "Paper Registration Deadline",
+        "date": "2026-02-26",
+        "time": "22:00",
+        "timezone": "UTC",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Main Conference Submission Deadline",
+        "date": "2026-03-05",
+        "time": "22:00",
+        "timezone": "UTC",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "supplementary",
+        "label": "Supplemental Materials Deadline",
+        "date": "2026-03-12",
+        "time": "22:00",
+        "timezone": "UTC",
+        "type": "supplementary",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Final Decisions",
+        "date": "2026-06-17",
+        "time": null,
+        "timezone": "UTC",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready Deadline",
+        "date": "2026-06-26",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-start",
+        "label": "Main Conference Start",
+        "date": "2026-09-10",
+        "time": null,
+        "timezone": "Europe/Stockholm",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-end",
+        "label": "Main Conference End",
+        "date": "2026-09-12",
+        "time": null,
+        "timezone": "Europe/Stockholm",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "wacv-2026",
+    "name": "WACV",
+    "fullName": "IEEE/CVF Winter Conference on Applications of Computer Vision",
+    "year": 2026,
+    "field": [
+      "computer-vision",
+      "artificial-intelligence"
+    ],
+    "subcategory": "cv",
+    "location": "Tucson, AZ, USA",
+    "websiteUrl": "https://wacv.thecvf.com/Conferences/2026",
+    "sourceUrl": "https://wacv.thecvf.com/Conferences/2026/Dates",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "round-2-registration",
+        "label": "Round 2 Paper Registration Deadline",
+        "date": "2025-09-12",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "round-2-full-paper",
+        "label": "Round 2 Paper Submission Deadline",
+        "date": "2025-09-19",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "round-2-supplementary",
+        "label": "Round 2 Supplemental Material",
+        "date": "2025-09-19",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "supplementary",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Reviews and Final Decisions to Authors",
+        "date": "2025-11-06",
+        "time": "07:59",
+        "timezone": "UTC",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-start",
+        "label": "Main Conference Start",
+        "date": "2026-03-08",
+        "time": null,
+        "timezone": "America/Phoenix",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-end",
+        "label": "Main Conference End",
+        "date": "2026-03-10",
+        "time": null,
+        "timezone": "America/Phoenix",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "aacl-ijcnlp-2026",
+    "name": "AACL-IJCNLP",
+    "fullName": "Asia-Pacific Chapter of the Association for Computational Linguistics and International Joint Conference on Natural Language Processing",
+    "year": 2026,
+    "field": [
+      "natural-language-processing",
+      "computational-linguistics"
+    ],
+    "subcategory": "nlp",
+    "location": "Hengqin, China",
+    "websiteUrl": "https://2026.aaclnet.org/",
+    "sourceUrl": "https://2026.aaclnet.org/calls/main_conference_papers/",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "arr-submission",
+        "label": "ARR Submission Deadline",
+        "date": "2026-05-25",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "commitment",
+        "label": "Commitment Deadline",
+        "date": "2026-08-02",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Notification of Acceptance",
+        "date": "2026-09-07",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready Papers Due",
+        "date": "2026-09-30",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-start",
+        "label": "Main Conference Start",
+        "date": "2026-11-06",
+        "time": null,
+        "timezone": "Asia/Shanghai",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-end",
+        "label": "Main Conference End",
+        "date": "2026-11-10",
+        "time": null,
+        "timezone": "Asia/Shanghai",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "acl-2026",
+    "name": "ACL",
+    "fullName": "Annual Meeting of the Association for Computational Linguistics",
+    "year": 2026,
+    "field": [
+      "natural-language-processing",
+      "computational-linguistics"
+    ],
+    "location": "San Diego, CA, USA",
+    "websiteUrl": "https://2026.aclweb.org",
+    "sourceUrl": "https://2026.aclweb.org/calls/main_conference_papers/",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "submission",
+        "label": "Submission Deadline",
+        "date": "2026-01-05",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "commitment",
+        "label": "Commitment Deadline",
+        "date": "2026-03-14",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Notification of Acceptance",
+        "date": "2026-04-04",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready Papers Due",
+        "date": "2026-04-19",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-start",
+        "label": "Main Conference Start",
+        "date": "2026-07-05",
+        "time": null,
+        "timezone": "America/Los_Angeles",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-end",
+        "label": "Main Conference End",
+        "date": "2026-07-07",
+        "time": null,
+        "timezone": "America/Los_Angeles",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ],
+    "subcategory": "nlp"
+  },
+  {
+    "id": "colm-2026",
+    "name": "COLM",
+    "fullName": "Conference on Language Modeling",
+    "year": 2026,
+    "field": [
+      "natural-language-processing",
+      "language-modeling",
+      "artificial-intelligence"
+    ],
+    "subcategory": "nlp",
+    "location": "San Francisco, CA, USA",
+    "websiteUrl": "https://colmweb.org/",
+    "sourceUrl": "https://colmweb.org/cfp.html",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstract Deadline",
+        "date": "2026-03-26",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Full Paper Submission Deadline",
+        "date": "2026-03-31",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "notification",
+        "label": "Decision Notifications",
+        "date": "2026-07-08",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2026-10-06",
+        "time": null,
+        "timezone": "America/Los_Angeles",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2026-10-09",
+        "time": null,
+        "timezone": "America/Los_Angeles",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "eacl-2026",
+    "name": "EACL",
+    "fullName": "Conference of the European Chapter of the Association for Computational Linguistics",
+    "year": 2026,
+    "field": [
+      "natural-language-processing",
+      "computational-linguistics"
+    ],
+    "subcategory": "nlp",
+    "location": "Rabat, Morocco",
+    "websiteUrl": "https://2026.eacl.org/",
+    "sourceUrl": "https://2026.eacl.org/calls/papers/",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "arr-submission",
+        "label": "ARR Submission Deadline",
+        "date": "2025-10-06",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "commitment",
+        "label": "EACL Commitment Deadline",
+        "date": "2025-12-14",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Notification",
+        "date": "2026-01-03",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2026-03-24",
+        "time": null,
+        "timezone": "Africa/Casablanca",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2026-03-29",
+        "time": null,
+        "timezone": "Africa/Casablanca",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "emnlp-2026",
+    "name": "EMNLP",
+    "fullName": "Conference on Empirical Methods in Natural Language Processing",
+    "year": 2026,
+    "field": [
+      "natural-language-processing",
+      "computational-linguistics"
+    ],
+    "subcategory": "nlp",
+    "location": "Budapest, Hungary",
+    "websiteUrl": "https://2026.emnlp.org",
+    "sourceUrl": "https://2026.emnlp.org/calls/main_conference_papers/",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "arr-submission",
+        "label": "ARR Submission Deadline",
+        "date": "2026-05-25",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "commitment",
+        "label": "EMNLP Commitment Deadline",
+        "date": "2026-08-02",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Notification of Acceptance",
+        "date": "2026-08-20",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready Papers Due",
+        "date": "2026-09-20",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-start",
+        "label": "Main Conference Start",
+        "date": "2026-10-24",
+        "time": null,
+        "timezone": "Europe/Budapest",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-end",
+        "label": "Main Conference End",
+        "date": "2026-10-29",
+        "time": null,
+        "timezone": "Europe/Budapest",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "sigir-2026",
+    "name": "SIGIR",
+    "fullName": "ACM SIGIR Conference on Research and Development in Information Retrieval",
+    "year": 2026,
+    "field": [
+      "information-retrieval",
+      "natural-language-processing",
+      "machine-learning"
+    ],
+    "subcategory": "nlp",
+    "location": "Melbourne, Australia",
+    "websiteUrl": "https://sigir2026.org/",
+    "sourceUrl": "https://sigir2026.org/en-AU/pages/attending/key-dates",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Full Paper Abstract Submission",
+        "date": "2026-01-15",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Full Paper Submission",
+        "date": "2026-01-22",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "notification",
+        "label": "Full Paper Notification",
+        "date": "2026-04-02",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready Submission",
+        "date": "2026-04-29",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2026-07-20",
+        "time": null,
+        "timezone": "Australia/Melbourne",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2026-07-24",
+        "time": null,
+        "timezone": "Australia/Melbourne",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "aamas-2026",
+    "name": "AAMAS",
+    "fullName": "International Conference on Autonomous Agents and Multiagent Systems",
+    "year": 2026,
+    "field": [
+      "artificial-intelligence",
+      "multi-agent-systems"
+    ],
+    "subcategory": "general-ai",
+    "location": "Paphos, Cyprus",
+    "websiteUrl": "https://cyprusconferences.org/aamas2026/",
+    "sourceUrl": "https://cyprusconferences.org/aamas2026/call-for-papers-main-track/",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstract Submission",
+        "date": "2025-10-01",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Paper Submission",
+        "date": "2025-10-08",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "notification",
+        "label": "Author Notification",
+        "date": "2025-12-22",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready Paper",
+        "date": "2026-02-18",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2026-05-25",
+        "time": null,
+        "timezone": "Asia/Nicosia",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2026-05-29",
+        "time": null,
+        "timezone": "Asia/Nicosia",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "icaps-2026",
+    "name": "ICAPS",
+    "fullName": "International Conference on Automated Planning and Scheduling",
+    "year": 2026,
+    "field": [
+      "artificial-intelligence",
+      "planning",
+      "scheduling"
+    ],
+    "subcategory": "general-ai",
+    "location": "Dublin, Ireland",
+    "websiteUrl": "https://icaps26.icaps-conference.org/",
+    "sourceUrl": "https://icaps26.icaps-conference.org/calls/cfp/",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstract Submission Deadline",
+        "date": "2025-12-02",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Paper Submission Deadline",
+        "date": "2025-12-08",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "notification",
+        "label": "Author Notification",
+        "date": "2026-02-20",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2026-06-27",
+        "time": null,
+        "timezone": "Europe/Dublin",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2026-07-02",
+        "time": null,
+        "timezone": "Europe/Dublin",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "ijcai-ecai-2026",
+    "name": "IJCAI-ECAI",
+    "fullName": "International Joint Conference on Artificial Intelligence and European Conference on Artificial Intelligence",
+    "year": 2026,
+    "field": [
+      "artificial-intelligence"
+    ],
+    "subcategory": "general-ai",
+    "location": "Bremen, Germany",
+    "websiteUrl": "https://2026.ijcai.org/",
+    "sourceUrl": "https://2026.ijcai.org/ijcai-ecai-2026-call-for-papers-main-track/",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstract Submission Deadline",
+        "date": "2026-01-12",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Full Paper Submission Deadline",
+        "date": "2026-01-19",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "phase-1-notification",
+        "label": "Phase I Notification",
+        "date": "2026-03-04",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Paper Notification",
+        "date": "2026-04-29",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera Ready Copy",
+        "date": "2026-05-20",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2026-08-15",
+        "time": null,
+        "timezone": "Europe/Berlin",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2026-08-21",
+        "time": null,
+        "timezone": "Europe/Berlin",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "kr-2026",
+    "name": "KR",
+    "fullName": "International Conference on Principles of Knowledge Representation and Reasoning",
+    "year": 2026,
+    "field": [
+      "artificial-intelligence",
+      "knowledge-representation",
+      "reasoning"
+    ],
+    "subcategory": "general-ai",
+    "location": "Lisbon, Portugal",
+    "websiteUrl": "https://kr.org/KR2026/",
+    "sourceUrl": "https://kr.org/KR2026/call_main_track.html",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Title and Abstract Submission",
+        "date": "2026-02-08",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Paper Submission Deadline",
+        "date": "2026-02-13",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "notification",
+        "label": "Notification of Acceptance",
+        "date": "2026-04-13",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready Due",
+        "date": "2026-05-03",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2026-07-20",
+        "time": null,
+        "timezone": "Europe/Lisbon",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2026-07-23",
+        "time": null,
+        "timezone": "Europe/Lisbon",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "aaai-2027",
+    "name": "AAAI",
+    "fullName": "AAAI Conference on Artificial Intelligence",
+    "year": 2027,
+    "field": [
+      "artificial-intelligence",
+      "machine-learning"
+    ],
+    "location": "Montreal, Canada",
+    "websiteUrl": "https://aaai.org/conference/aaai/aaai-27/",
+    "sourceUrl": "https://aaai.org/conference/aaai/aaai-27/",
+    "sourceCheckedAt": "2026-05-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstracts Due",
+        "date": "2026-07-21",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Full Papers Due",
+        "date": "2026-07-28",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "supplementary",
+        "label": "Supplementary Material and Code Due",
+        "date": "2026-07-31",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "supplementary",
+        "isPrimary": false
+      },
+      {
+        "id": "phase-1-notification",
+        "label": "Phase 1 Rejection Notification",
+        "date": "2026-09-24",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "final-notification",
+        "label": "Final Acceptance Notification",
+        "date": "2026-11-30",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready Files Due",
+        "date": "2026-12-14",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2027-02-16",
+        "time": null,
+        "timezone": "America/Toronto",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2027-02-23",
+        "time": null,
+        "timezone": "America/Toronto",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ],
+    "subcategory": "general-ai"
+  }
+]
