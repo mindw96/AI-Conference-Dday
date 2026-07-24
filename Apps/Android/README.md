@@ -23,6 +23,52 @@ information architecture and reads the same public conference JSON contract.
 
 The debug APK is generated at `app/build/outputs/apk/debug/app-debug.apk`.
 
+## Play Internal Testing
+
+The release build defaults to Android version `1.0.0` with version code `1`.
+The project targets API 37, which satisfies Google Play's API 36 requirement
+that takes effect on August 31, 2026.
+
+Create the local upload key once:
+
+```bash
+./scripts/create_upload_keystore.sh
+```
+
+The private key is written under the repository's ignored `private/android/`
+directory. `keystore.properties` contains only its path and alias; the password
+is requested at build time and is never committed.
+
+Back up the `.jks` file and its password separately. Google Play can reset an
+upload key after Play App Signing is enabled, but keeping a verified backup is
+still important.
+
+Build the signed Android App Bundle:
+
+```bash
+./scripts/build_release_bundle.sh
+```
+
+The signed bundle and its SHA-256 file are generated at:
+
+```text
+app/build/outputs/bundle/release/app-release.aab
+app/build/outputs/bundle/release/app-release.aab.sha256
+```
+
+For later uploads, increment the version code:
+
+```bash
+DDAY_ANDROID_VERSION_CODE=2 \
+DDAY_ANDROID_VERSION_NAME=1.0.1 \
+./scripts/build_release_bundle.sh
+```
+
+Use Play App Signing when creating the first Play Console release. Google keeps
+the app-signing key, while the local Dday key remains the separate upload key.
+CI builds an unsigned release AAB only to verify the optimized release variant;
+publishable bundles must come from `build_release_bundle.sh`.
+
 ## Project Emulator
 
 Create the Pixel 9 Pro Android 16 virtual device once:

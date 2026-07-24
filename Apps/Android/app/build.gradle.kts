@@ -1,7 +1,33 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.plugin.compose")
 }
+
+val releaseSigningPropertiesFile = rootProject.file("keystore.properties")
+val releaseSigningProperties = Properties().apply {
+    if (releaseSigningPropertiesFile.isFile) {
+        releaseSigningPropertiesFile.inputStream().use(::load)
+    }
+}
+
+fun releaseSigningValue(propertyName: String, environmentName: String): String? =
+    providers.environmentVariable(environmentName).orNull?.takeIf { it.isNotBlank() }
+        ?: releaseSigningProperties.getProperty(propertyName)?.trim()?.takeIf { it.isNotEmpty() }
+
+val releaseStoreFile = releaseSigningValue("storeFile", "DDAY_ANDROID_STORE_FILE")
+val releaseStorePassword =
+    releaseSigningValue("storePassword", "DDAY_ANDROID_STORE_PASSWORD")
+val releaseKeyAlias = releaseSigningValue("keyAlias", "DDAY_ANDROID_KEY_ALIAS")
+val releaseKeyPassword = releaseSigningValue("keyPassword", "DDAY_ANDROID_KEY_PASSWORD")
+val releaseSigningConfigured =
+    listOf(
+        releaseStoreFile,
+        releaseStorePassword,
+        releaseKeyAlias,
+        releaseKeyPassword,
+    ).all { it != null }
 
 android {
     namespace = "dev.mindw.dday"
@@ -11,10 +37,21 @@ android {
         applicationId = "dev.mindw.dday"
         minSdk = 26
         targetSdk = 37
-        versionCode = 1
-        versionName = "0.1.0"
+        versionCode = providers.gradleProperty("ddayVersionCode").orElse("1").get().toInt()
+        versionName = providers.gradleProperty("ddayVersionName").orElse("1.0.0").get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        if (releaseSigningConfigured) {
+            create("release") {
+                storeFile = rootProject.file(checkNotNull(releaseStoreFile))
+                storePassword = checkNotNull(releaseStorePassword)
+                keyAlias = checkNotNull(releaseKeyAlias)
+                keyPassword = checkNotNull(releaseKeyPassword)
+            }
+        }
     }
 
     buildTypes {
@@ -25,7 +62,11 @@ android {
         }
 
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            if (releaseSigningConfigured) {
+                signingConfig = signingConfigs.getByName("release")
+            }
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",

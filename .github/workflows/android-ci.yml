@@ -32,9 +32,14 @@ jobs:
         with:
           distribution: temurin
           java-version: "21"
+          cache: gradle
+          cache-dependency-path: |
+            Apps/Android/*.gradle.kts
+            Apps/Android/app/*.gradle.kts
+            Apps/Android/gradle/wrapper/gradle-wrapper.properties
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
 
       - name: Install Android platform
         run: sdkmanager "platforms;android-37.0" "build-tools;37.0.0"
@@ -42,4 +47,4 @@ jobs:
       - name: Test and build
         run: |
           chmod +x Apps/Android/gradlew Apps/Android/scripts/*.sh
-          Apps/Android/scripts/build_debug.sh
+          Apps/Android/scripts/build_ci.sh

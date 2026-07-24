@@ -3,5 +3,8 @@
 .android-avd/
 **/build/
 local.properties
+keystore.properties
+*.jks
+*.keystore
 *.iml
 captures/
