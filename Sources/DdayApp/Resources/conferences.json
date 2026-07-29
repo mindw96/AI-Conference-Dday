@@ -1970,8 +1970,8 @@
     ],
     "location": "Montreal, Canada",
     "websiteUrl": "https://aaai.org/conference/aaai/aaai-27/",
-    "sourceUrl": "https://aaai.org/conference/aaai/aaai-27/",
-    "sourceCheckedAt": "2026-05-27",
+    "sourceUrl": "https://aaai.org/conference/aaai/aaai-27/main-technical-track-call/",
+    "sourceCheckedAt": "2026-07-30",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2020,15 +2020,6 @@
         "isPrimary": false
       },
       {
-        "id": "camera-ready",
-        "label": "Camera-ready Files Due",
-        "date": "2026-12-14",
-        "time": "23:59",
-        "timezone": "AoE",
-        "type": "camera-ready",
-        "isPrimary": false
-      },
-      {
         "id": "conference-start",
         "label": "Conference Start",
         "date": "2027-02-16",
@@ -2048,5 +2039,294 @@
       }
     ],
     "subcategory": "general-ai"
+  },
+  {
+    "id": "kdd-2027",
+    "name": "KDD",
+    "fullName": "ACM SIGKDD Conference on Knowledge Discovery and Data Mining",
+    "year": 2027,
+    "field": [
+      "machine-learning",
+      "data-mining",
+      "artificial-intelligence"
+    ],
+    "subcategory": "ml",
+    "location": "San Jose, CA, USA",
+    "websiteUrl": "https://kdd2027.kdd.org/",
+    "sourceUrl": "https://kdd2027.kdd.org/research-track-call-for-papers/",
+    "sourceCheckedAt": "2026-07-30",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Research Track Abstract Deadline",
+        "date": "2026-07-19",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Research Track Paper Deadline",
+        "date": "2026-07-26",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "notification",
+        "label": "Notification",
+        "date": "2026-11-14",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2027-08-01",
+        "time": null,
+        "timezone": "America/Los_Angeles",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2027-08-05",
+        "time": null,
+        "timezone": "America/Los_Angeles",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "3dv-2027",
+    "name": "3DV",
+    "fullName": "International Conference on 3D Vision",
+    "year": 2027,
+    "field": [
+      "computer-vision",
+      "3d-vision"
+    ],
+    "subcategory": "cv",
+    "location": "Thessaloniki, Greece",
+    "websiteUrl": "https://3dvconf.github.io/2027/",
+    "sourceUrl": "https://3dvconf.github.io/2027/",
+    "sourceCheckedAt": "2026-07-30",
+    "timezone": "America/Los_Angeles",
+    "deadlines": [
+      {
+        "id": "full-paper",
+        "label": "Paper Submission",
+        "date": "2026-08-28",
+        "time": "11:00",
+        "timezone": "America/Los_Angeles",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "supplementary",
+        "label": "Supplementary Material",
+        "date": "2026-09-02",
+        "time": "11:00",
+        "timezone": "America/Los_Angeles",
+        "type": "supplementary",
+        "isPrimary": false
+      },
+      {
+        "id": "preliminary-notification",
+        "label": "Preliminary Notification",
+        "date": "2026-10-27",
+        "time": "11:00",
+        "timezone": "America/Los_Angeles",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "final-notification",
+        "label": "Final Notification",
+        "date": "2026-12-02",
+        "time": "11:00",
+        "timezone": "America/Los_Angeles",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Main Conference Start",
+        "date": "2027-04-06",
+        "time": null,
+        "timezone": "Europe/Athens",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Main Conference End",
+        "date": "2027-04-09",
+        "time": null,
+        "timezone": "Europe/Athens",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "wacv-2027",
+    "name": "WACV",
+    "fullName": "IEEE/CVF Winter Conference on Applications of Computer Vision",
+    "year": 2027,
+    "field": [
+      "computer-vision",
+      "artificial-intelligence"
+    ],
+    "subcategory": "cv",
+    "location": "Disney Springs, Buena Vista, FL, USA",
+    "websiteUrl": "https://wacv.thecvf.com/Conferences/2027",
+    "sourceUrl": "https://wacv.thecvf.com/Conferences/2027/CallForPapers",
+    "sourceCheckedAt": "2026-07-30",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "round-2-registration",
+        "label": "Round 2 Paper Registration Deadline",
+        "date": "2026-08-21",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "round-2-full-paper",
+        "label": "Round 2 Paper Submission Deadline",
+        "date": "2026-08-28",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "round-2-supplementary",
+        "label": "Round 2 Supplemental Material",
+        "date": "2026-08-30",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "supplementary",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Reviews and Final Decisions to Authors",
+        "date": "2026-10-09",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready Both Rounds",
+        "date": "2026-11-02",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-start",
+        "label": "Main Conference Start",
+        "date": "2027-01-06",
+        "time": null,
+        "timezone": "America/New_York",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-end",
+        "label": "Main Conference End",
+        "date": "2027-01-08",
+        "time": null,
+        "timezone": "America/New_York",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "aamas-2027",
+    "name": "AAMAS",
+    "fullName": "International Conference on Autonomous Agents and Multiagent Systems",
+    "year": 2027,
+    "field": [
+      "artificial-intelligence",
+      "multi-agent-systems"
+    ],
+    "subcategory": "general-ai",
+    "location": "Hanoi, Vietnam",
+    "websiteUrl": "https://warwick.ac.uk/fac/sci/dcs/aamas2027/",
+    "sourceUrl": "https://warwick.ac.uk/fac/sci/dcs/aamas2027/calls/",
+    "sourceCheckedAt": "2026-07-30",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstract Submission",
+        "date": "2026-10-01",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Paper Submission",
+        "date": "2026-10-08",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "notification",
+        "label": "Author Notification",
+        "date": "2026-12-21",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready Paper",
+        "date": "2027-01-25",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2027-05-03",
+        "time": null,
+        "timezone": "Asia/Ho_Chi_Minh",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2027-05-07",
+        "time": null,
+        "timezone": "Asia/Ho_Chi_Minh",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
   }
 ]
