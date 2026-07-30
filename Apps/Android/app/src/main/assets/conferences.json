@@ -2328,5 +2328,59 @@
         "isPrimary": false
       }
     ]
+  },
+  {
+    "id": "iclr-2027",
+    "name": "ICLR",
+    "fullName": "International Conference on Learning Representations",
+    "year": 2027,
+    "field": [
+      "machine-learning",
+      "artificial-intelligence"
+    ],
+    "subcategory": "ml",
+    "location": "TBA",
+    "websiteUrl": "https://iclr.cc/Conferences/2027",
+    "sourceUrl": "https://iclr.cc/Conferences/2027/CallForPapers",
+    "sourceCheckedAt": "2026-07-30",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstract Deadline",
+        "date": "2026-09-18",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Paper Deadline",
+        "date": "2026-09-25",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "reviews-released",
+        "label": "Reviews Released",
+        "date": "2026-11-05",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "final-decisions",
+        "label": "Final Decisions",
+        "date": "2026-12-16",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      }
+    ]
   }
 ]
