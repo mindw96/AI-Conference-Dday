@@ -30,6 +30,18 @@ jobs:
       - name: Build Swift package
         run: swift build
 
+      - name: Validate mobile privacy manifest
+        run: plutil -lint Apps/Mobile/DdayMobile/PrivacyInfo.xcprivacy
+
+      - name: Build iPhone and iPad app
+        run: |
+          xcodebuild \
+            -project Apps/Mobile/DdayMobile.xcodeproj \
+            -scheme DdayMobile \
+            -destination "generic/platform=iOS Simulator" \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
       - name: Build app bundle
         run: ./scripts/build_app.sh
 

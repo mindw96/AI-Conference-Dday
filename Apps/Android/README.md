@@ -22,6 +22,10 @@ information architecture and reads the same public conference JSON contract.
 ```
 
 The debug APK is generated at `app/build/outputs/apk/debug/app-debug.apk`.
+All project scripts keep Gradle's project cache outside the repository at
+`~/.gradle/dday-project-cache`, which prevents cloud-storage placeholders under
+`Documents` from breaking builds. Set `DDAY_GRADLE_PROJECT_CACHE_DIR` to use a
+different local cache path.
 
 ## Play Internal Testing
 
@@ -99,6 +103,8 @@ stable System UI.
 
 ## Conference Data
 
-`scripts/sync_conference_data.sh` copies the repository's canonical
-`data/conferences.json` into the Android assets directory. The app can also
-refresh that file from the shared HTTPS feed when the user asks it to.
+Gradle runs `syncConferenceData` before every build and copies the repository's
+canonical `data/conferences.json` into the Android assets directory. The
+`scripts/sync_conference_data.sh` helper remains available for an explicit
+manual sync. The app can also refresh the data from the shared HTTPS feed when
+the user asks it to.

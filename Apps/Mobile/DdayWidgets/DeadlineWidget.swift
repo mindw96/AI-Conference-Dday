@@ -37,28 +37,20 @@ struct DeadlineWidgetProvider: TimelineProvider {
         completion: @escaping (Timeline<DeadlineWidgetEntry>) -> Void
     ) {
         let now = Date()
-        let snapshot = (store.load() ?? .empty).refreshed(now: now)
-        let entry = DeadlineWidgetEntry(
-            date: now,
-            snapshot: snapshot,
-            appearance: store.loadAppearance()
-        )
-        let nextRefresh = nextRefreshDate(now: now, deadline: snapshot.deadlineDate)
-        completion(Timeline(entries: [entry], policy: .after(nextRefresh)))
-    }
-
-    private func nextRefreshDate(now: Date, deadline: Date) -> Date {
-        let remaining = deadline.timeIntervalSince(now)
-        if remaining > 0 && remaining <= 24 * 60 * 60 {
-            return now.addingTimeInterval(60 * 60)
+        let snapshot = store.load() ?? .empty
+        let appearance = store.loadAppearance()
+        let entries = MobileWidgetTimelinePlanner.entryDates(
+            now: now,
+            snapshot: snapshot
+        ).map { entryDate in
+            DeadlineWidgetEntry(
+                date: entryDate,
+                snapshot: snapshot.refreshed(now: entryDate),
+                appearance: appearance
+            )
         }
-
-        let calendar = Calendar.current
-        return calendar.nextDate(
-            after: now,
-            matching: DateComponents(hour: 0, minute: 5),
-            matchingPolicy: .nextTime
-        ) ?? now.addingTimeInterval(60 * 60)
+        let nextRefresh = MobileWidgetTimelinePlanner.nextDailyRefresh(after: now)
+        completion(Timeline(entries: entries, policy: .after(nextRefresh)))
     }
 }
 

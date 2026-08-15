@@ -1,9 +1,10 @@
 # Dday
 
-Dday keeps AI conference deadlines close at hand across Apple devices.
+Dday keeps AI conference deadlines close at hand on macOS, iPhone, iPad, and
+Android.
 
-Use it as a quiet macOS menu bar countdown, or as iPhone and iPad widgets for the
-deadline you care about most.
+Use it as a quiet macOS menu bar countdown or a Home Screen widget for the
+deadline you care about most. iPhone also supports Lock Screen widgets.
 
 [한국어 README](README.ko.md)
 
@@ -21,6 +22,7 @@ deadline you care about most.
 | --- | --- | --- |
 | Menu Bar D-Day | macOS | [Menu Bar D-Day for macOS](docs/MENUBAR_DDAY.md) |
 | Widget D-Day | iPhone, iPad | [Widget D-Day for iPhone and iPad](docs/WIDGET_DDAY.md) |
+| Android D-Day | Android | [Dday for Android](Apps/Android/README.md) |
 
 ## Features
 
@@ -28,6 +30,10 @@ deadline you care about most.
 - Local-time D-Day calculation with AoE deadline support.
 - User-selected main D-Day for the app and widgets.
 - Custom D-Days for deadlines that are not in the conference list.
+- System Calendar export on iPhone, iPad, and Android for submission deadlines
+  and multi-day conference periods.
+- Optional on-device reminders on iPhone and iPad for the selected deadline and
+  custom D-Days.
 - Korean, English, and system-language modes.
 - Local-first settings and custom data.
 - Manual conference list update from the public GitHub dataset.
@@ -36,6 +42,8 @@ deadline you care about most.
 
 - iPhone and iPad: distributed through the App Store.
 - macOS: distributed through signed and notarized GitHub Releases.
+- Android: under active development and preparing for Google Play internal
+  testing.
 
 Current macOS releases require Apple Silicon.
 
@@ -47,6 +55,7 @@ Download the macOS app from the
 ```text
 Dday/
   Apps/
+    Android/                # Android app and home-screen widget
     Mobile/                 # iPhone/iPad app and WidgetKit extension
   Checks/
     DdayCoreChecks/          # lightweight validation runner
@@ -59,9 +68,9 @@ Dday/
   scripts/
 ```
 
-`DdayCore` is shared across Apple platforms. The platform apps are intentionally
-thin: they present deadlines, settings, widgets, and release-specific UI around
-the same core data model.
+`DdayCore` is shared across Apple platforms. The Android app implements the same
+deadline rules in Kotlin, and every platform reads the canonical public
+conference dataset from `data/conferences.json`.
 
 ## Development
 
@@ -88,6 +97,13 @@ Build the iPhone/iPad app from Xcode:
 
 ```text
 Apps/Mobile/DdayMobile.xcodeproj
+```
+
+Build and test the Android app:
+
+```bash
+cd Apps/Android
+./scripts/build_debug.sh
 ```
 
 For release work, see:

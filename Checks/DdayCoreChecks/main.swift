@@ -10,8 +10,14 @@ enum DdayCoreChecks {
         try checkPastDeadlineUsesDPlusFormat()
         try checkInvalidDeadlineDateIsRejected()
         try checkInvalidDeadlineTimeIsRejected()
+        try checkInvalidDeadlineTimezoneIsRejected()
+        try checkInvalidStoredUserDeadlineTimezoneIsMigrated()
         try checkAoEMapsToUTCMinusTwelve()
         try checkAoEDeadlineUsesLocalDisplayTimezone()
+        try checkWidgetTimelineSkipsDistantAndEmptyDeadlines()
+        try checkWidgetTimelineSchedulesVisibleTransitions()
+        try checkWidgetTimelineEntryCountIsBounded()
+        try checkWidgetTimelineSchedulesNextDailyRefresh()
         try checkDefaultConferenceDataURLUsesCurrentRepository()
         try checkLoadsConferenceJSON()
         try checkLoadsConferenceJSONFromData()
@@ -19,6 +25,7 @@ enum DdayCoreChecks {
         try checkConferenceDataUpdaterFallsBackWhenCacheIsInvalid()
         try checkLoadsProjectConferenceData()
         try checkBundledMacConferenceDataMatchesPublicData()
+        try checkBundledAndroidConferenceDataMatchesPublicData()
 
         print("DdayCoreChecks passed")
     }
@@ -194,8 +201,60 @@ enum DdayCoreChecks {
         }
     }
 
+    private static func checkInvalidDeadlineTimezoneIsRejected() throws {
+        let deadline = ConferenceDeadline(
+            id: "paper",
+            label: "Paper Deadline",
+            date: "2026-05-27",
+            time: "23:59",
+            timezone: "Not/A-TimeZone",
+            type: .submission,
+            isPrimary: true
+        )
+
+        do {
+            _ = try DeadlineCalculator().date(for: deadline)
+            throw CheckError("invalid timezone should be rejected")
+        } catch DeadlineCalculationError.invalidTimeZone {
+            return
+        }
+    }
+
+    private static func checkInvalidStoredUserDeadlineTimezoneIsMigrated() throws {
+        let suiteName = "DdayCoreChecks-\(UUID().uuidString)"
+        let defaults = try require(UserDefaults(suiteName: suiteName))
+        defer {
+            defaults.removePersistentDomain(forName: suiteName)
+        }
+
+        let store = UserDeadlineStore(defaults: defaults)
+        store.deadlines = [
+            UserDeadline(
+                id: "legacy",
+                name: "Legacy D-Day",
+                label: "Deadline",
+                date: "2026-08-01",
+                time: "12:00",
+                timezone: "Not/A-TimeZone",
+                createdAt: Date(timeIntervalSince1970: 0)
+            )
+        ]
+
+        let migrated = try require(store.deadlines.first)
+        try expect(
+            migrated.timezone == TimeZone.current.identifier,
+            "invalid stored timezone should migrate to the current timezone"
+        )
+
+        let reloaded = UserDeadlineStore(defaults: defaults)
+        try expect(
+            reloaded.deadlines.first?.timezone == TimeZone.current.identifier,
+            "migrated timezone should be persisted"
+        )
+    }
+
     private static func checkAoEMapsToUTCMinusTwelve() throws {
-        let timezone = DeadlineCalculator().resolvedTimeZone("AoE")
+        let timezone = try DeadlineCalculator().resolvedTimeZone("AoE")
 
         try expect(
             timezone.secondsFromGMT() == -12 * 60 * 60,
@@ -223,6 +282,89 @@ enum DdayCoreChecks {
         )
 
         try expect(display.text == "D-1", "expected D-1 in Asia/Seoul, got \(display.text)")
+    }
+
+    private static func checkWidgetTimelineSkipsDistantAndEmptyDeadlines() throws {
+        let calendar = utcCalendar()
+        let now = try require(ISO8601DateFormatter().date(from: "2026-07-01T12:00:00Z"))
+        let deadline = try require(ISO8601DateFormatter().date(from: "2026-07-03T23:59:00Z"))
+
+        let distantDates = DeadlineTimelinePlanner.entryDates(
+            now: now,
+            deadline: deadline,
+            shouldScheduleCountdown: true,
+            calendar: calendar
+        )
+        let emptyDates = DeadlineTimelinePlanner.entryDates(
+            now: now,
+            deadline: deadline,
+            shouldScheduleCountdown: false,
+            calendar: calendar
+        )
+
+        try expect(distantDates == [now], "distant deadlines should use the daily refresh only")
+        try expect(emptyDates == [now], "empty widget snapshots should not schedule countdown entries")
+    }
+
+    private static func checkWidgetTimelineSchedulesVisibleTransitions() throws {
+        let calendar = utcCalendar()
+        let now = try require(ISO8601DateFormatter().date(from: "2026-07-01T23:50:00Z"))
+        let midnight = try require(ISO8601DateFormatter().date(from: "2026-07-02T00:00:00Z"))
+        let firstMinuteTransition = try require(
+            ISO8601DateFormatter().date(from: "2026-07-02T00:01:00Z")
+        )
+        let deadline = try require(ISO8601DateFormatter().date(from: "2026-07-02T01:00:00Z"))
+
+        let dates = DeadlineTimelinePlanner.entryDates(
+            now: now,
+            deadline: deadline,
+            shouldScheduleCountdown: true,
+            calendar: calendar
+        )
+
+        try expect(dates.first == now, "widget timeline should start immediately")
+        try expect(dates.contains(midnight), "widget timeline should refresh at the deadline day boundary")
+        try expect(
+            dates.contains(firstMinuteTransition),
+            "widget timeline should include the H-1 to M-59 transition"
+        )
+        try expect(dates.last == deadline, "widget timeline should include the exact deadline")
+        try expect(
+            zip(dates, dates.dropFirst()).allSatisfy(<),
+            "widget timeline entries should be strictly increasing"
+        )
+    }
+
+    private static func checkWidgetTimelineEntryCountIsBounded() throws {
+        let calendar = utcCalendar()
+        let now = try require(ISO8601DateFormatter().date(from: "2026-07-02T00:00:00Z"))
+        let deadline = try require(ISO8601DateFormatter().date(from: "2026-07-02T23:59:00Z"))
+
+        let dates = DeadlineTimelinePlanner.entryDates(
+            now: now,
+            deadline: deadline,
+            shouldScheduleCountdown: true,
+            calendar: calendar
+        )
+
+        try expect(
+            dates.count <= DeadlineTimelinePlanner.maximumEntryCount,
+            "widget timeline should respect the entry limit"
+        )
+        try expect(dates.last == deadline, "bounded widget timeline should preserve the exact deadline")
+    }
+
+    private static func checkWidgetTimelineSchedulesNextDailyRefresh() throws {
+        let calendar = utcCalendar()
+        let now = try require(ISO8601DateFormatter().date(from: "2026-07-01T23:59:00Z"))
+        let expected = try require(ISO8601DateFormatter().date(from: "2026-07-02T00:05:00Z"))
+
+        let nextRefresh = DeadlineTimelinePlanner.nextDailyRefresh(
+            after: now,
+            calendar: calendar
+        )
+
+        try expect(nextRefresh == expected, "widget should schedule its next daily refresh at 00:05")
     }
 
     private static func checkDefaultConferenceDataURLUsesCurrentRepository() throws {
@@ -378,6 +520,22 @@ enum DdayCoreChecks {
         )
     }
 
+    private static func checkBundledAndroidConferenceDataMatchesPublicData() throws {
+        let root = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+        let publicURL = root.appendingPathComponent("data/conferences.json")
+        let bundledURL = root.appendingPathComponent(
+            "Apps/Android/app/src/main/assets/conferences.json"
+        )
+
+        let publicData = try Data(contentsOf: publicURL)
+        let bundledData = try Data(contentsOf: bundledURL)
+
+        try expect(
+            publicData == bundledData,
+            "Apps/Android/app/src/main/assets/conferences.json must match data/conferences.json"
+        )
+    }
+
     private static func checkProjectConferenceDataUsesStableFeedSchema(url: URL) throws {
         let data = try Data(contentsOf: url)
         let raw = try JSONSerialization.jsonObject(with: data)
@@ -410,6 +568,7 @@ enum DdayCoreChecks {
             try expectWebURL(conference["websiteUrl"] as? String, field: "\(id).websiteUrl")
             try expectWebURL(conference["sourceUrl"] as? String, field: "\(id).sourceUrl")
             try expectValidDate(conference["sourceCheckedAt"] as? String, field: "\(id).sourceCheckedAt")
+            try expectValidTimeZone(conference["timezone"] as? String, field: "\(id).timezone")
 
             guard let deadlines = conference["deadlines"] as? [[String: Any]], !deadlines.isEmpty else {
                 throw CheckError("conference \(id) must have at least one deadline")
@@ -427,6 +586,10 @@ enum DdayCoreChecks {
                 if let time = deadline["time"] as? String {
                     try expectValidTime(time, field: "\(id).\(deadlineID).time")
                 }
+                try expectValidTimeZone(
+                    deadline["timezone"] as? String,
+                    field: "\(id).\(deadlineID).timezone"
+                )
             }
         }
     }
@@ -467,6 +630,15 @@ enum DdayCoreChecks {
         try expect((0...23).contains(parts[0]) && (0...59).contains(parts[1]), "\(field) must be a valid time")
     }
 
+    private static func expectValidTimeZone(_ value: String?, field: String) throws {
+        let identifier = try require(value)
+        do {
+            _ = try DeadlineCalculator().resolvedTimeZone(identifier)
+        } catch {
+            throw CheckError("\(field) must be AoE or a valid IANA timezone identifier")
+        }
+    }
+
     private static func expect(
         _ condition: @autoclosure () -> Bool,
         _ message: String
@@ -482,6 +654,12 @@ enum DdayCoreChecks {
         }
 
         return value
+    }
+
+    private static func utcCalendar() -> Calendar {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        return calendar
     }
 }
 

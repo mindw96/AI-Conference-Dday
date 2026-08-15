@@ -41,7 +41,6 @@ export DDAY_ANDROID_KEY_PASSWORD="${DDAY_ANDROID_KEY_PASSWORD:-${DDAY_ANDROID_ST
 trap 'unset DDAY_ANDROID_STORE_PASSWORD DDAY_ANDROID_KEY_PASSWORD' EXIT
 
 gradle_arguments=(
-    --project-dir "${PROJECT_DIR}"
     clean
     test
     bundleRelease
@@ -56,7 +55,7 @@ if [[ -n "${DDAY_ANDROID_VERSION_NAME:-}" ]]; then
 fi
 
 "${PROJECT_DIR}/scripts/sync_conference_data.sh"
-"${PROJECT_DIR}/gradlew" "${gradle_arguments[@]}"
+"${PROJECT_DIR}/scripts/run_gradle.sh" "${gradle_arguments[@]}"
 
 if [[ ! -f "${BUNDLE_PATH}" ]]; then
     echo "Expected bundle was not created at ${BUNDLE_PATH}." >&2

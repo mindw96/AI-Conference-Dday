@@ -30,6 +30,7 @@
 		A20000000000000000000004 /* DeadlineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000013 /* DeadlineWidget.swift */; };
 		A20000000000000000000005 /* DdayWidgets.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A20000000000000000000010 /* DdayWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A20000000000000000000006 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000003E /* PrivacyInfo.xcprivacy */; };
+		A20000000000000000000007 /* DdayCore in Frameworks */ = {isa = PBXBuildFile; productRef = A20000000000000000000017 /* DdayCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A20000000000000000000007 /* DdayCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +245,7 @@
 			);
 			name = DdayWidgets;
 			packageProductDependencies = (
+				A20000000000000000000017 /* DdayCore */,
 			);
 			productName = DdayWidgets;
 			productReference = A20000000000000000000010 /* DdayWidgets.appex */;
@@ -648,6 +651,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		A10000000000000000000016 /* DdayCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A10000000000000000000015 /* XCLocalSwiftPackageReference "../.." */;
+			productName = DdayCore;
+		};
+		A20000000000000000000017 /* DdayCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A10000000000000000000015 /* XCLocalSwiftPackageReference "../.." */;
 			productName = DdayCore;

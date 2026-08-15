@@ -29,6 +29,11 @@ val releaseSigningConfigured =
         releaseKeyPassword,
     ).all { it != null }
 
+val syncConferenceData = tasks.register<Copy>("syncConferenceData") {
+    from(rootProject.file("../../data/conferences.json"))
+    into(layout.projectDirectory.dir("src/main/assets"))
+}
+
 android {
     namespace = "dev.mindw.dday"
     compileSdk = 37
@@ -88,6 +93,10 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+}
+
+tasks.named("preBuild").configure {
+    dependsOn(syncConferenceData)
 }
 
 dependencies {

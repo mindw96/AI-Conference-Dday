@@ -22,6 +22,7 @@ public struct DeadlineDisplay: Equatable, Sendable {
 public enum DeadlineCalculationError: Error, Equatable, Sendable {
     case invalidDate(String)
     case invalidTime(String)
+    case invalidTimeZone(String)
 }
 
 public struct DeadlineCalculator: Sendable {
@@ -65,12 +66,16 @@ public struct DeadlineCalculator: Sendable {
         try date(for: deadline, timezone: resolvedTimeZone(deadline.timezone))
     }
 
-    public func resolvedTimeZone(_ identifier: String) -> TimeZone {
+    public func resolvedTimeZone(_ identifier: String) throws -> TimeZone {
         if identifier.caseInsensitiveCompare("AoE") == .orderedSame {
             return TimeZone(secondsFromGMT: -12 * 60 * 60)!
         }
 
-        return TimeZone(identifier: identifier) ?? .current
+        guard let timeZone = TimeZone(identifier: identifier) else {
+            throw DeadlineCalculationError.invalidTimeZone(identifier)
+        }
+
+        return timeZone
     }
 
     private func date(for deadline: ConferenceDeadline, timezone: TimeZone) throws -> Date {

@@ -1,8 +1,11 @@
 # Dday
 
-Dday는 AI 학회 데드라인을 Apple 기기에서 빠르게 확인할 수 있게 도와주는 앱입니다.
+Dday는 macOS, iPhone, iPad, Android에서 AI 학회 데드라인을 빠르게
+확인할 수 있게 도와주는 앱입니다.
 
-Mac에서는 상단바에 선택한 D-Day를 계속 띄우고, iPhone과 iPad에서는 홈 화면과 잠금화면 위젯으로 가장 중요한 마감을 볼 수 있습니다.
+Mac에서는 상단바에 선택한 D-Day를 계속 띄우고, 모바일에서는 홈 화면
+위젯으로 가장 중요한 마감을 볼 수 있습니다. iPhone은 잠금화면 위젯도
+지원합니다.
 
 [English README](README.md)
 
@@ -20,6 +23,7 @@ Mac에서는 상단바에 선택한 D-Day를 계속 띄우고, iPhone과 iPad에
 | --- | --- | --- |
 | 상단바 D-Day | macOS | [macOS 상단바 D-Day](docs/MENUBAR_DDAY.ko.md) |
 | 위젯 D-Day | iPhone, iPad | [iPhone/iPad 위젯 D-Day](docs/WIDGET_DDAY.ko.md) |
+| Android D-Day | Android | [Android용 Dday](Apps/Android/README.md) |
 
 ## 주요 기능
 
@@ -27,6 +31,9 @@ Mac에서는 상단바에 선택한 D-Day를 계속 띄우고, iPhone과 iPad에
 - AoE 마감과 사용자 로컬 시간대 기준 D-Day 계산
 - 앱과 위젯에 표시할 메인 D-Day 직접 선택
 - 목록에 없는 개인 마감용 사용자 D-Day
+- iPhone, iPad, Android에서 제출 마감과 여러 날에 걸친 학회 기간을
+  시스템 캘린더에 추가
+- iPhone과 iPad에서 선택한 마감과 사용자 D-Day를 위한 기기 내 알림
 - 한국어, 영어, 시스템 언어 설정
 - 로컬 우선 설정과 데이터 저장
 - GitHub 공개 데이터셋 기반 학회 목록 수동 업데이트
@@ -35,6 +42,7 @@ Mac에서는 상단바에 선택한 D-Day를 계속 띄우고, iPhone과 iPad에
 
 - iPhone/iPad: App Store를 통해 배포합니다.
 - macOS: 서명 및 공증된 GitHub Release로 배포합니다.
+- Android: 개발 중이며 Google Play 내부 테스트를 준비하고 있습니다.
 
 현재 macOS 릴리즈는 Apple Silicon Mac에서 실행됩니다.
 
@@ -46,6 +54,7 @@ macOS 앱은
 ```text
 Dday/
   Apps/
+    Android/                # Android 앱과 홈 화면 위젯
     Mobile/                 # iPhone/iPad 앱과 WidgetKit 확장
   Checks/
     DdayCoreChecks/          # 가벼운 검증 실행기
@@ -58,7 +67,9 @@ Dday/
   scripts/
 ```
 
-`DdayCore`는 Apple 플랫폼들이 공유하는 핵심 로직입니다. macOS 앱, iPhone/iPad 앱, 위젯은 같은 코어 데이터를 각 플랫폼에 맞게 보여주는 역할을 합니다.
+`DdayCore`는 Apple 플랫폼들이 공유하는 핵심 로직입니다. Android 앱은 같은
+마감 계산 규칙을 Kotlin으로 구현하며, 모든 플랫폼은
+`data/conferences.json`의 공용 학회 데이터를 사용합니다.
 
 ## 개발
 
@@ -85,6 +96,13 @@ iPhone/iPad 앱은 Xcode에서 엽니다.
 
 ```text
 Apps/Mobile/DdayMobile.xcodeproj
+```
+
+Android 앱 빌드와 테스트:
+
+```bash
+cd Apps/Android
+./scripts/build_debug.sh
 ```
 
 릴리즈 관련 문서:

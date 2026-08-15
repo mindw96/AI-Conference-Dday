@@ -1,3 +1,4 @@
+import DdayCore
 import Foundation
 
 enum DdayAppGroup {
@@ -38,9 +39,6 @@ struct MobileWidgetDeadlineSnapshot: Codable, Equatable, Sendable {
             return self
         }
 
-        var calendar = calendar
-        calendar.timeZone = .current
-
         let todayStart = calendar.startOfDay(for: now)
         let deadlineStart = calendar.startOfDay(for: deadlineDate)
         let days = calendar.dateComponents([.day], from: todayStart, to: deadlineStart).day ?? 0
@@ -77,6 +75,31 @@ struct MobileWidgetDeadlineSnapshot: Codable, Equatable, Sendable {
         }
 
         return "M-\(totalMinutes)"
+    }
+}
+
+enum MobileWidgetTimelinePlanner {
+    static func entryDates(
+        now: Date,
+        snapshot: MobileWidgetDeadlineSnapshot,
+        calendar: Calendar = .current
+    ) -> [Date] {
+        DeadlineTimelinePlanner.entryDates(
+            now: now,
+            deadline: snapshot.deadlineDate,
+            shouldScheduleCountdown: !snapshot.sourceDateText.isEmpty,
+            calendar: calendar
+        )
+    }
+
+    static func nextDailyRefresh(
+        after date: Date,
+        calendar: Calendar = .current
+    ) -> Date {
+        DeadlineTimelinePlanner.nextDailyRefresh(
+            after: date,
+            calendar: calendar
+        )
     }
 }
 

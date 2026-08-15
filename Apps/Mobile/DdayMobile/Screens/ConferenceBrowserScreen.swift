@@ -76,11 +76,13 @@ private struct ConferenceRow: View {
     let conference: Conference
 
     var body: some View {
+        let summary = model.summary(for: conference)
+
         HStack {
             VStack(alignment: .leading, spacing: 4) {
                 Text(conference.name)
                     .fontWeight(.semibold)
-                if let summary = model.summary(for: conference) {
+                if let summary {
                     Text(summary.deadlineLabel)
                         .font(.caption)
                         .foregroundStyle(.secondary)
@@ -89,7 +91,7 @@ private struct ConferenceRow: View {
 
             Spacer()
 
-            if let summary = model.summary(for: conference) {
+            if let summary {
                 Text(summary.display.text)
                     .font(.headline.monospacedDigit())
             }

@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.widget.RemoteViews
 import dev.mindw.dday.MainActivity
 import dev.mindw.dday.R
@@ -19,6 +20,7 @@ import dev.mindw.dday.model.WidgetTextColor
 import dev.mindw.dday.model.summaryFor
 import dev.mindw.dday.model.toSummary
 import dev.mindw.dday.ui.AppStrings
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -48,6 +50,21 @@ class DdayWidgetProvider : AppWidgetProvider() {
                         appWidgetId,
                         remoteViews(context, snapshot),
                     )
+                }
+            } catch (error: CancellationException) {
+                throw error
+            } catch (error: Exception) {
+                Log.e(TAG, "Unable to refresh Dday widgets.", error)
+                val fallback = fallbackWidgetSnapshot()
+                appWidgetIds.forEach { appWidgetId ->
+                    runCatching {
+                        appWidgetManager.updateAppWidget(
+                            appWidgetId,
+                            remoteViews(context, fallback),
+                        )
+                    }.onFailure { fallbackError ->
+                        Log.e(TAG, "Unable to render the fallback widget.", fallbackError)
+                    }
                 }
             } finally {
                 pendingResult.finish()
@@ -104,6 +121,7 @@ class DdayWidgetProvider : AppWidgetProvider() {
     }
 
     companion object {
+        private const val TAG = "DdayWidget"
         private val refreshActions = setOf(
             Intent.ACTION_DATE_CHANGED,
             Intent.ACTION_TIME_CHANGED,
@@ -126,6 +144,17 @@ class DdayWidgetProvider : AppWidgetProvider() {
             context.sendBroadcast(intent)
         }
     }
+}
+
+private fun fallbackWidgetSnapshot(): WidgetSnapshot {
+    val strings = AppStrings(AppLanguage.System)
+    return WidgetSnapshot(
+        title = "Dday",
+        countdown = "—",
+        label = strings.chooseMain,
+        background = WidgetBackground.System,
+        textColor = WidgetTextColor.Auto,
+    )
 }
 
 private data class WidgetSnapshot(

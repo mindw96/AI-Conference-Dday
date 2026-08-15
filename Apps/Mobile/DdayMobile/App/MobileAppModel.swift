@@ -91,13 +91,6 @@ final class MobileAppModel: ObservableObject {
         store?.conferences.filter { nextSummary(for: $0) != nil } ?? []
     }
 
-    var upcomingSummaries: [MobileDeadlineSummary] {
-        let conferenceSummaries = selectedSubcategories.flatMap(upcomingSummaries(in:))
-
-        return (conferenceSummaries + customDeadlineSummaries.filter { $0.display.remainingSeconds > 0 })
-            .sorted { $0.display.deadlineDate < $1.display.deadlineDate }
-    }
-
     var customDeadlineSummaries: [MobileDeadlineSummary] {
         userDeadlines
             .compactMap(summary(for:))

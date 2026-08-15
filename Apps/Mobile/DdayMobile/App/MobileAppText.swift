@@ -105,8 +105,8 @@ struct MobileAppText {
     var privacy: String { korean ? "개인정보" : "Privacy" }
     var privacyBody: String {
         korean
-            ? "계정, 분석, 추적 없이 로컬 설정과 학회 데이터만 사용합니다."
-            : "No account, analytics, or tracking. The app only uses local settings and conference data."
+            ? "계정, 분석, 추적 없이 로컬 설정과 학회 데이터만 사용합니다. 알림과 캘린더 추가는 사용자가 선택한 경우에만 기기에서 처리되며 외부로 전송되지 않습니다."
+            : "No account, analytics, or tracking. Notifications and Calendar additions are processed on device only when you choose to use them, and are not sent anywhere."
     }
 
     func updateFailed(_ message: String) -> String {

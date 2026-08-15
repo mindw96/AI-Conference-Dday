@@ -1,6 +1,7 @@
 package dev.mindw.dday.data
 
 import android.content.Context
+import androidx.core.util.AtomicFile
 import dev.mindw.dday.model.Conference
 import dev.mindw.dday.model.ConferenceDeadline
 import dev.mindw.dday.model.ConferenceSubcategory
@@ -18,16 +19,10 @@ import java.net.URL
 class ConferenceRepository(context: Context) {
     private val appContext = context.applicationContext
     private val cacheFile = File(appContext.filesDir, CACHE_FILENAME)
+    private val atomicCacheFile = AtomicFile(cacheFile)
 
     suspend fun load(): List<Conference> = withContext(Dispatchers.IO) {
-        val bundled = appContext.assets.open(ASSET_FILENAME)
-            .bufferedReader()
-            .use { it.readText() }
-        val cached = cacheFile.takeIf(File::isFile)?.readText()
-
-        cached
-            ?.let { runCatching { parse(it) }.getOrNull() }
-            ?: parse(bundled)
+        loadCached() ?: loadBundled()
     }
 
     suspend fun refresh(): List<Conference> = withContext(Dispatchers.IO) {
@@ -56,10 +51,41 @@ class ConferenceRepository(context: Context) {
             val bytes = connection.inputStream.use(::readLimited)
             val text = bytes.toString(Charsets.UTF_8)
             val parsed = parse(text)
-            cacheFile.writeText(text)
+            writeCache(bytes)
             parsed
         } finally {
             connection.disconnect()
+        }
+    }
+
+    private fun loadCached(): List<Conference>? {
+        if (!cacheFile.isFile) {
+            return null
+        }
+
+        return try {
+            atomicCacheFile.openRead()
+                .bufferedReader()
+                .use { parse(it.readText()) }
+        } catch (_: Exception) {
+            atomicCacheFile.delete()
+            null
+        }
+    }
+
+    private fun loadBundled(): List<Conference> =
+        appContext.assets.open(ASSET_FILENAME)
+            .bufferedReader()
+            .use { parse(it.readText()) }
+
+    private fun writeCache(bytes: ByteArray) {
+        val output = atomicCacheFile.startWrite()
+        try {
+            output.write(bytes)
+            atomicCacheFile.finishWrite(output)
+        } catch (error: Exception) {
+            atomicCacheFile.failWrite(output)
+            throw error
         }
     }
 

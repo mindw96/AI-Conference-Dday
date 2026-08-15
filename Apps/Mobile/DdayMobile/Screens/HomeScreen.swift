@@ -7,36 +7,31 @@ struct HomeScreen: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
-                    if let errorMessage = model.errorMessage {
-                        ContentUnavailableView(
-                            model.text.conferenceDataUnavailable,
-                            systemImage: "exclamationmark.triangle",
-                            description: Text(errorMessage)
-                        )
-                    } else if let summary = model.featuredSummary {
-                        DeadlineHero(summary: summary)
-                    } else {
-                        ContentUnavailableView(
-                            model.text.noMainDday,
-                            systemImage: "pin",
-                            description: Text(model.text.noMainDdayDescription)
-                        )
-                    }
-
-                    if model.errorMessage == nil {
-                        if model.upcomingSummaries.isEmpty {
+            TimelineView(.periodic(from: .now, by: 60)) { _ in
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 24) {
+                        if let errorMessage = model.errorMessage {
                             ContentUnavailableView(
-                                model.text.noUpcomingDeadlines,
-                                systemImage: "calendar.badge.exclamationmark"
+                                model.text.conferenceDataUnavailable,
+                                systemImage: "exclamationmark.triangle",
+                                description: Text(errorMessage)
                             )
+                        } else if let summary = model.featuredSummary {
+                            DeadlineHero(summary: summary)
                         } else {
+                            ContentUnavailableView(
+                                model.text.noMainDday,
+                                systemImage: "pin",
+                                description: Text(model.text.noMainDdayDescription)
+                            )
+                        }
+
+                        if model.errorMessage == nil {
                             UpcomingDeadlinesSection(onAddToCalendar: addToCalendar)
                         }
                     }
+                    .padding()
                 }
-                .padding()
             }
             .navigationTitle(model.text.homeTitle)
             .alert(item: $calendarAlert) { alert in
@@ -123,29 +118,23 @@ private struct UpcomingDeadlinesSection: View {
     let onAddToCalendar: (MobileDeadlineSummary) -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(model.text.upcoming)
-                .font(.headline)
+        let groups = deadlineGroups
 
-            let customSummaries = model.customDeadlineSummaries
-                .filter { $0.display.remainingSeconds > 0 }
-            if !customSummaries.isEmpty {
-                UpcomingDeadlineGroup(
-                    id: "custom",
-                    title: model.text.customTitle,
-                    summaries: customSummaries,
-                    collapsedGroupIDs: $collapsedGroupIDs,
-                    onAddToCalendar: onAddToCalendar
-                )
-            }
+        if groups.isEmpty {
+            ContentUnavailableView(
+                model.text.noUpcomingDeadlines,
+                systemImage: "calendar.badge.exclamationmark"
+            )
+        } else {
+            VStack(alignment: .leading, spacing: 12) {
+                Text(model.text.upcoming)
+                    .font(.headline)
 
-            ForEach(model.selectedSubcategories, id: \.rawValue) { subcategory in
-                let summaries = model.upcomingSummaries(in: subcategory)
-                if !summaries.isEmpty {
+                ForEach(groups) { group in
                     UpcomingDeadlineGroup(
-                        id: subcategory.rawValue,
-                        title: model.text.subcategoryTitle(subcategory),
-                        summaries: summaries,
+                        id: group.id,
+                        title: group.title,
+                        summaries: group.summaries,
                         collapsedGroupIDs: $collapsedGroupIDs,
                         onAddToCalendar: onAddToCalendar
                     )
@@ -153,6 +142,42 @@ private struct UpcomingDeadlinesSection: View {
             }
         }
     }
+
+    private var deadlineGroups: [UpcomingDeadlineGroupData] {
+        var groups: [UpcomingDeadlineGroupData] = []
+        let customSummaries = model.customDeadlineSummaries
+            .filter { $0.display.remainingSeconds > 0 }
+        if !customSummaries.isEmpty {
+            groups.append(
+                UpcomingDeadlineGroupData(
+                    id: "custom",
+                    title: model.text.customTitle,
+                    summaries: customSummaries
+                )
+            )
+        }
+
+        for subcategory in model.selectedSubcategories {
+            let summaries = model.upcomingSummaries(in: subcategory)
+            if !summaries.isEmpty {
+                groups.append(
+                    UpcomingDeadlineGroupData(
+                        id: subcategory.rawValue,
+                        title: model.text.subcategoryTitle(subcategory),
+                        summaries: summaries
+                    )
+                )
+            }
+        }
+
+        return groups
+    }
+}
+
+private struct UpcomingDeadlineGroupData: Identifiable {
+    let id: String
+    let title: String
+    let summaries: [MobileDeadlineSummary]
 }
 
 private struct UpcomingDeadlineGroup: View {

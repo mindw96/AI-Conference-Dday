@@ -35,7 +35,10 @@ public struct ConferenceDataUpdater: @unchecked Sendable {
     }
 
     public func fetchAndCacheLatest() async throws -> ConferenceStore {
-        let (data, response) = try await URLSession.shared.data(from: remoteURL)
+        var request = URLRequest(url: remoteURL)
+        request.cachePolicy = .reloadIgnoringLocalCacheData
+        request.timeoutInterval = 30
+        let (data, response) = try await URLSession.shared.data(for: request)
 
         if let httpResponse = response as? HTTPURLResponse {
             if !(200..<300).contains(httpResponse.statusCode) {

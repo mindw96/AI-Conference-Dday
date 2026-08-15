@@ -20,14 +20,15 @@ public final class UserDeadlineStore {
                 return []
             }
 
-            return deadlines.sorted { $0.createdAt < $1.createdAt }
-        }
-        set {
-            guard let data = try? encoder.encode(newValue) else {
-                return
+            let normalized = deadlines.map(normalizedDeadline)
+            if normalized != deadlines {
+                save(normalized)
             }
 
-            defaults.set(data, forKey: Key.userDeadlines)
+            return normalized.sorted { $0.createdAt < $1.createdAt }
+        }
+        set {
+            save(newValue)
         }
     }
 
@@ -43,5 +44,29 @@ public final class UserDeadlineStore {
 
     public func remove(id: String) {
         deadlines = deadlines.filter { $0.id != id }
+    }
+
+    private func normalizedDeadline(_ deadline: UserDeadline) -> UserDeadline {
+        guard (try? DeadlineCalculator().resolvedTimeZone(deadline.timezone)) == nil else {
+            return deadline
+        }
+
+        return UserDeadline(
+            id: deadline.id,
+            name: deadline.name,
+            label: deadline.label,
+            date: deadline.date,
+            time: deadline.time,
+            timezone: TimeZone.current.identifier,
+            createdAt: deadline.createdAt
+        )
+    }
+
+    private func save(_ deadlines: [UserDeadline]) {
+        guard let data = try? encoder.encode(deadlines) else {
+            return
+        }
+
+        defaults.set(data, forKey: Key.userDeadlines)
     }
 }
