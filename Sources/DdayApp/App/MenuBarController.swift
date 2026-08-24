@@ -15,6 +15,7 @@ final class MenuBarController: NSObject {
     private let appUpdater: AppUpdater
     private let badgeRenderer = StatusBadgeRenderer()
     private var refreshTimer: Timer?
+    private var badgeAppearanceWindowController: BadgeAppearanceWindowController?
     private var lastSelectedWebsiteURL: URL?
     private var isUpdatingConferences = false
 
@@ -28,7 +29,7 @@ final class MenuBarController: NSObject {
         settings: SettingsStore,
         userDeadlineStore: UserDeadlineStore,
         conferenceDataUpdater: ConferenceDataUpdater = ConferenceDataUpdater(),
-        appUpdater: AppUpdater = AppUpdater()
+        appUpdater: AppUpdater? = nil
     ) {
         self.statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         self.store = store
@@ -36,7 +37,7 @@ final class MenuBarController: NSObject {
         self.settings = settings
         self.userDeadlineStore = userDeadlineStore
         self.conferenceDataUpdater = conferenceDataUpdater
-        self.appUpdater = appUpdater
+        self.appUpdater = appUpdater ?? AppUpdater()
 
         super.init()
 
@@ -101,8 +102,12 @@ final class MenuBarController: NSObject {
             button.image = nil
             button.imagePosition = .noImage
             button.title = title
-        case .badge:
-            let image = badgeRenderer.image(for: title, style: settings.menuBarVisualStyle)
+        case .badge, .glass:
+            let image = badgeRenderer.image(
+                for: title,
+                style: settings.menuBarVisualStyle,
+                glassAppearance: settings.menuBarGlassAppearance
+            )
             statusItem.length = image.size.width + 4
             button.title = ""
             button.image = image
@@ -271,6 +276,15 @@ final class MenuBarController: NSObject {
             styleItem.state = settings.menuBarVisualStyle == style ? .on : .off
             submenu.addItem(styleItem)
         }
+
+        submenu.addItem(.separator())
+        let customizeItem = NSMenuItem(
+            title: text.customizeGlassColors,
+            action: #selector(showBadgeAppearanceEditor),
+            keyEquivalent: ""
+        )
+        customizeItem.target = self
+        submenu.addItem(customizeItem)
 
         item.submenu = submenu
         return item
@@ -488,6 +502,8 @@ final class MenuBarController: NSObject {
             return text.plainText
         case .badge:
             return text.lightBadge
+        case .glass:
+            return text.glassBadge
         }
     }
 
@@ -560,6 +576,25 @@ final class MenuBarController: NSObject {
 
         settings.menuBarVisualStyle = style
         refresh()
+    }
+
+    @objc private func showBadgeAppearanceEditor() {
+        badgeAppearanceWindowController?.close()
+
+        let controller = BadgeAppearanceWindowController(
+            appearance: settings.menuBarGlassAppearance,
+            language: settings.appLanguage
+        ) { [weak self] appearance in
+            guard let self else {
+                return
+            }
+
+            settings.menuBarGlassAppearance = appearance
+            settings.menuBarVisualStyle = .glass
+            refresh()
+        }
+        badgeAppearanceWindowController = controller
+        controller.present()
     }
 
     @objc private func selectLanguage(_ sender: NSMenuItem) {
@@ -1027,6 +1062,14 @@ private struct MenuText {
 
     var lightBadge: String {
         usesKorean ? "밝은 배지" : "Light Badge"
+    }
+
+    var glassBadge: String {
+        "Glass Badge"
+    }
+
+    var customizeGlassColors: String {
+        usesKorean ? "Glass 색상 사용자화..." : "Customize Glass Colors..."
     }
 
     var addCustomDday: String {

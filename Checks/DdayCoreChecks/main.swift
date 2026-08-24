@@ -12,6 +12,7 @@ enum DdayCoreChecks {
         try checkInvalidDeadlineTimeIsRejected()
         try checkInvalidDeadlineTimezoneIsRejected()
         try checkInvalidStoredUserDeadlineTimezoneIsMigrated()
+        try checkMenuBarGlassAppearancePersists()
         try checkAoEMapsToUTCMinusTwelve()
         try checkAoEDeadlineUsesLocalDisplayTimezone()
         try checkWidgetTimelineSkipsDistantAndEmptyDeadlines()
@@ -250,6 +251,43 @@ enum DdayCoreChecks {
         try expect(
             reloaded.deadlines.first?.timezone == TimeZone.current.identifier,
             "migrated timezone should be persisted"
+        )
+    }
+
+    private static func checkMenuBarGlassAppearancePersists() throws {
+        let suiteName = "DdayCoreChecks-\(UUID().uuidString)"
+        let defaults = try require(UserDefaults(suiteName: suiteName))
+        defer {
+            defaults.removePersistentDomain(forName: suiteName)
+        }
+
+        let settings = SettingsStore(defaults: defaults)
+        try expect(
+            settings.menuBarGlassAppearance == .standard,
+            "glass appearance should use the standard defaults when unset"
+        )
+
+        let customized = MenuBarGlassAppearance(
+            backgroundRGB: DdayRGBColor(red: -10, green: 120, blue: 300),
+            textRGB: DdayRGBColor(red: 220, green: 230, blue: 240),
+            usesAutomaticTextColor: false
+        )
+        settings.menuBarVisualStyle = .glass
+        settings.menuBarGlassAppearance = customized
+
+        let reloaded = SettingsStore(defaults: defaults)
+        try expect(
+            reloaded.menuBarVisualStyle == .glass,
+            "glass visual style should persist"
+        )
+        try expect(
+            reloaded.menuBarGlassAppearance == customized,
+            "glass RGB appearance should persist"
+        )
+        try expect(
+            reloaded.menuBarGlassAppearance.backgroundRGB
+                == DdayRGBColor(red: 0, green: 120, blue: 255),
+            "glass RGB values should be clamped to 0...255"
         )
     }
 
