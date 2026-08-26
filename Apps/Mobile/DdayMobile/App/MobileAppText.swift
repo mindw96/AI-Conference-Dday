@@ -79,10 +79,14 @@ struct MobileAppText {
     var widgetAppearance: String { korean ? "위젯 외형" : "Widget Appearance" }
     var widgetBackground: String { korean ? "배경색" : "Background" }
     var widgetTextColor: String { korean ? "글씨색" : "Text Color" }
+    var widgetGlassTint: String { korean ? "글래스 색상" : "Glass Tint" }
+    var widgetCustomTextColor: String { korean ? "사용자 지정 글씨색" : "Custom Text Color" }
+    var chooseColor: String { korean ? "색상 선택" : "Choose Color" }
+    var rgbValues: String { "RGB" }
     var widgetAppearanceDescription: String {
         korean
-            ? "홈 화면 위젯의 배경색과 글씨색을 선택합니다. 시스템 배경은 iOS 위젯 기본 스타일을 따릅니다."
-            : "Choose the Home Screen widget background and text color. System background follows the default iOS widget style."
+            ? "전체 색상 모드에서는 절제된 글래스 색상과 글씨색을 RGB로 조정할 수 있습니다. iOS 26의 투명·틴트 모드에서는 시스템 Liquid Glass 외형을 따릅니다."
+            : "Customize the subtle glass tint and text color with RGB values in Full Color mode. Clear and Tinted appearances follow the system Liquid Glass style on iOS 26."
     }
     var notifications: String { korean ? "알림" : "Notifications" }
     var enableNotifications: String { korean ? "마감 알림 켜기" : "Enable deadline reminders" }
@@ -136,6 +140,8 @@ struct MobileAppText {
         switch background {
         case .system:
             return korean ? "시스템" : "System"
+        case .glass:
+            return korean ? "글래스" : "Glass"
         case .white:
             return korean ? "흰색" : "White"
         case .black:
@@ -153,6 +159,8 @@ struct MobileAppText {
             return korean ? "검정" : "Black"
         case .white:
             return korean ? "흰색" : "White"
+        case .custom:
+            return korean ? "사용자 지정" : "Custom"
         }
     }
 

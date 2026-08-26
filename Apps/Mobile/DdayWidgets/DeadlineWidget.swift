@@ -78,6 +78,7 @@ struct DeadlineWidget: Widget {
 
 private struct DeadlineWidgetView: View {
     @Environment(\.widgetFamily) private var family
+    @Environment(\.widgetRenderingMode) private var renderingMode
     let entry: DeadlineWidgetEntry
 
     var body: some View {
@@ -131,22 +132,52 @@ private struct DeadlineWidgetView: View {
     private func withWidgetBackground<Content: View>(
         @ViewBuilder content: () -> Content
     ) -> some View {
-        if let background = entry.appearance.background.widgetBackgroundColor {
-            content()
-                .containerBackground(background, for: .widget)
-        } else {
-            content()
-                .containerBackground(.background, for: .widget)
+        content()
+            .overlay {
+                if renderingMode == .fullColor,
+                   entry.appearance.background == .glass {
+                    ContainerRelativeShape()
+                        .stroke(Color.white.opacity(0.58), lineWidth: 0.8)
+                        .padding(1)
+                }
+            }
+            .containerBackground(for: .widget) {
+                WidgetBackgroundView(appearance: entry.appearance)
+            }
+    }
+}
+
+private struct WidgetBackgroundView: View {
+    @Environment(\.colorScheme) private var colorScheme
+    let appearance: MobileWidgetAppearance
+
+    var body: some View {
+        switch appearance.background {
+        case .system:
+            Color(uiColor: .systemBackground)
+        case .glass:
+            ZStack {
+                Color(uiColor: .systemBackground)
+                appearance.backgroundRGB.widgetColor
+                    .opacity(colorScheme == .dark ? 0.2 : 0.11)
+            }
+        case .white:
+            Color.white
+        case .black:
+            Color.black
+        case .navy:
+            Color(red: 0.07, green: 0.11, blue: 0.22)
         }
     }
 }
 
 private struct SmallDeadlineWidget: View {
+    @Environment(\.widgetRenderingMode) private var renderingMode
     let snapshot: MobileWidgetDeadlineSnapshot
     let appearance: MobileWidgetAppearance
 
     private var palette: WidgetPalette {
-        WidgetPalette(appearance: appearance)
+        WidgetPalette(appearance: appearance, renderingMode: renderingMode)
     }
 
     var body: some View {
@@ -161,6 +192,7 @@ private struct SmallDeadlineWidget: View {
             Text(snapshot.deadlineText)
                 .font(.system(size: 64, weight: .bold, design: .rounded))
                 .monospacedDigit()
+                .widgetAccentable()
                 .minimumScaleFactor(0.45)
                 .lineLimit(1)
                 .foregroundStyle(palette.primary)
@@ -178,11 +210,12 @@ private struct SmallDeadlineWidget: View {
 }
 
 private struct MediumDeadlineWidget: View {
+    @Environment(\.widgetRenderingMode) private var renderingMode
     let snapshot: MobileWidgetDeadlineSnapshot
     let appearance: MobileWidgetAppearance
 
     private var palette: WidgetPalette {
-        WidgetPalette(appearance: appearance)
+        WidgetPalette(appearance: appearance, renderingMode: renderingMode)
     }
 
     var body: some View {
@@ -214,6 +247,7 @@ private struct MediumDeadlineWidget: View {
             Text(snapshot.deadlineText)
                 .font(.system(size: 66, weight: .bold, design: .rounded))
                 .monospacedDigit()
+                .widgetAccentable()
                 .minimumScaleFactor(0.45)
                 .lineLimit(1)
                 .layoutPriority(2)
@@ -224,11 +258,12 @@ private struct MediumDeadlineWidget: View {
 }
 
 private struct LargeDeadlineWidget: View {
+    @Environment(\.widgetRenderingMode) private var renderingMode
     let snapshot: MobileWidgetDeadlineSnapshot
     let appearance: MobileWidgetAppearance
 
     private var palette: WidgetPalette {
-        WidgetPalette(appearance: appearance)
+        WidgetPalette(appearance: appearance, renderingMode: renderingMode)
     }
 
     var body: some View {
@@ -246,6 +281,7 @@ private struct LargeDeadlineWidget: View {
             Text(snapshot.deadlineText)
                 .font(.system(size: 96, weight: .bold, design: .rounded))
                 .monospacedDigit()
+                .widgetAccentable()
                 .minimumScaleFactor(0.45)
                 .lineLimit(1)
                 .foregroundStyle(palette.primary)
@@ -273,11 +309,12 @@ private struct LargeDeadlineWidget: View {
 }
 
 private struct ExtraLargeDeadlineWidget: View {
+    @Environment(\.widgetRenderingMode) private var renderingMode
     let snapshot: MobileWidgetDeadlineSnapshot
     let appearance: MobileWidgetAppearance
 
     private var palette: WidgetPalette {
-        WidgetPalette(appearance: appearance)
+        WidgetPalette(appearance: appearance, renderingMode: renderingMode)
     }
 
     var body: some View {
@@ -314,6 +351,7 @@ private struct ExtraLargeDeadlineWidget: View {
             Text(snapshot.deadlineText)
                 .font(.system(size: 126, weight: .bold, design: .rounded))
                 .monospacedDigit()
+                .widgetAccentable()
                 .minimumScaleFactor(0.45)
                 .lineLimit(1)
                 .layoutPriority(2)
@@ -394,11 +432,20 @@ private struct WidgetPalette {
     let primary: Color
     let secondary: Color
 
-    init(appearance: MobileWidgetAppearance) {
+    init(
+        appearance: MobileWidgetAppearance,
+        renderingMode: WidgetRenderingMode
+    ) {
+        guard renderingMode == .fullColor else {
+            primary = .primary
+            secondary = .secondary
+            return
+        }
+
         switch appearance.textColor {
         case .automatic:
             switch appearance.background {
-            case .system:
+            case .system, .glass:
                 primary = .primary
                 secondary = .secondary
             case .white:
@@ -414,21 +461,21 @@ private struct WidgetPalette {
         case .white:
             primary = .white
             secondary = .white.opacity(0.7)
+        case .custom:
+            primary = appearance.textRGB.widgetColor
+            secondary = appearance.textRGB.widgetColor.opacity(0.68)
         }
     }
 }
 
-private extension MobileWidgetBackground {
-    var widgetBackgroundColor: Color? {
-        switch self {
-        case .system:
-            return nil
-        case .white:
-            return .white
-        case .black:
-            return .black
-        case .navy:
-            return Color(red: 0.07, green: 0.11, blue: 0.22)
-        }
+private extension MobileWidgetRGBColor {
+    var widgetColor: Color {
+        Color(
+            .sRGB,
+            red: Double(red) / 255,
+            green: Double(green) / 255,
+            blue: Double(blue) / 255,
+            opacity: 1
+        )
     }
 }
