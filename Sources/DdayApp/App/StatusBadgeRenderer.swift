@@ -1,6 +1,7 @@
 import AppKit
 import DdayCore
 
+@MainActor
 struct StatusBadgeRenderer {
     private let font = NSFont.monospacedDigitSystemFont(ofSize: 13, weight: .semibold)
     private let horizontalPadding: CGFloat = 9
