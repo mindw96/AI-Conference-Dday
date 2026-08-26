@@ -197,6 +197,26 @@ final class MobileAppModel: ObservableObject {
         saveWidgetAppearance()
     }
 
+    func setWidgetGlassTint(_ color: MobileWidgetRGBColor) {
+        guard widgetAppearance.backgroundRGB != color || widgetAppearance.background != .glass else {
+            return
+        }
+
+        widgetAppearance.backgroundRGB = color
+        widgetAppearance.background = .glass
+        saveWidgetAppearance()
+    }
+
+    func setWidgetCustomTextColor(_ color: MobileWidgetRGBColor) {
+        guard widgetAppearance.textRGB != color || widgetAppearance.textColor != .custom else {
+            return
+        }
+
+        widgetAppearance.textRGB = color
+        widgetAppearance.textColor = .custom
+        saveWidgetAppearance()
+    }
+
     func select(_ source: MobileDeadlineSource) {
         selectedSource = source
         saveSelectedSource(source)
