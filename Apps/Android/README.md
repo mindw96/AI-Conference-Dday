@@ -39,9 +39,11 @@ Create the local upload key once:
 ./scripts/create_upload_keystore.sh
 ```
 
-The private key is written under the repository's ignored `private/android/`
-directory. `keystore.properties` contains only its path and alias; the password
-is requested at build time and is never committed.
+The private key is written outside the repository under
+`~/Library/Application Support/Dday/Signing/Android/`. Set
+`DDAY_ANDROID_SIGNING_DIR` before running the creation script to use another
+non-cloud location. `keystore.properties` contains only its absolute path and
+alias; the password is requested at build time and is never committed.
 
 Back up the `.jks` file and its password separately. Google Play can reset an
 upload key after Play App Signing is enabled, but keeping a verified backup is
@@ -96,10 +98,10 @@ In a second terminal, build, install, and launch Dday:
 The install script waits for Android, System UI, and Package Manager to finish
 booting, so it is safe to run while the emulator is still starting.
 
-The AVD is named `Dday_API_36_1` and is stored in the ignored
-`.android-avd/` directory so it does not affect other Android projects. The
-launcher also enables Apple Silicon host GPU acceleration for a faster and more
-stable System UI.
+The AVD is named `Dday_API_36_1` and is stored in the standard
+`~/.android/avd` directory, outside repositories and cloud-synced workspaces.
+Set `ANDROID_AVD_HOME` to override that location. The launcher also enables
+Apple Silicon host GPU acceleration for a faster and more stable System UI.
 
 ## Conference Data
 

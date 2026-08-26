@@ -4,7 +4,7 @@ set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 export ANDROID_SDK_ROOT="${ANDROID_SDK_ROOT:-/opt/homebrew/share/android-commandlinetools}"
-export ANDROID_AVD_HOME="${ANDROID_AVD_HOME:-${PROJECT_DIR}/.android-avd}"
+export ANDROID_AVD_HOME="${ANDROID_AVD_HOME:-${HOME}/.android/avd}"
 
 AVD_NAME="${DDAY_AVD_NAME:-Dday_API_36_1}"
 SYSTEM_IMAGE="system-images;android-36.1;google_apis;arm64-v8a"

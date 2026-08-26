@@ -3,11 +3,10 @@
 set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-REPOSITORY_DIR="$(cd "${PROJECT_DIR}/../.." && pwd)"
 export JAVA_HOME="${JAVA_HOME:-/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home}"
 
 KEYTOOL="${JAVA_HOME}/bin/keytool"
-KEYSTORE_DIR="${REPOSITORY_DIR}/private/android"
+KEYSTORE_DIR="${DDAY_ANDROID_SIGNING_DIR:-${HOME}/Library/Application Support/Dday/Signing/Android}"
 KEYSTORE_PATH="${KEYSTORE_DIR}/dday-upload-key.jks"
 CERTIFICATE_PATH="${KEYSTORE_DIR}/dday-upload-certificate.pem"
 PROPERTIES_PATH="${PROJECT_DIR}/keystore.properties"
@@ -46,6 +45,7 @@ fi
 
 umask 077
 mkdir -p "${KEYSTORE_DIR}"
+chmod 700 "${KEYSTORE_DIR}"
 
 export DDAY_UPLOAD_PASSWORD="${upload_password}"
 trap 'unset DDAY_UPLOAD_PASSWORD upload_password upload_password_confirmation' EXIT
@@ -72,11 +72,12 @@ trap 'unset DDAY_UPLOAD_PASSWORD upload_password upload_password_confirmation' E
     -file "${CERTIFICATE_PATH}"
 
 {
-    printf 'storeFile=../../private/android/dday-upload-key.jks\n'
+    printf 'storeFile=%s\n' "${KEYSTORE_PATH}"
     printf 'keyAlias=%s\n' "${KEY_ALIAS}"
 } > "${PROPERTIES_PATH}"
 
 chmod 600 "${KEYSTORE_PATH}" "${PROPERTIES_PATH}"
+chmod 644 "${CERTIFICATE_PATH}"
 
 echo
 echo "Upload keystore created at ${KEYSTORE_PATH}"
