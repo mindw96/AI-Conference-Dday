@@ -3,7 +3,7 @@
 set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-export ANDROID_AVD_HOME="${ANDROID_AVD_HOME:-${PROJECT_DIR}/.android-avd}"
+export ANDROID_AVD_HOME="${ANDROID_AVD_HOME:-${HOME}/.android/avd}"
 
 AVD_NAME="${DDAY_AVD_NAME:-Dday_API_36_1}"
 CONFIG_PATH="${ANDROID_AVD_HOME}/${AVD_NAME}.avd/config.ini"
