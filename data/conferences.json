@@ -11,13 +11,13 @@
     "location": "Melbourne, Australia",
     "websiteUrl": "https://www.acml-conf.org/2026/",
     "sourceUrl": "https://www.acml-conf.org/2026/calls/papers/",
-    "sourceCheckedAt": "2026-05-27",
+    "sourceCheckedAt": "2026-09-21",
     "timezone": "AoE",
     "deadlines": [
       {
         "id": "full-paper",
         "label": "Conference Track Submission Deadline",
-        "date": "2026-06-26",
+        "date": "2026-07-05",
         "time": "23:59",
         "timezone": "AoE",
         "type": "submission",
@@ -26,7 +26,7 @@
       {
         "id": "reviews-released",
         "label": "Reviews Released to Authors",
-        "date": "2026-08-10",
+        "date": "2026-08-30",
         "time": "23:59",
         "timezone": "AoE",
         "type": "notification",
@@ -35,7 +35,7 @@
       {
         "id": "notification",
         "label": "Acceptance Notification",
-        "date": "2026-09-15",
+        "date": "2026-09-22",
         "time": "23:59",
         "timezone": "AoE",
         "type": "notification",
@@ -43,7 +43,7 @@
       },
       {
         "id": "camera-ready",
-        "label": "Camera-ready Submission Deadline",
+        "label": "Camera-ready Submission Deadline (Pending Revision)",
         "date": "2026-09-29",
         "time": "23:59",
         "timezone": "AoE",
@@ -532,10 +532,10 @@
       "machine-learning",
       "artificial-intelligence"
     ],
-    "location": "Georgia World Congress Center; International Convention Centre; Palais des Congres de Paris",
+    "location": "Sydney, Australia; Atlanta, GA, USA; Paris, France",
     "websiteUrl": "https://neurips.cc/Conferences/2026",
     "sourceUrl": "https://neurips.cc/Conferences/2026/Dates",
-    "sourceCheckedAt": "2026-05-27",
+    "sourceCheckedAt": "2026-09-21",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -567,19 +567,55 @@
       },
       {
         "id": "conference-start",
-        "label": "Conference Sessions Start",
+        "label": "Sydney Main Conference Start",
         "date": "2026-12-08",
         "time": null,
-        "timezone": "UTC",
+        "timezone": "Australia/Sydney",
         "type": "conference-start",
         "isPrimary": false
       },
       {
         "id": "conference-end",
-        "label": "Conference Sessions End",
+        "label": "Sydney Main Conference End",
         "date": "2026-12-10",
         "time": null,
-        "timezone": "UTC",
+        "timezone": "Australia/Sydney",
+        "type": "conference-end",
+        "isPrimary": false
+      },
+      {
+        "id": "atlanta-conference-start",
+        "label": "Atlanta Main Conference Start",
+        "date": "2026-12-09",
+        "time": null,
+        "timezone": "America/New_York",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "atlanta-conference-end",
+        "label": "Atlanta Main Conference End",
+        "date": "2026-12-11",
+        "time": null,
+        "timezone": "America/New_York",
+        "type": "conference-end",
+        "isPrimary": false
+      },
+      {
+        "id": "paris-conference-start",
+        "label": "Paris Main Conference Start",
+        "date": "2026-12-09",
+        "time": null,
+        "timezone": "Europe/Paris",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "paris-conference-end",
+        "label": "Paris Main Conference End",
+        "date": "2026-12-11",
+        "time": null,
+        "timezone": "Europe/Paris",
         "type": "conference-end",
         "isPrimary": false
       }
@@ -798,7 +834,7 @@
     "location": "Osaka, Japan",
     "websiteUrl": "https://accv2026.org/",
     "sourceUrl": "https://accv2026.org/",
-    "sourceCheckedAt": "2026-05-27",
+    "sourceCheckedAt": "2026-09-21",
     "timezone": "GMT",
     "deadlines": [
       {
@@ -880,7 +916,7 @@
     "location": "Rio de Janeiro, Brazil",
     "websiteUrl": "https://2026.acmmm.org/",
     "sourceUrl": "https://2026.acmmm.org/site/important-dates.html",
-    "sourceCheckedAt": "2026-05-27",
+    "sourceCheckedAt": "2026-09-21",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -961,7 +997,7 @@
     "location": "Lancaster, UK",
     "websiteUrl": "https://bmvc2026.bmva.org/",
     "sourceUrl": "https://bmvc2026.bmva.org/dates/",
-    "sourceCheckedAt": "2026-05-27",
+    "sourceCheckedAt": "2026-09-21",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -1267,7 +1303,7 @@
     "location": "Hengqin, China",
     "websiteUrl": "https://2026.aaclnet.org/",
     "sourceUrl": "https://2026.aaclnet.org/calls/main_conference_papers/",
-    "sourceCheckedAt": "2026-05-27",
+    "sourceCheckedAt": "2026-09-21",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -1281,8 +1317,17 @@
       },
       {
         "id": "commitment",
-        "label": "Commitment Deadline",
-        "date": "2026-08-02",
+        "label": "First-round Commitment Deadline",
+        "date": "2026-08-07",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": false
+      },
+      {
+        "id": "second-round-commitment",
+        "label": "Second-round Commitment Deadline",
+        "date": "2026-08-25",
         "time": "23:59",
         "timezone": "AoE",
         "type": "submission",
@@ -1410,9 +1455,9 @@
     ],
     "subcategory": "nlp",
     "location": "San Francisco, CA, USA",
-    "websiteUrl": "https://colmweb.org/",
-    "sourceUrl": "https://colmweb.org/cfp.html",
-    "sourceCheckedAt": "2026-05-27",
+    "websiteUrl": "https://colm.cc/Conferences/2026",
+    "sourceUrl": "https://colm.cc/Conferences/2026/Dates",
+    "sourceCheckedAt": "2026-09-21",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -1437,8 +1482,8 @@
         "id": "notification",
         "label": "Decision Notifications",
         "date": "2026-07-08",
-        "time": "23:59",
-        "timezone": "AoE",
+        "time": null,
+        "timezone": "America/Los_Angeles",
         "type": "notification",
         "isPrimary": false
       },
@@ -1453,7 +1498,7 @@
       },
       {
         "id": "conference-end",
-        "label": "Conference End",
+        "label": "Conference End (Including Workshops)",
         "date": "2026-10-09",
         "time": null,
         "timezone": "America/Los_Angeles",
@@ -1538,7 +1583,7 @@
     "location": "Budapest, Hungary",
     "websiteUrl": "https://2026.emnlp.org",
     "sourceUrl": "https://2026.emnlp.org/calls/main_conference_papers/",
-    "sourceCheckedAt": "2026-05-27",
+    "sourceCheckedAt": "2026-09-21",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -1571,7 +1616,7 @@
       {
         "id": "camera-ready",
         "label": "Camera-ready Papers Due",
-        "date": "2026-09-20",
+        "date": "2026-08-30",
         "time": "23:59",
         "timezone": "AoE",
         "type": "camera-ready",
@@ -1971,7 +2016,7 @@
     "location": "Montreal, Canada",
     "websiteUrl": "https://aaai.org/conference/aaai/aaai-27/",
     "sourceUrl": "https://aaai.org/conference/aaai/aaai-27/main-technical-track-call/",
-    "sourceCheckedAt": "2026-07-30",
+    "sourceCheckedAt": "2026-09-21",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2054,12 +2099,12 @@
     "location": "San Jose, CA, USA",
     "websiteUrl": "https://kdd2027.kdd.org/",
     "sourceUrl": "https://kdd2027.kdd.org/research-track-call-for-papers/",
-    "sourceCheckedAt": "2026-07-30",
+    "sourceCheckedAt": "2026-09-21",
     "timezone": "AoE",
     "deadlines": [
       {
         "id": "abstract",
-        "label": "Research Track Abstract Deadline",
+        "label": "First Cycle Abstract Submission Deadline",
         "date": "2026-07-19",
         "time": "23:59",
         "timezone": "AoE",
@@ -2068,7 +2113,7 @@
       },
       {
         "id": "full-paper",
-        "label": "Research Track Paper Deadline",
+        "label": "First Cycle Research Track Submission Deadline",
         "date": "2026-07-26",
         "time": "23:59",
         "timezone": "AoE",
@@ -2077,7 +2122,7 @@
       },
       {
         "id": "notification",
-        "label": "Notification",
+        "label": "First Cycle Acceptance Notification",
         "date": "2026-11-14",
         "time": "23:59",
         "timezone": "AoE",
@@ -2117,15 +2162,24 @@
     "location": "Thessaloniki, Greece",
     "websiteUrl": "https://3dvconf.github.io/2027/",
     "sourceUrl": "https://3dvconf.github.io/2027/",
-    "sourceCheckedAt": "2026-07-30",
-    "timezone": "America/Los_Angeles",
+    "sourceCheckedAt": "2026-09-21",
+    "timezone": "AoE",
     "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstract Registration Deadline",
+        "date": "2026-08-28",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
       {
         "id": "full-paper",
         "label": "Paper Submission",
         "date": "2026-08-28",
-        "time": "11:00",
-        "timezone": "America/Los_Angeles",
+        "time": "23:59",
+        "timezone": "AoE",
         "type": "submission",
         "isPrimary": true
       },
@@ -2133,8 +2187,8 @@
         "id": "supplementary",
         "label": "Supplementary Material",
         "date": "2026-09-02",
-        "time": "11:00",
-        "timezone": "America/Los_Angeles",
+        "time": "23:59",
+        "timezone": "AoE",
         "type": "supplementary",
         "isPrimary": false
       },
@@ -2189,7 +2243,7 @@
     "location": "Disney Springs, Buena Vista, FL, USA",
     "websiteUrl": "https://wacv.thecvf.com/Conferences/2027",
     "sourceUrl": "https://wacv.thecvf.com/Conferences/2027/CallForPapers",
-    "sourceCheckedAt": "2026-07-30",
+    "sourceCheckedAt": "2026-09-21",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2269,8 +2323,8 @@
     "subcategory": "general-ai",
     "location": "Hanoi, Vietnam",
     "websiteUrl": "https://warwick.ac.uk/fac/sci/dcs/aamas2027/",
-    "sourceUrl": "https://warwick.ac.uk/fac/sci/dcs/aamas2027/calls/",
-    "sourceCheckedAt": "2026-07-30",
+    "sourceUrl": "https://warwick.ac.uk/fac/sci/dcs/aamas2027/calls/call-for-main-track/",
+    "sourceCheckedAt": "2026-09-21",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2342,7 +2396,7 @@
     "location": "TBA",
     "websiteUrl": "https://iclr.cc/Conferences/2027",
     "sourceUrl": "https://iclr.cc/Conferences/2027/CallForPapers",
-    "sourceCheckedAt": "2026-07-30",
+    "sourceCheckedAt": "2026-09-21",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2379,6 +2433,476 @@
         "time": "23:59",
         "timezone": "AoE",
         "type": "notification",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "aistats-2027",
+    "name": "AISTATS",
+    "fullName": "International Conference on Artificial Intelligence and Statistics",
+    "year": 2027,
+    "field": [
+      "machine-learning",
+      "statistics",
+      "artificial-intelligence"
+    ],
+    "subcategory": "ml",
+    "location": "Montreal, Canada",
+    "websiteUrl": "https://aistats.org/aistats2027/",
+    "sourceUrl": "https://virtual.aistats.org/Conferences/2027/CallForPapers",
+    "sourceCheckedAt": "2026-09-21",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstract Submission Deadline",
+        "date": "2026-09-29",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Full Paper and Supplementary Material Deadline",
+        "date": "2026-10-06",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "reviews-released",
+        "label": "Reviews Released to Authors",
+        "date": "2026-11-16",
+        "time": null,
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Acceptance Notification",
+        "date": "2027-01-20",
+        "time": null,
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2027-05-03",
+        "time": null,
+        "timezone": "America/Toronto",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2027-05-06",
+        "time": null,
+        "timezone": "America/Toronto",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "alt-2027",
+    "name": "ALT",
+    "fullName": "International Conference on Algorithmic Learning Theory",
+    "year": 2027,
+    "field": [
+      "machine-learning",
+      "learning-theory"
+    ],
+    "subcategory": "ml",
+    "location": "Leiden, Netherlands",
+    "websiteUrl": "https://algorithmiclearningtheory.org/alt2027/",
+    "sourceUrl": "https://algorithmiclearningtheory.org/alt2027/call-for-papers/",
+    "sourceCheckedAt": "2026-09-21",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "full-paper",
+        "label": "Paper Submission Deadline",
+        "date": "2026-10-12",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "notification",
+        "label": "Author Notification",
+        "date": "2027-01-05",
+        "time": null,
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2027-03-09",
+        "time": null,
+        "timezone": "Europe/Amsterdam",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2027-03-12",
+        "time": null,
+        "timezone": "Europe/Amsterdam",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "cvpr-2027",
+    "name": "CVPR",
+    "fullName": "IEEE/CVF Conference on Computer Vision and Pattern Recognition",
+    "year": 2027,
+    "field": [
+      "computer-vision",
+      "artificial-intelligence"
+    ],
+    "location": "Seattle, WA, USA",
+    "websiteUrl": "https://cvpr.thecvf.com/Conferences/2027",
+    "sourceUrl": "https://cvpr.thecvf.com/Conferences/2027/Dates",
+    "sourceCheckedAt": "2026-09-21",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "registration",
+        "label": "Paper Registration Deadline",
+        "date": "2026-11-10",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Paper Submission Deadline",
+        "date": "2026-11-16",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "supplementary",
+        "label": "Supplementary Material Deadline",
+        "date": "2026-11-23",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "supplementary",
+        "isPrimary": false
+      },
+      {
+        "id": "reviews-released",
+        "label": "Reviews Released to Authors",
+        "date": "2027-01-25",
+        "time": null,
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Final Decisions",
+        "date": "2027-02-25",
+        "time": null,
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-start",
+        "label": "Main Conference Start",
+        "date": "2027-06-22",
+        "time": null,
+        "timezone": "America/Los_Angeles",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-end",
+        "label": "Main Conference End",
+        "date": "2027-06-25",
+        "time": null,
+        "timezone": "America/Los_Angeles",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ],
+    "subcategory": "cv"
+  },
+  {
+    "id": "eacl-2027",
+    "name": "EACL",
+    "fullName": "Conference of the European Chapter of the Association for Computational Linguistics",
+    "year": 2027,
+    "field": [
+      "natural-language-processing",
+      "computational-linguistics"
+    ],
+    "subcategory": "nlp",
+    "location": "Athens, Greece",
+    "websiteUrl": "https://2027.eacl.org/",
+    "sourceUrl": "https://2027.eacl.org/calls/papers/",
+    "sourceCheckedAt": "2026-09-21",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "arr-submission",
+        "label": "ARR August 2026 Submission Deadline",
+        "date": "2026-08-03",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "commitment",
+        "label": "EACL Commitment Deadline",
+        "date": "2026-10-11",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Acceptance Notification",
+        "date": "2026-11-12",
+        "time": null,
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready Submission Deadline",
+        "date": "2026-11-26",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2027-03-09",
+        "time": null,
+        "timezone": "Europe/Athens",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2027-03-14",
+        "time": null,
+        "timezone": "Europe/Athens",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "naacl-2027",
+    "name": "NAACL",
+    "fullName": "Annual Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics",
+    "year": 2027,
+    "field": [
+      "natural-language-processing",
+      "computational-linguistics"
+    ],
+    "subcategory": "nlp",
+    "location": "San Francisco, CA, USA",
+    "websiteUrl": "https://2027.naacl.org/",
+    "sourceUrl": "https://2027.naacl.org/calls/main_conference_papers/",
+    "sourceCheckedAt": "2026-09-21",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "arr-submission",
+        "label": "ARR October 2026 Submission Deadline",
+        "date": "2026-10-12",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "commitment",
+        "label": "NAACL Commitment Deadline",
+        "date": "2026-12-23",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Acceptance Notification",
+        "date": "2027-02-10",
+        "time": null,
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2027-06-01",
+        "time": null,
+        "timezone": "America/Los_Angeles",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2027-06-05",
+        "time": null,
+        "timezone": "America/Los_Angeles",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "coling-2027",
+    "name": "COLING",
+    "fullName": "International Conference on Computational Linguistics",
+    "year": 2027,
+    "field": [
+      "natural-language-processing",
+      "computational-linguistics"
+    ],
+    "subcategory": "nlp",
+    "location": "Macau, China",
+    "websiteUrl": "https://2027.coling-iccl.org/",
+    "sourceUrl": "https://2027.coling-iccl.org/",
+    "sourceCheckedAt": "2026-09-21",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "arr-submission",
+        "label": "ARR October 2026 Submission Deadline",
+        "date": "2026-10-12",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "commitment",
+        "label": "COLING Commitment Deadline",
+        "date": "2026-12-23",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Acceptance Notification",
+        "date": "2027-02-10",
+        "time": null,
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2027-05-09",
+        "time": null,
+        "timezone": "Asia/Macau",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2027-05-14",
+        "time": null,
+        "timezone": "Asia/Macau",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "icaps-2027",
+    "name": "ICAPS",
+    "fullName": "International Conference on Automated Planning and Scheduling",
+    "year": 2027,
+    "field": [
+      "artificial-intelligence",
+      "planning",
+      "scheduling"
+    ],
+    "subcategory": "general-ai",
+    "location": "Columbia, SC, USA",
+    "websiteUrl": "https://icaps27.icaps-conference.org/",
+    "sourceUrl": "https://icaps27.icaps-conference.org/calls/cfp/",
+    "sourceCheckedAt": "2026-09-21",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstract Submission Deadline",
+        "date": "2026-12-07",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Paper Submission Deadline",
+        "date": "2026-12-14",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "notification",
+        "label": "Acceptance Notification",
+        "date": "2027-02-26",
+        "time": null,
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2027-06-27",
+        "time": null,
+        "timezone": "America/New_York",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2027-07-02",
+        "time": null,
+        "timezone": "America/New_York",
+        "type": "conference-end",
         "isPrimary": false
       }
     ]
