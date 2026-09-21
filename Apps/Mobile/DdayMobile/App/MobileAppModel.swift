@@ -41,6 +41,8 @@ final class MobileAppModel: ObservableObject {
     private let widgetSnapshotStore: MobileWidgetSnapshotStore
     private let notificationScheduler: MobileNotificationScheduler
     private let defaults: UserDefaults
+    private var notificationPreferenceRevision = 0
+    private var notificationRefreshRevision = 0
 
     var text: MobileAppText {
         MobileAppText(language: appLanguage)
@@ -72,23 +74,24 @@ final class MobileAppModel: ObservableObject {
     }
 
     func load() {
+        userDeadlines = userDeadlineStore.deadlines
         do {
             store = try loader.loadPreferredStore()
-            userDeadlines = userDeadlineStore.deadlines
             errorMessage = nil
-            syncWidgetSnapshot()
         } catch {
             store = nil
             errorMessage = error.localizedDescription
         }
+        syncWidgetSnapshot()
+    }
+
+    func refreshAfterActivation() async {
+        syncWidgetSnapshot(reload: true)
+        await refreshNotificationsIfNeeded()
     }
 
     var featuredSummary: MobileDeadlineSummary? {
         selectedSummary
-    }
-
-    var activeConferences: [Conference] {
-        store?.conferences.filter { nextSummary(for: $0) != nil } ?? []
     }
 
     var customDeadlineSummaries: [MobileDeadlineSummary] {
@@ -106,7 +109,9 @@ final class MobileAppModel: ObservableObject {
     }
 
     func conferences(in subcategory: ConferenceSubcategory) -> [Conference] {
-        activeConferences.filter { $0.subcategory == subcategory }
+        (store?.conferences ?? [])
+            .filter { $0.subcategory == subcategory }
+            .filter { nextSummary(for: $0) != nil }
     }
 
     func pastConferences(in subcategory: ConferenceSubcategory) -> [Conference] {
@@ -271,11 +276,15 @@ final class MobileAppModel: ObservableObject {
     }
 
     func refreshConferenceData() async {
+        guard !isUpdatingData else {
+            return
+        }
         isUpdatingData = true
         updateMessage = nil
 
         do {
             store = try await loader.fetchLatestStore()
+            errorMessage = nil
             updateMessage = text.updateSucceeded
             syncWidgetSnapshot(reload: true)
             await refreshNotificationsIfNeeded()
@@ -319,8 +328,14 @@ final class MobileAppModel: ObservableObject {
     }
 
     func setNotificationsEnabled(_ enabled: Bool) async {
+        notificationPreferenceRevision += 1
+        notificationRefreshRevision += 1
+        let revision = notificationPreferenceRevision
         if enabled {
             let granted = await notificationScheduler.requestAuthorization()
+            guard revision == notificationPreferenceRevision else {
+                return
+            }
             guard granted else {
                 notificationsEnabled = false
                 defaults.set(false, forKey: Key.notificationsEnabled)
@@ -341,11 +356,18 @@ final class MobileAppModel: ObservableObject {
     }
 
     func refreshNotificationsIfNeeded() async {
+        notificationRefreshRevision += 1
+        let revision = notificationRefreshRevision
         guard notificationsEnabled else {
+            await notificationScheduler.clearScheduledReminders()
             return
         }
 
-        guard await notificationScheduler.notificationsAllowed() else {
+        let allowed = await notificationScheduler.notificationsAllowed()
+        guard revision == notificationRefreshRevision, notificationsEnabled else {
+            return
+        }
+        guard allowed else {
             notificationsEnabled = false
             defaults.set(false, forKey: Key.notificationsEnabled)
             notificationMessage = text.notificationPermissionDenied
@@ -365,8 +387,17 @@ final class MobileAppModel: ObservableObject {
                 items: items,
                 language: appLanguage
             )
+            guard revision == notificationRefreshRevision, notificationsEnabled else {
+                return
+            }
             notificationMessage = text.notificationsScheduled(count)
+        } catch is CancellationError {
+            // A newer selection or preference change owns the current schedule.
+            return
         } catch {
+            guard revision == notificationRefreshRevision, notificationsEnabled else {
+                return
+            }
             notificationMessage = text.notificationSchedulingFailed(error.localizedDescription)
         }
     }
@@ -563,7 +594,6 @@ final class MobileAppModel: ObservableObject {
             return MobileNotificationScheduleItem(
                 id: summary.id,
                 title: summary.title,
-                deadlineText: summary.display.text,
                 deadlineLabel: summary.deadlineLabel,
                 deadlineDate: summary.display.deadlineDate
             )

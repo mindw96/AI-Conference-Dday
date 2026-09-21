@@ -5,7 +5,7 @@ import Foundation
 private let userDeadlineConferenceID = "__user_deadline__"
 
 @MainActor
-final class MenuBarController: NSObject {
+final class MenuBarController: NSObject, NSMenuDelegate, NSMenuItemValidation {
     private let statusItem: NSStatusItem
     private var store: ConferenceStore
     private let calculator: DeadlineCalculator
@@ -18,6 +18,9 @@ final class MenuBarController: NSObject {
     private var badgeAppearanceWindowController: BadgeAppearanceWindowController?
     private var lastSelectedWebsiteURL: URL?
     private var isUpdatingConferences = false
+    private var startupError: Error?
+    private var renderedPresentation: StatusPresentation?
+    private var appearanceObservation: NSKeyValueObservation?
 
     private var text: MenuText {
         MenuText(language: settings.appLanguage)
@@ -42,6 +45,7 @@ final class MenuBarController: NSObject {
         super.init()
 
         configureStatusItem()
+        observeDisplayPreferences()
         refresh()
         startTimer()
     }
@@ -54,14 +58,17 @@ final class MenuBarController: NSObject {
             userDeadlineStore: UserDeadlineStore(),
             conferenceDataUpdater: ConferenceDataUpdater()
         )
-        controller.statusItem.button?.title = "Dday Error"
-        controller.statusItem.menu = controller.errorMenu(error: error)
+        controller.startupError = error
+        controller.refresh()
         return controller
     }
 
     private func configureStatusItem() {
         statusItem.button?.title = "Dday"
         statusItem.button?.toolTip = text.toolTip
+        let menu = NSMenu()
+        menu.delegate = self
+        statusItem.menu = menu
     }
 
     private func startTimer() {
@@ -77,16 +84,54 @@ final class MenuBarController: NSObject {
         refreshTimer = timer
     }
 
+    private func observeDisplayPreferences() {
+        appearanceObservation = statusItem.button?.observe(\.effectiveAppearance) { [weak self] _, _ in
+            Task { @MainActor in self?.refresh() }
+        }
+        NSWorkspace.shared.notificationCenter.addObserver(
+            self,
+            selector: #selector(displayPreferencesChanged),
+            name: NSWorkspace.accessibilityDisplayOptionsDidChangeNotification,
+            object: nil
+        )
+    }
+
+    @objc private func displayPreferencesChanged(_ notification: Notification) {
+        refresh()
+    }
+
     private func refresh() {
         guard let selection = resolvedSelection() else {
-            applyMenuBarTitle("Dday")
-            statusItem.menu = emptyMenu()
+            applyMenuBarTitle(startupError == nil ? "Dday" : "Dday Error")
             return
         }
 
         let displayText = menuBarTitle(selection: selection)
         applyMenuBarTitle(displayText)
-        statusItem.menu = menu(selected: selection)
+    }
+
+    func menuNeedsUpdate(_ menu: NSMenu) {
+        // Build the full catalog only when it is opened. Timer ticks must not
+        // replace a menu that the user is currently navigating.
+        refresh()
+        let updatedMenu = resolvedSelection().map { self.menu(selected: $0) } ?? emptyMenu()
+        menu.removeAllItems()
+        if let startupError {
+            menu.addItem(infoItem(text.couldNotStart, emphasis: true))
+            menu.addItem(infoItem(String(describing: startupError)))
+            menu.addItem(.separator())
+        }
+        for item in updatedMenu.items {
+            updatedMenu.removeItem(item)
+            menu.addItem(item)
+        }
+    }
+
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(checkConferenceListUpdates) {
+            return !isUpdatingConferences
+        }
+        return true
     }
 
     private func applyMenuBarTitle(_ title: String) {
@@ -94,9 +139,21 @@ final class MenuBarController: NSObject {
             return
         }
 
+        let presentation = StatusPresentation(
+            title: title,
+            style: settings.menuBarVisualStyle,
+            glassAppearance: settings.menuBarGlassAppearance,
+            appearanceName: button.effectiveAppearance.name.rawValue,
+            environment: .current(appearance: button.effectiveAppearance)
+        )
+        guard presentation != renderedPresentation else {
+            return
+        }
+        renderedPresentation = presentation
         button.toolTip = title
+        button.setAccessibilityLabel(title)
 
-        switch settings.menuBarVisualStyle {
+        switch presentation.style {
         case .plain:
             statusItem.length = NSStatusItem.variableLength
             button.image = nil
@@ -105,8 +162,9 @@ final class MenuBarController: NSObject {
         case .badge, .glass:
             let image = badgeRenderer.image(
                 for: title,
-                style: settings.menuBarVisualStyle,
-                glassAppearance: settings.menuBarGlassAppearance
+                style: presentation.style,
+                glassAppearance: presentation.glassAppearance,
+                environment: presentation.environment
             )
             statusItem.length = image.size.width + 4
             button.title = ""
@@ -140,7 +198,7 @@ final class MenuBarController: NSObject {
         let userCandidates = userDeadlineStore.deadlines.map(SelectedDeadline.init(userDeadline:))
         let candidates = officialCandidates + userCandidates
 
-        let future = candidates
+        let next = candidates
             .compactMap { selection -> (SelectedDeadline, Date)? in
                 guard let date = try? calculator.date(for: selection.deadline),
                       date >= now else {
@@ -149,17 +207,16 @@ final class MenuBarController: NSObject {
 
                 return (selection, date)
             }
-            .sorted { $0.1 < $1.1 }
+            .min { $0.1 < $1.1 }?.0 ?? candidates.first
 
-        if let next = future.first?.0 {
+        if let next {
             settings.selectedDeadline = DeadlineSelection(
                 conferenceID: next.conferenceID,
-                deadlineID: next.deadline.id
+                deadlineID: next.deadlineID
             )
-            return next
         }
 
-        return candidates.first
+        return next
     }
 
     private func menuBarTitle(selection: SelectedDeadline) -> String {
@@ -321,7 +378,7 @@ final class MenuBarController: NSObject {
                 keyEquivalent: ""
             )
             deadlineItem.target = self
-                deadlineItem.representedObject = DeadlineMenuSelection(
+            deadlineItem.representedObject = DeadlineMenuSelection(
                 conferenceID: userDeadlineConferenceID,
                 deadlineID: userDeadline.id
             )
@@ -395,19 +452,15 @@ final class MenuBarController: NSObject {
         let menu = NSMenu()
         menu.addItem(infoItem(text.noConferences))
         menu.addItem(.separator())
+        menu.addItem(displayModeMenu())
+        menu.addItem(visualStyleMenu())
+        menu.addItem(languageMenu())
+        let addCustomItem = NSMenuItem(title: text.addCustomDday, action: #selector(addCustomDday), keyEquivalent: "")
+        addCustomItem.target = self
+        menu.addItem(addCustomItem)
+        menu.addItem(.separator())
         menu.addItem(conferenceUpdateMenuItem())
         menu.addItem(appUpdater.menuItem(title: text.checkForAppUpdates))
-        menu.addItem(.separator())
-        let quitItem = NSMenuItem(title: text.quit, action: #selector(quit), keyEquivalent: "q")
-        quitItem.target = self
-        menu.addItem(quitItem)
-        return menu
-    }
-
-    private func errorMenu(error: Error) -> NSMenu {
-        let menu = NSMenu()
-        menu.addItem(infoItem(text.couldNotStart, emphasis: true))
-        menu.addItem(infoItem(String(describing: error)))
         menu.addItem(.separator())
         let quitItem = NSMenuItem(title: text.quit, action: #selector(quit), keyEquivalent: "q")
         quitItem.target = self
@@ -604,7 +657,6 @@ final class MenuBarController: NSObject {
         }
 
         settings.appLanguage = language
-        configureStatusItem()
         refresh()
     }
 
@@ -713,6 +765,7 @@ final class MenuBarController: NSObject {
             do {
                 let updatedStore = try await conferenceDataUpdater.fetchAndCacheLatest()
                 store = updatedStore
+                startupError = nil
 
                 if let selectedDeadline = settings.selectedDeadline,
                    selectedDeadline.conferenceID != userDeadlineConferenceID,
@@ -743,6 +796,14 @@ final class MenuBarController: NSObject {
     @objc private func quit() {
         NSApplication.shared.terminate(nil)
     }
+}
+
+private struct StatusPresentation: Equatable {
+    let title: String
+    let style: MenuBarVisualStyle
+    let glassAppearance: MenuBarGlassAppearance
+    let appearanceName: String
+    let environment: StatusBadgeEnvironment
 }
 
 private struct SelectedDeadline {

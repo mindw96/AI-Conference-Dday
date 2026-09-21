@@ -37,6 +37,7 @@ codesign --verify --deep --strict --verbose=2 "$APP_DIR"
 spctl -a -vv "$APP_DIR" || true
 
 rm -f "$NOTARY_ZIP"
+mkdir -p "$(dirname "$NOTARY_ZIP")"
 ditto --norsrc -c -k --keepParent "$APP_DIR" "$NOTARY_ZIP"
 xcrun notarytool submit "$NOTARY_ZIP" \
   --keychain-profile "$NOTARY_PROFILE" \

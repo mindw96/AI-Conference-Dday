@@ -44,13 +44,19 @@ if [[ -z "$APP_BUILD_VERSION" && -n "$APP_VERSION" ]]; then
 fi
 
 cd "$ROOT"
-swift build -c release
+MACOS_SDK="$(xcrun --sdk macosx --show-sdk-path)"
+# Also give Clang's linker driver -isysroot: Swift 6.4's --sysroot alone can
+# record the deployment target as the SDK version in LC_BUILD_VERSION.
+xcrun --sdk macosx swift build --sdk "$MACOS_SDK" -c release --product Dday \
+  -Xswiftc -Xclang-linker -Xswiftc -isysroot \
+  -Xswiftc -Xclang-linker -Xswiftc "$MACOS_SDK"
+BUILD_DIR="$(xcrun --sdk macosx swift build --sdk "$MACOS_SDK" -c release --show-bin-path)"
 
 rm -rf "$APP_DIR"
 mkdir -p "$APP_DIR/Contents/MacOS"
 mkdir -p "$APP_DIR/Contents/Resources"
 mkdir -p "$APP_DIR/Contents/Frameworks"
-cp "$ROOT/.build/release/Dday" "$APP_DIR/Contents/MacOS/Dday"
+cp "$BUILD_DIR/Dday" "$APP_DIR/Contents/MacOS/Dday"
 cp "$ROOT/Support/Info.plist" "$APP_DIR/Contents/Info.plist"
 if [[ -n "$APP_VERSION" ]]; then
   /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $APP_VERSION" "$APP_DIR/Contents/Info.plist"

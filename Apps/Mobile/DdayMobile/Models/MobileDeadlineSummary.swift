@@ -1,6 +1,20 @@
 import DdayCore
 import Foundation
 
+enum CustomDeadlineTimezone: String, CaseIterable {
+    case aoe
+    case local
+
+    var deadlineTimezoneIdentifier: String {
+        switch self {
+        case .aoe:
+            return "AoE"
+        case .local:
+            return TimeZone.current.identifier
+        }
+    }
+}
+
 enum MobileDeadlineSource: Codable, Equatable, Sendable {
     case conference(conferenceID: String, deadlineID: String)
     case custom(id: String)
@@ -66,7 +80,7 @@ struct MobileDeadlineSummary: Identifiable {
                 .minute()
         )
 
-        return "\(dateText) \(TimeZone.current.abbreviation() ?? "")"
+        return "\(dateText) \(TimeZone.current.abbreviation(for: display.deadlineDate) ?? "")"
     }
 }
 

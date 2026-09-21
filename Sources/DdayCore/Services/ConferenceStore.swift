@@ -15,6 +15,27 @@ public struct ConferenceStore: Sendable {
     public static func load(from data: Data) throws -> ConferenceStore {
         let decoder = JSONDecoder()
         let conferences = try decoder.decode([Conference].self, from: data)
+        // Validate before a downloaded catalog can replace the last usable cache.
+        let calculator = DeadlineCalculator()
+        var conferenceIDs = Set<String>()
+        for conference in conferences {
+            guard !conference.id.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+                  conferenceIDs.insert(conference.id).inserted else {
+                throw ConferenceDataValidationError.invalidConferenceID(conference.id)
+            }
+            guard !conference.deadlines.isEmpty else {
+                throw ConferenceDataValidationError.missingDeadlines(conference.id)
+            }
+            _ = try calculator.resolvedTimeZone(conference.timezone)
+            var deadlineIDs = Set<String>()
+            for deadline in conference.deadlines {
+                guard !deadline.id.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+                      deadlineIDs.insert(deadline.id).inserted else {
+                    throw ConferenceDataValidationError.invalidDeadlineID(conference.id, deadline.id)
+                }
+                _ = try calculator.date(for: deadline)
+            }
+        }
         return ConferenceStore(conferences: conferences.sorted())
     }
 
@@ -29,6 +50,23 @@ public struct ConferenceStore: Sendable {
         }
 
         return (conference, deadline)
+    }
+}
+
+public enum ConferenceDataValidationError: LocalizedError, Equatable {
+    case invalidConferenceID(String)
+    case invalidDeadlineID(String, String)
+    case missingDeadlines(String)
+
+    public var errorDescription: String? {
+        switch self {
+        case .invalidConferenceID(let id):
+            return "Conference data contains an empty or duplicate conference ID: \(id)."
+        case .invalidDeadlineID(let conferenceID, let deadlineID):
+            return "Conference \(conferenceID) contains an empty or duplicate deadline ID: \(deadlineID)."
+        case .missingDeadlines(let id):
+            return "Conference \(id) has no deadlines."
+        }
     }
 }
 

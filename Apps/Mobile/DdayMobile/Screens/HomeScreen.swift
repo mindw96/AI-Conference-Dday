@@ -10,14 +10,14 @@ struct HomeScreen: View {
             TimelineView(.periodic(from: .now, by: 60)) { _ in
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 24) {
-                        if let errorMessage = model.errorMessage {
+                        if let summary = model.featuredSummary {
+                            DeadlineHero(summary: summary)
+                        } else if let errorMessage = model.errorMessage {
                             ContentUnavailableView(
                                 model.text.conferenceDataUnavailable,
                                 systemImage: "exclamationmark.triangle",
                                 description: Text(errorMessage)
                             )
-                        } else if let summary = model.featuredSummary {
-                            DeadlineHero(summary: summary)
                         } else {
                             ContentUnavailableView(
                                 model.text.noMainDday,
@@ -181,6 +181,7 @@ private struct UpcomingDeadlineGroupData: Identifiable {
 }
 
 private struct UpcomingDeadlineGroup: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let id: String
     let title: String
     let summaries: [MobileDeadlineSummary]
@@ -194,7 +195,7 @@ private struct UpcomingDeadlineGroup: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Button {
-                withAnimation(.snappy) {
+                withAnimation(reduceMotion ? nil : .snappy) {
                     if isExpanded {
                         collapsedGroupIDs.insert(id)
                     } else {
@@ -223,6 +224,7 @@ private struct UpcomingDeadlineGroup: View {
                         .foregroundStyle(.secondary)
                         .rotationEffect(.degrees(isExpanded ? 0 : -90))
                 }
+                .frame(minHeight: 44)
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
@@ -274,7 +276,8 @@ private struct UpcomingDeadlineRow: View {
                 Image(systemName: "calendar.badge.plus")
                     .font(.title3.weight(.semibold))
                     .foregroundStyle(.secondary)
-                    .frame(width: 34, height: 34)
+                    .frame(minWidth: 44, minHeight: 44)
+                    .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
             .accessibilityLabel(model.text.addToCalendar)

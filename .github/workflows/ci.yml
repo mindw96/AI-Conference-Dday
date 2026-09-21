@@ -30,6 +30,9 @@ jobs:
       - name: Build Swift package
         run: swift build
 
+      - name: Check mobile model and reminder scheduling
+        run: bash Apps/Mobile/Checks/run.sh
+
       - name: Validate mobile privacy manifest
         run: plutil -lint Apps/Mobile/DdayMobile/PrivacyInfo.xcprivacy
 
@@ -39,8 +42,12 @@ jobs:
             -project Apps/Mobile/DdayMobile.xcodeproj \
             -scheme DdayMobile \
             -destination "generic/platform=iOS Simulator" \
+            -derivedDataPath build/iOS \
             CODE_SIGNING_ALLOWED=NO \
             build
+
+      - name: Validate built iOS app and widget requirements
+        run: python3 scripts/check_ios_bundle.py build/iOS/Build/Products/Debug-iphonesimulator/DdayMobile.app
 
       - name: Build app bundle
         run: ./scripts/build_app.sh

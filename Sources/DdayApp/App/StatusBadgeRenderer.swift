@@ -1,6 +1,21 @@
 import AppKit
 import DdayCore
 
+struct StatusBadgeEnvironment: Equatable {
+    let isDark: Bool
+    let reduceTransparency: Bool
+    let increaseContrast: Bool
+
+    @MainActor
+    static func current(appearance: NSAppearance) -> Self {
+        Self(
+            isDark: appearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua,
+            reduceTransparency: NSWorkspace.shared.accessibilityDisplayShouldReduceTransparency,
+            increaseContrast: NSWorkspace.shared.accessibilityDisplayShouldIncreaseContrast
+        )
+    }
+}
+
 @MainActor
 struct StatusBadgeRenderer {
     private let font = NSFont.monospacedDigitSystemFont(ofSize: 13, weight: .semibold)
@@ -12,43 +27,27 @@ struct StatusBadgeRenderer {
     func image(
         for text: String,
         style: MenuBarVisualStyle,
-        glassAppearance: MenuBarGlassAppearance = .standard
+        glassAppearance: MenuBarGlassAppearance = .standard,
+        environment: StatusBadgeEnvironment
     ) -> NSImage {
+        let background = backgroundColor(
+            for: style, glassAppearance: glassAppearance, environment: environment
+        )
         let attributes = textAttributes(
             for: style,
-            glassAppearance: glassAppearance
+            glassAppearance: glassAppearance,
+            background: background,
+            environment: environment
         )
         let textSize = text.size(withAttributes: attributes)
         let imageWidth = ceil(textSize.width + horizontalPadding * 2)
-        let image = NSImage(size: NSSize(width: imageWidth, height: imageHeight))
-
-        image.lockFocus()
-        defer { image.unlockFocus() }
-
+        let imageSize = NSSize(width: imageWidth, height: imageHeight)
         let badgeRect = NSRect(
             x: 0,
             y: (imageHeight - badgeHeight) / 2,
             width: imageWidth,
             height: badgeHeight
         )
-        let path = NSBezierPath(roundedRect: badgeRect, xRadius: cornerRadius, yRadius: cornerRadius)
-        backgroundColor(
-            for: style,
-            glassAppearance: glassAppearance
-        ).setFill()
-        path.fill()
-
-        if style == .glass {
-            let highlightPath = NSBezierPath(
-                roundedRect: badgeRect.insetBy(dx: 0.5, dy: 0.5),
-                xRadius: cornerRadius - 0.5,
-                yRadius: cornerRadius - 0.5
-            )
-            highlightPath.lineWidth = 0.8
-            NSColor.white.withAlphaComponent(0.52).setStroke()
-            highlightPath.stroke()
-        }
-
         let textRect = NSRect(
             x: horizontalPadding,
             y: floor((imageHeight - textSize.height) / 2) + 1,
@@ -56,25 +55,47 @@ struct StatusBadgeRenderer {
             height: textSize.height
         )
 
-        text.draw(in: textRect, withAttributes: attributes)
-
+        let radius = cornerRadius
+        let highlight = style == .glass && !environment.increaseContrast
+        // AppKit redraws this representation at the destination display scale.
+        // Capture resolved drawing values, not AppKit controls or app state:
+        // the drawing handler can also be invoked off the main thread.
+        let image = NSImage(size: imageSize, flipped: false) { _ in
+            let path = NSBezierPath(roundedRect: badgeRect, xRadius: radius, yRadius: radius)
+            background.setFill()
+            path.fill()
+            if highlight {
+                let outline = NSBezierPath(
+                    roundedRect: badgeRect.insetBy(dx: 0.5, dy: 0.5),
+                    xRadius: radius - 0.5,
+                    yRadius: radius - 0.5
+                )
+                outline.lineWidth = 0.8
+                NSColor.white.withAlphaComponent(0.52).setStroke()
+                outline.stroke()
+            }
+            text.draw(in: textRect, withAttributes: attributes)
+            return true
+        }
         image.isTemplate = false
         return image
     }
 
     private func textAttributes(
         for style: MenuBarVisualStyle,
-        glassAppearance: MenuBarGlassAppearance
+        glassAppearance: MenuBarGlassAppearance,
+        background: NSColor,
+        environment: StatusBadgeEnvironment
     ) -> [NSAttributedString.Key: Any] {
         let color: NSColor
         switch style {
         case .plain:
-            color = .black
+            color = environment.isDark ? .white : .black
         case .badge:
-            color = NSColor(calibratedWhite: 0.34, alpha: 1)
+            color = environment.increaseContrast ? .black : NSColor(calibratedWhite: 0.34, alpha: 1)
         case .glass:
-            color = glassAppearance.usesAutomaticTextColor
-                ? automaticTextColor(for: glassAppearance.backgroundRGB)
+            color = glassAppearance.usesAutomaticTextColor || environment.increaseContrast
+                ? automaticTextColor(for: background, environment: environment)
                 : nsColor(for: glassAppearance.textRGB)
         }
 
@@ -87,49 +108,43 @@ struct StatusBadgeRenderer {
 
     private func backgroundColor(
         for style: MenuBarVisualStyle,
-        glassAppearance: MenuBarGlassAppearance
+        glassAppearance: MenuBarGlassAppearance,
+        environment: StatusBadgeEnvironment
     ) -> NSColor {
         switch style {
         case .plain:
             return .clear
         case .badge:
-            return NSColor(calibratedWhite: 0.93, alpha: 0.96)
+            return NSColor(calibratedWhite: 0.93, alpha: environment.reduceTransparency || environment.increaseContrast ? 1 : 0.96)
         case .glass:
             return nsColor(for: glassAppearance.backgroundRGB)
-                .withAlphaComponent(glassTintAlpha)
+                .withAlphaComponent(
+                    environment.reduceTransparency || environment.increaseContrast
+                        ? 1 : (environment.isDark ? 0.46 : 0.32)
+                )
         }
     }
 
-    private func automaticTextColor(for background: DdayRGBColor) -> NSColor {
-        effectiveLuminance(of: background) > 0.48
-            ? NSColor(calibratedWhite: 0.12, alpha: 0.96)
-            : NSColor.white.withAlphaComponent(0.96)
-    }
-
-    private var glassTintAlpha: CGFloat {
-        isDarkAppearance ? 0.46 : 0.32
-    }
-
-    private var isDarkAppearance: Bool {
-        let appearance = NSApp?.effectiveAppearance ?? NSAppearance.currentDrawing()
-        return appearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
-    }
-
-    private func effectiveLuminance(of color: DdayRGBColor) -> Double {
-        let base = isDarkAppearance ? 20.0 : 245.0
-        let alpha = Double(glassTintAlpha)
+    private func automaticTextColor(for background: NSColor, environment: StatusBadgeEnvironment) -> NSColor {
+        let color = background.usingColorSpace(.sRGB)!
+        let base = environment.isDark ? 20.0 / 255 : 245.0 / 255
+        let alpha = Double(color.alphaComponent)
 
         func linearized(_ component: Double) -> Double {
-            let composited = component * alpha + base * (1 - alpha)
-            let value = composited / 255
+            let value = component * alpha + base * (1 - alpha)
             return value <= 0.04045
                 ? value / 12.92
                 : pow((value + 0.055) / 1.055, 2.4)
         }
 
-        return 0.2126 * linearized(Double(color.red))
-            + 0.7152 * linearized(Double(color.green))
-            + 0.0722 * linearized(Double(color.blue))
+        let luminance = 0.2126 * linearized(Double(color.redComponent))
+            + 0.7152 * linearized(Double(color.greenComponent))
+            + 0.0722 * linearized(Double(color.blueComponent))
+        // Select the higher WCAG contrast ratio. In Increase Contrast mode
+        // the opaque background makes this independent of the wallpaper.
+        let blackContrast = (luminance + 0.05) / 0.05
+        let whiteContrast = 1.05 / (luminance + 0.05)
+        return blackContrast >= whiteContrast ? .black : .white
     }
 
     private func nsColor(for color: DdayRGBColor) -> NSColor {
