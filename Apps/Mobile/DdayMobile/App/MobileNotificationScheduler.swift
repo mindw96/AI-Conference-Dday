@@ -5,13 +5,47 @@ import UserNotifications
 struct MobileNotificationScheduleItem: Sendable {
     let id: String
     let title: String
-    let deadlineText: String
     let deadlineLabel: String
     let deadlineDate: Date
 }
 
 @MainActor
-struct MobileNotificationScheduler {
+protocol MobileNotificationCenter {
+    func requestAuthorization() async throws -> Bool
+    func notificationsAllowed() async -> Bool
+    func pendingNotificationRequests() async -> [UNNotificationRequest]
+    func removePendingNotificationRequests(withIdentifiers identifiers: [String])
+    func add(_ request: UNNotificationRequest) async throws
+}
+
+@MainActor
+private struct SystemMobileNotificationCenter: MobileNotificationCenter {
+    private let center = UNUserNotificationCenter.current()
+
+    func requestAuthorization() async throws -> Bool {
+        try await center.requestAuthorization(options: [.alert, .sound, .badge])
+    }
+
+    func notificationsAllowed() async -> Bool {
+        let settings = await center.notificationSettings()
+        return settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional
+    }
+
+    func pendingNotificationRequests() async -> [UNNotificationRequest] {
+        await center.pendingNotificationRequests()
+    }
+
+    func removePendingNotificationRequests(withIdentifiers identifiers: [String]) {
+        center.removePendingNotificationRequests(withIdentifiers: identifiers)
+    }
+
+    func add(_ request: UNNotificationRequest) async throws {
+        try await center.add(request)
+    }
+}
+
+@MainActor
+final class MobileNotificationScheduler {
     private enum ReminderWindow: Int, CaseIterable {
         case sevenDays = 7
         case threeDays = 3
@@ -32,56 +66,118 @@ struct MobileNotificationScheduler {
         }
     }
 
-    private let center: UNUserNotificationCenter
+    private let center: any MobileNotificationCenter
     private let calendar: Calendar
+    private var operation: Task<Void, Never>?
+    private var generation = 0
 
     init(
-        center: UNUserNotificationCenter = .current(),
-        calendar: Calendar = .current
+        center: (any MobileNotificationCenter)? = nil,
+        calendar: Calendar = .autoupdatingCurrent
     ) {
-        self.center = center
+        self.center = center ?? SystemMobileNotificationCenter()
         self.calendar = calendar
     }
 
     func requestAuthorization() async -> Bool {
         do {
-            return try await center.requestAuthorization(options: [.alert, .sound, .badge])
+            return try await center.requestAuthorization()
         } catch {
             return false
         }
     }
 
     func notificationsAllowed() async -> Bool {
-        let settings = await center.notificationSettings()
-        return settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional
+        await center.notificationsAllowed()
     }
 
     func clearScheduledReminders() async {
-        let pendingRequests = await center.pendingNotificationRequests()
-        let identifiers = pendingRequests
-            .map(\.identifier)
-            .filter { $0.hasPrefix("dday-reminder-") }
-
-        center.removePendingNotificationRequests(withIdentifiers: identifiers)
+        generation += 1
+        let expectedGeneration = generation
+        let previousOperation = operation
+        let clearing = Task { @MainActor in
+            // Wait for an in-flight add to finish before removing its request.
+            await previousOperation?.value
+            let pendingRequests = await center.pendingNotificationRequests()
+            center.removePendingNotificationRequests(withIdentifiers: reminderIDs(in: pendingRequests))
+        }
+        operation = clearing
+        await clearing.value
+        if generation == expectedGeneration {
+            operation = nil
+        }
     }
 
     func schedule(
         items: [MobileNotificationScheduleItem],
-        language: AppLanguage
+        language: AppLanguage,
+        now: Date = Date()
     ) async throws -> Int {
-        await clearScheduledReminders()
+        generation += 1
+        let expectedGeneration = generation
+        let previousOperation = operation
+        let scheduling = Task { @MainActor in
+            await previousOperation?.value
+            try checkGeneration(expectedGeneration)
 
-        var scheduledCount = 0
+            let pendingRequests = await center.pendingNotificationRequests()
+            try checkGeneration(expectedGeneration)
+            let identifiers = reminderIDs(in: pendingRequests)
+            center.removePendingNotificationRequests(withIdentifiers: identifiers)
+
+            // Use a conservative 64-request budget, preserving other app notifications.
+            let availableSlots = max(0, 64 - (pendingRequests.count - identifiers.count))
+            let requests = requests(items: items, language: language, now: now)
+                .prefix(availableSlots)
+
+            for request in requests {
+                try checkGeneration(expectedGeneration)
+                try await center.add(request)
+            }
+            try checkGeneration(expectedGeneration)
+            return requests.count
+        }
+        operation = Task { _ = try? await scheduling.value }
+        defer {
+            if generation == expectedGeneration {
+                operation = nil
+            }
+        }
+        return try await scheduling.value
+    }
+
+    private func checkGeneration(_ expectedGeneration: Int) throws {
+        guard generation == expectedGeneration else {
+            throw CancellationError()
+        }
+    }
+
+    private func reminderIDs(in requests: [UNNotificationRequest]) -> [String] {
+        requests.map(\.identifier).filter { $0.hasPrefix("dday-reminder-") }
+    }
+
+    private func requests(
+        items: [MobileNotificationScheduleItem],
+        language: AppLanguage,
+        now: Date
+    ) -> [UNNotificationRequest] {
+        var planned: [(date: Date, request: UNNotificationRequest)] = []
         for item in items {
             for window in ReminderWindow.allCases {
                 guard let fireDate = reminderDate(for: item.deadlineDate, window: window),
-                      fireDate > Date() else {
+                      fireDate > now else {
                     continue
                 }
 
+                let days = calendar.dateComponents(
+                    [.day],
+                    from: calendar.startOfDay(for: fireDate),
+                    to: calendar.startOfDay(for: item.deadlineDate)
+                ).day ?? 0
                 let content = UNMutableNotificationContent()
-                content.title = notificationTitle(for: item)
-                content.body = notificationBody(for: item, window: window, language: language)
+                let deadlineText = days > 0 ? "D-\(days)" : "D-Day"
+                content.title = "\(item.title) \(deadlineText)"
+                content.body = notificationBody(for: item, days: days, language: language)
                 content.sound = .default
                 content.userInfo = [
                     "deadlineID": item.id,
@@ -89,7 +185,7 @@ struct MobileNotificationScheduler {
                 ]
 
                 let components = calendar.dateComponents(
-                    [.year, .month, .day, .hour, .minute],
+                    [.calendar, .timeZone, .year, .month, .day, .hour, .minute, .second],
                     from: fireDate
                 )
                 let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
@@ -99,12 +195,16 @@ struct MobileNotificationScheduler {
                     trigger: trigger
                 )
 
-                try await center.add(request)
-                scheduledCount += 1
+                planned.append((fireDate, request))
             }
         }
 
-        return scheduledCount
+        return planned.sorted {
+            if $0.date == $1.date {
+                return $0.request.identifier < $1.request.identifier
+            }
+            return $0.date < $1.date
+        }.map(\.request)
     }
 
     private func reminderDate(for deadlineDate: Date, window: ReminderWindow) -> Date? {
@@ -128,25 +228,20 @@ struct MobileNotificationScheduler {
         return nineAM
     }
 
-    private func notificationTitle(for item: MobileNotificationScheduleItem) -> String {
-        "\(item.title) \(item.deadlineText)"
-    }
-
     private func notificationBody(
         for item: MobileNotificationScheduleItem,
-        window: ReminderWindow,
+        days: Int,
         language: AppLanguage
     ) -> String {
         let korean = isKorean(language)
 
-        switch window {
-        case .sevenDays, .threeDays, .oneDay:
+        if days > 0 {
             if korean {
-                return "\(item.deadlineLabel)까지 \(window.rawValue)일 남았습니다."
+                return "\(item.deadlineLabel)까지 \(days)일 남았습니다."
             }
 
-            return "\(item.deadlineLabel) is in \(window.rawValue) day\(window.rawValue == 1 ? "" : "s")."
-        case .deadlineDay:
+            return "\(item.deadlineLabel) is in \(days) day\(days == 1 ? "" : "s")."
+        } else {
             if korean {
                 return "\(item.deadlineLabel) 당일입니다."
             }

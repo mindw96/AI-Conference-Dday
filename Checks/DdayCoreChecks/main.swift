@@ -10,6 +10,8 @@ enum DdayCoreChecks {
         try checkPastDeadlineUsesDPlusFormat()
         try checkInvalidDeadlineDateIsRejected()
         try checkInvalidDeadlineTimeIsRejected()
+        try checkMalformedDeadlineComponentsAreRejected()
+        try checkLeapDayAndDefaultTimeRemainSupported()
         try checkInvalidDeadlineTimezoneIsRejected()
         try checkInvalidStoredUserDeadlineTimezoneIsMigrated()
         try checkMenuBarGlassAppearancePersists()
@@ -23,6 +25,7 @@ enum DdayCoreChecks {
         try checkLoadsConferenceJSON()
         try checkLoadsConferenceJSONFromData()
         try checkUnknownConferenceDataValuesUseFallbacks()
+        try checkInvalidConferenceDataIsRejected()
         try checkConferenceDataUpdaterFallsBackWhenCacheIsInvalid()
         try checkLoadsProjectConferenceData()
         try checkBundledMacConferenceDataMatchesPublicData()
@@ -219,6 +222,44 @@ enum DdayCoreChecks {
         } catch DeadlineCalculationError.invalidTimeZone {
             return
         }
+    }
+
+    private static func checkMalformedDeadlineComponentsAreRejected() throws {
+        let invalidDates = [
+            "2026-extra-05-27", "2026--05-27", "-2026-05-27", "2026-5-27",
+            "2026-05-27-", "2026-02-29", "2026-04-31", "0000-05-27"
+        ]
+        let invalidTimes = ["12:bad:30", "12::30", ":12:30", "12:30:", "1:30", "+1:30"]
+        for date in invalidDates {
+            let deadline = ConferenceDeadline(
+                id: "paper", label: "Paper", date: date, time: "12:30",
+                timezone: "UTC", type: .submission, isPrimary: true
+            )
+            do {
+                _ = try DeadlineCalculator().date(for: deadline)
+                throw CheckError("malformed date was accepted: \(date)")
+            } catch DeadlineCalculationError.invalidDate { }
+        }
+        for time in invalidTimes {
+            let deadline = ConferenceDeadline(
+                id: "paper", label: "Paper", date: "2026-05-27", time: time,
+                timezone: "UTC", type: .submission, isPrimary: true
+            )
+            do {
+                _ = try DeadlineCalculator().date(for: deadline)
+                throw CheckError("malformed time was accepted: \(time)")
+            } catch DeadlineCalculationError.invalidTime { }
+        }
+    }
+
+    private static func checkLeapDayAndDefaultTimeRemainSupported() throws {
+        let deadline = ConferenceDeadline(
+            id: "paper", label: "Paper", date: "2028-02-29", time: nil,
+            timezone: "AoE", type: .submission, isPrimary: true
+        )
+        let actual = try DeadlineCalculator().date(for: deadline)
+        let expected = try require(ISO8601DateFormatter().date(from: "2028-03-01T11:59:00Z"))
+        try expect(actual == expected, "leap days and the default 23:59 AoE time must remain supported")
     }
 
     private static func checkInvalidStoredUserDeadlineTimezoneIsMigrated() throws {
@@ -481,17 +522,56 @@ enum DdayCoreChecks {
             try? fileManager.removeItem(at: temporaryDirectory)
         }
 
-        try Data("not json".utf8).write(to: cacheURL)
-
         let updater = ConferenceDataUpdater(
             remoteURL: URL(string: "https://example.invalid/conferences.json")!,
             cacheURL: cacheURL,
             fileManager: fileManager
         )
-        let store = try updater.loadPreferred(bundledURL: fixtureURL)
+        let payloads = [("not JSON", Data("not json".utf8))] + (try invalidConferencePayloads())
+        for (label, payload) in payloads {
+            try payload.write(to: cacheURL)
+            let store = try updater.loadPreferred(bundledURL: fixtureURL)
+            try expect(store.conferences.first?.id == "testconf-2026", "expected bundled data after \(label) cache")
+            try expect(!fileManager.fileExists(atPath: cacheURL.path), "\(label) cache should be removed")
+        }
+    }
 
-        try expect(store.conferences.count == 1, "expected bundled data after invalid cache")
-        try expect(!fileManager.fileExists(atPath: cacheURL.path), "invalid cache should be removed")
+    private static func checkInvalidConferenceDataIsRejected() throws {
+        for (label, payload) in try invalidConferencePayloads() {
+            do {
+                _ = try ConferenceStore.load(from: payload)
+                throw CheckError("invalid catalog was accepted: \(label)")
+            } catch is ConferenceDataValidationError {
+            } catch is DeadlineCalculationError { }
+        }
+        let empty = try ConferenceStore.load(from: Data("[]".utf8))
+        try expect(empty.conferences.isEmpty, "an empty catalog remains a supported state")
+    }
+
+    private static func invalidConferencePayloads() throws -> [(String, Data)] {
+        let fixtureURL = try require(Bundle.module.url(forResource: "conferences-fixture", withExtension: "json"))
+        let raw = try JSONSerialization.jsonObject(with: Data(contentsOf: fixtureURL))
+        let conferences = try require(raw as? [[String: Any]])
+        let conference = try require(conferences.first)
+        let deadlines = try require(conference["deadlines"] as? [[String: Any]])
+        let deadline = try require(deadlines.first)
+        var catalogs: [(String, [[String: Any]])] = [
+            ("duplicate conference ID", [conference, conference]),
+            ("empty conference ID", [conference.merging(["id": " "]) { _, new in new }]),
+            ("invalid conference timezone", [conference.merging(["timezone": "Not/AZone"]) { _, new in new }]),
+            ("empty deadlines", [conference.merging(["deadlines": []]) { _, new in new }]),
+            ("duplicate deadline ID", [conference.merging(["deadlines": [deadline, deadline]]) { _, new in new }])
+        ]
+        for (key, value) in [("id", ""), ("date", "2026-extra-05-27"), ("date", "2026-02-29"),
+                             ("time", "12:bad:30"), ("timezone", "Not/AZone")] {
+            let invalidDeadline = deadline.merging([key: value]) { _, new in new }
+            catalogs.append(("invalid deadline \(key): \(value)", [
+                conference.merging(["deadlines": [invalidDeadline]]) { _, new in new }
+            ]))
+        }
+        return try catalogs.map { label, catalog in
+            (label, try JSONSerialization.data(withJSONObject: catalog))
+        }
     }
 
     private static func checkLoadsProjectConferenceData() throws {

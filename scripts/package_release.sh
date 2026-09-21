@@ -21,6 +21,14 @@ BACKGROUND_PATH="$DMG_ROOT/.background/dmg-background.png"
 
 export COPYFILE_DISABLE=1
 
+cleanup() {
+  if [[ -n "$MOUNT_DIR" ]]; then
+    hdiutil detach "$MOUNT_DIR" -quiet || true
+  fi
+  rm -rf "$WORK_ROOT"
+}
+trap cleanup EXIT
+
 if [[ ! -d "$APP_DIR" ]]; then
   echo "Missing app bundle: $APP_DIR" >&2
   echo "Run ./scripts/build_app.sh first." >&2
@@ -70,14 +78,6 @@ if [[ -z "$MOUNT_DIR" || ! -d "$MOUNT_DIR" ]]; then
   echo "Could not resolve mounted DMG path." >&2
   exit 67
 fi
-
-cleanup() {
-  if [[ -n "$MOUNT_DIR" ]]; then
-    hdiutil detach "$MOUNT_DIR" -quiet || true
-  fi
-  rm -rf "$WORK_ROOT"
-}
-trap cleanup EXIT
 
 sleep 1
 osascript \
@@ -134,7 +134,6 @@ fi
 
 sync
 hdiutil detach "$MOUNT_DIR" -quiet
-trap - EXIT
 MOUNT_DIR=""
 
 hdiutil convert "$RW_DMG" \

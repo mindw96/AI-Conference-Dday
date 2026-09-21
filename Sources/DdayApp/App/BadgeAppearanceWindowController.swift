@@ -14,6 +14,7 @@ final class BadgeAppearanceWindowController: NSWindowController, NSTextFieldDele
     private let automaticTextCheckbox = NSButton()
     private var backgroundFields: [NSTextField] = []
     private var textFields: [NSTextField] = []
+    private var appearanceObservation: NSKeyValueObservation?
 
     init(
         appearance: MenuBarGlassAppearance,
@@ -35,6 +36,15 @@ final class BadgeAppearanceWindowController: NSWindowController, NSTextFieldDele
         configureWindow()
         configureContent()
         synchronizeControls()
+        appearanceObservation = previewImageView.observe(\.effectiveAppearance) { [weak self] _, _ in
+            Task { @MainActor in self?.updatePreview() }
+        }
+        NSWorkspace.shared.notificationCenter.addObserver(
+            self,
+            selector: #selector(displayPreferencesChanged),
+            name: NSWorkspace.accessibilityDisplayOptionsDidChangeNotification,
+            object: nil
+        )
     }
 
     @available(*, unavailable)
@@ -310,8 +320,13 @@ final class BadgeAppearanceWindowController: NSWindowController, NSTextFieldDele
         previewImageView.image = badgeRenderer.image(
             for: "AAAI D-42",
             style: .glass,
-            glassAppearance: appearance
+            glassAppearance: appearance,
+            environment: .current(appearance: previewImageView.effectiveAppearance)
         )
+    }
+
+    @objc private func displayPreferencesChanged(_ notification: Notification) {
+        updatePreview()
     }
 
     private func commitAppearance() {

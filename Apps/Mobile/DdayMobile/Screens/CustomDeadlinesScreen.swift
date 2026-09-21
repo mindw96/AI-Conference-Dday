@@ -129,20 +129,6 @@ private struct AddCustomDeadlineSheet: View {
     }
 }
 
-enum CustomDeadlineTimezone: String, CaseIterable {
-    case aoe
-    case local
-
-    var deadlineTimezoneIdentifier: String {
-        switch self {
-        case .aoe:
-            return "AoE"
-        case .local:
-            return TimeZone.current.identifier
-        }
-    }
-}
-
 #Preview {
     CustomDeadlinesScreen()
         .environmentObject(MobileAppModel())

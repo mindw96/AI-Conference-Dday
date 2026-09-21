@@ -79,8 +79,8 @@ public struct DeadlineCalculator: Sendable {
     }
 
     private func date(for deadline: ConferenceDeadline, timezone: TimeZone) throws -> Date {
-        let dateParts = deadline.date.split(separator: "-").compactMap { Int($0) }
-        guard dateParts.count == 3 else {
+        guard let dateParts = components(in: deadline.date, separator: "-", widths: [4, 2, 2]),
+              dateParts[0] > 0 else {
             throw DeadlineCalculationError.invalidDate(deadline.date)
         }
 
@@ -88,8 +88,7 @@ public struct DeadlineCalculator: Sendable {
         var minute = 59
 
         if let time = deadline.time {
-            let timeParts = time.split(separator: ":").compactMap { Int($0) }
-            guard timeParts.count == 2 else {
+            guard let timeParts = components(in: time, separator: ":", widths: [2, 2]) else {
                 throw DeadlineCalculationError.invalidTime(time)
             }
             hour = timeParts[0]
@@ -119,6 +118,17 @@ public struct DeadlineCalculator: Sendable {
         }
 
         return date
+    }
+
+    private func components(in value: String, separator: Character, widths: [Int]) -> [Int]? {
+        let parts = value.split(separator: separator, omittingEmptySubsequences: false)
+        guard parts.count == widths.count,
+              zip(parts, widths).allSatisfy({ part, width in
+                  part.utf8.count == width && part.utf8.allSatisfy { (48...57).contains($0) }
+              }) else {
+            return nil
+        }
+        return parts.compactMap { Int($0) }
     }
 
     private func countdownText(for remainingSeconds: TimeInterval) -> String {
