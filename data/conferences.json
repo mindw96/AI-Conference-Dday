@@ -11,7 +11,7 @@
     "location": "Melbourne, Australia",
     "websiteUrl": "https://www.acml-conf.org/2026/",
     "sourceUrl": "https://www.acml-conf.org/2026/calls/papers/",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -39,6 +39,15 @@
         "time": "23:59",
         "timezone": "AoE",
         "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Conference Track Camera-ready Submission Deadline",
+        "date": "2026-11-01",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
         "isPrimary": false
       },
       {
@@ -526,7 +535,7 @@
     "location": "Sydney, Australia; Atlanta, GA, USA; Paris, France",
     "websiteUrl": "https://neurips.cc/Conferences/2026",
     "sourceUrl": "https://neurips.cc/Conferences/2026/Dates",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -554,6 +563,15 @@
         "time": "23:59",
         "timezone": "AoE",
         "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Paper Camera Ready Deadline",
+        "date": "2026-11-06",
+        "time": null,
+        "timezone": "AoE",
+        "type": "camera-ready",
         "isPrimary": false
       },
       {
@@ -825,7 +843,7 @@
     "location": "Osaka, Japan",
     "websiteUrl": "https://accv2026.org/",
     "sourceUrl": "https://accv2026.org/",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "GMT",
     "deadlines": [
       {
@@ -907,7 +925,7 @@
     "location": "Rio de Janeiro, Brazil",
     "websiteUrl": "https://2026.acmmm.org/",
     "sourceUrl": "https://2026.acmmm.org/site/important-dates.html",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -988,7 +1006,7 @@
     "location": "Lancaster, UK",
     "websiteUrl": "https://bmvc2026.bmva.org/",
     "sourceUrl": "https://bmvc2026.bmva.org/dates/",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -1294,7 +1312,7 @@
     "location": "Hengqin, China",
     "websiteUrl": "https://2026.aaclnet.org/",
     "sourceUrl": "https://2026.aaclnet.org/calls/main_conference_papers/",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -1354,7 +1372,7 @@
       {
         "id": "main-conference-end",
         "label": "Main Conference End",
-        "date": "2026-11-10",
+        "date": "2026-11-08",
         "time": null,
         "timezone": "Asia/Shanghai",
         "type": "conference-end",
@@ -1448,7 +1466,7 @@
     "location": "San Francisco, CA, USA",
     "websiteUrl": "https://colm.cc/Conferences/2026",
     "sourceUrl": "https://colm.cc/Conferences/2026/Dates",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -1574,7 +1592,7 @@
     "location": "Budapest, Hungary",
     "websiteUrl": "https://2026.emnlp.org",
     "sourceUrl": "https://2026.emnlp.org/calls/main_conference_papers/",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2007,7 +2025,7 @@
     "location": "Montreal, Canada",
     "websiteUrl": "https://aaai.org/conference/aaai/aaai-27/",
     "sourceUrl": "https://aaai.org/conference/aaai/aaai-27/main-technical-track-call/",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2090,7 +2108,7 @@
     "location": "San Jose, CA, USA",
     "websiteUrl": "https://kdd2027.kdd.org/",
     "sourceUrl": "https://kdd2027.kdd.org/research-track-call-for-papers/",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2152,8 +2170,8 @@
     "subcategory": "cv",
     "location": "Thessaloniki, Greece",
     "websiteUrl": "https://3dvconf.github.io/2027/",
-    "sourceUrl": "https://3dvconf.github.io/2027/",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceUrl": "https://3dvconf.github.io/2027/dates/",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2234,7 +2252,7 @@
     "location": "Disney Springs, Buena Vista, FL, USA",
     "websiteUrl": "https://wacv.thecvf.com/Conferences/2027",
     "sourceUrl": "https://wacv.thecvf.com/Conferences/2027/Dates",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2315,7 +2333,7 @@
     "location": "Hanoi, Vietnam",
     "websiteUrl": "https://warwick.ac.uk/fac/sci/dcs/aamas2027/",
     "sourceUrl": "https://warwick.ac.uk/fac/sci/dcs/aamas2027/calls/call-for-main-track/",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2387,7 +2405,7 @@
     "location": "California, USA",
     "websiteUrl": "https://iclr.cc/Conferences/2027",
     "sourceUrl": "https://iclr.cc/Conferences/2027/CallForPapers",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2460,7 +2478,7 @@
     "location": "Montreal, Canada",
     "websiteUrl": "https://aistats.org/aistats2027/",
     "sourceUrl": "https://virtual.aistats.org/Conferences/2027/CallForPapers",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2532,7 +2550,7 @@
     "location": "Leiden, Netherlands",
     "websiteUrl": "https://algorithmiclearningtheory.org/alt2027/",
     "sourceUrl": "https://algorithmiclearningtheory.org/alt2027/call-for-papers/",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2585,7 +2603,7 @@
     "location": "Seattle, WA, USA",
     "websiteUrl": "https://cvpr.thecvf.com/Conferences/2027",
     "sourceUrl": "https://cvpr.thecvf.com/Conferences/2027/Dates",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2667,7 +2685,7 @@
     "location": "Athens, Greece",
     "websiteUrl": "https://2027.eacl.org/",
     "sourceUrl": "https://2027.eacl.org/calls/papers/",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2739,7 +2757,7 @@
     "location": "San Francisco, CA, USA",
     "websiteUrl": "https://2027.naacl.org/",
     "sourceUrl": "https://2027.naacl.org/calls/main_conference_papers/",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2750,6 +2768,15 @@
         "timezone": "AoE",
         "type": "submission",
         "isPrimary": true
+      },
+      {
+        "id": "meta-reviews-released",
+        "label": "Meta-reviews Released",
+        "date": "2026-12-18",
+        "time": null,
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
       },
       {
         "id": "commitment",
@@ -2811,7 +2838,7 @@
     "location": "Macau, China",
     "websiteUrl": "https://2027.coling-iccl.org/",
     "sourceUrl": "https://2027.coling-iccl.org/",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2875,7 +2902,7 @@
     "location": "Columbia, SC, USA",
     "websiteUrl": "https://icaps27.icaps-conference.org/",
     "sourceUrl": "https://icaps27.icaps-conference.org/calls/cfp/",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2938,7 +2965,7 @@
     "location": "Kyoto, Japan",
     "websiteUrl": "https://2027.aclweb.org/",
     "sourceUrl": "https://2027.aclweb.org/calls/main/",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2981,8 +3008,8 @@
     "subcategory": "general-ai",
     "location": "Kyoto, Japan",
     "websiteUrl": "https://2027.ijcai.org/",
-    "sourceUrl": "https://2027.ijcai.org/",
-    "sourceCheckedAt": "2026-10-13",
+    "sourceUrl": "https://2027.ijcai.org/ijcai-2027-call-for-papers-main-track/",
+    "sourceCheckedAt": "2026-11-07",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -3004,12 +3031,30 @@
         "isPrimary": true
       },
       {
+        "id": "phase-1-notification",
+        "label": "Summary Reject Notification",
+        "date": "2027-02-25",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
         "id": "notification",
         "label": "Paper Notification",
         "date": "2027-04-21",
         "time": "23:59",
         "timezone": "AoE",
         "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready Copy Deadline",
+        "date": "2027-05-07",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
         "isPrimary": false
       },
       {
@@ -3027,6 +3072,124 @@
         "date": "2027-08-13",
         "time": null,
         "timezone": "Asia/Tokyo",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "colt-2027",
+    "name": "COLT",
+    "fullName": "Conference on Learning Theory",
+    "year": 2027,
+    "field": [
+      "machine-learning",
+      "learning-theory"
+    ],
+    "subcategory": "ml",
+    "location": "Tokyo, Japan",
+    "websiteUrl": "https://learningtheory.org/colt2027/",
+    "sourceUrl": "https://learningtheory.org/colt2027/cfp.html",
+    "sourceCheckedAt": "2026-11-07",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "full-paper",
+        "label": "Full Paper Submission Deadline",
+        "date": "2027-01-29",
+        "time": null,
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2027-06-28",
+        "time": null,
+        "timezone": "Asia/Tokyo",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2027-07-02",
+        "time": null,
+        "timezone": "Asia/Tokyo",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "sigir-2027",
+    "name": "SIGIR",
+    "fullName": "ACM SIGIR Conference on Research and Development in Information Retrieval",
+    "year": 2027,
+    "field": [
+      "information-retrieval",
+      "natural-language-processing",
+      "machine-learning"
+    ],
+    "subcategory": "nlp",
+    "location": "San Jose, California, USA",
+    "websiteUrl": "https://sigir2027.org/",
+    "sourceUrl": "https://sigir2027.org/pages/submit-full.html",
+    "sourceCheckedAt": "2026-11-07",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstract Submission Deadline",
+        "date": "2027-01-14",
+        "time": null,
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Full Paper Submission Deadline",
+        "date": "2027-01-21",
+        "time": null,
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "notification",
+        "label": "Full Paper Notification",
+        "date": "2027-04-05",
+        "time": null,
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready Submission Deadline",
+        "date": "2027-04-30",
+        "time": null,
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2027-07-19",
+        "time": null,
+        "timezone": "America/Los_Angeles",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2027-07-24",
+        "time": null,
+        "timezone": "America/Los_Angeles",
         "type": "conference-end",
         "isPrimary": false
       }
