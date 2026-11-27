@@ -2025,7 +2025,7 @@
     "location": "Montreal, Canada",
     "websiteUrl": "https://aaai.org/conference/aaai/aaai-27/",
     "sourceUrl": "https://aaai.org/conference/aaai/aaai-27/main-technical-track-call/",
-    "sourceCheckedAt": "2026-11-07",
+    "sourceCheckedAt": "2026-11-27",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2062,6 +2062,15 @@
         "time": "23:59",
         "timezone": "AoE",
         "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "author-response",
+        "label": "Author Response Deadline",
+        "date": "2026-10-31",
+        "time": null,
+        "timezone": "AoE",
+        "type": "submission",
         "isPrimary": false
       },
       {
@@ -2108,7 +2117,7 @@
     "location": "San Jose, CA, USA",
     "websiteUrl": "https://kdd2027.kdd.org/",
     "sourceUrl": "https://kdd2027.kdd.org/research-track-call-for-papers/",
-    "sourceCheckedAt": "2026-11-07",
+    "sourceCheckedAt": "2026-11-27",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2128,6 +2137,15 @@
         "timezone": "AoE",
         "type": "submission",
         "isPrimary": true
+      },
+      {
+        "id": "author-response",
+        "label": "First Cycle Author Response Deadline",
+        "date": "2026-10-13",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": false
       },
       {
         "id": "notification",
@@ -2333,7 +2351,7 @@
     "location": "Hanoi, Vietnam",
     "websiteUrl": "https://warwick.ac.uk/fac/sci/dcs/aamas2027/",
     "sourceUrl": "https://warwick.ac.uk/fac/sci/dcs/aamas2027/calls/call-for-main-track/",
-    "sourceCheckedAt": "2026-11-07",
+    "sourceCheckedAt": "2026-11-27",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2353,6 +2371,15 @@
         "timezone": "AoE",
         "type": "submission",
         "isPrimary": true
+      },
+      {
+        "id": "author-response",
+        "label": "Author Response Deadline",
+        "date": "2026-11-24",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": false
       },
       {
         "id": "notification",
@@ -2405,7 +2432,7 @@
     "location": "California, USA",
     "websiteUrl": "https://iclr.cc/Conferences/2027",
     "sourceUrl": "https://iclr.cc/Conferences/2027/CallForPapers",
-    "sourceCheckedAt": "2026-11-07",
+    "sourceCheckedAt": "2026-11-27",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2433,6 +2460,15 @@
         "time": null,
         "timezone": "AoE",
         "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "author-reviewer-discussion-end",
+        "label": "Author–Reviewer Discussion Ends",
+        "date": "2026-11-18",
+        "time": null,
+        "timezone": "AoE",
+        "type": "submission",
         "isPrimary": false
       },
       {
@@ -2477,8 +2513,8 @@
     "subcategory": "ml",
     "location": "Montreal, Canada",
     "websiteUrl": "https://aistats.org/aistats2027/",
-    "sourceUrl": "https://virtual.aistats.org/Conferences/2027/CallForPapers",
-    "sourceCheckedAt": "2026-11-07",
+    "sourceUrl": "https://virtual.aistats.org/Conferences/2027/Dates",
+    "sourceCheckedAt": "2026-11-27",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2506,6 +2542,24 @@
         "time": null,
         "timezone": "AoE",
         "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "author-response",
+        "label": "Initial Rebuttal Ends (Responses Released to Reviewers)",
+        "date": "2026-11-24",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": false
+      },
+      {
+        "id": "author-reviewer-discussion-end",
+        "label": "Author–Reviewer Discussion Ends",
+        "date": "2026-12-03",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
         "isPrimary": false
       },
       {
@@ -2603,7 +2657,7 @@
     "location": "Seattle, WA, USA",
     "websiteUrl": "https://cvpr.thecvf.com/Conferences/2027",
     "sourceUrl": "https://cvpr.thecvf.com/Conferences/2027/Dates",
-    "sourceCheckedAt": "2026-11-07",
+    "sourceCheckedAt": "2026-11-27",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2643,6 +2697,15 @@
         "isPrimary": false
       },
       {
+        "id": "author-response",
+        "label": "Author Response Deadline",
+        "date": "2027-02-01",
+        "time": null,
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": false
+      },
+      {
         "id": "notification",
         "label": "Final Decisions",
         "date": "2027-02-25",
@@ -2663,7 +2726,7 @@
       {
         "id": "main-conference-end",
         "label": "Main Conference End",
-        "date": "2027-06-25",
+        "date": "2027-06-24",
         "time": null,
         "timezone": "America/Los_Angeles",
         "type": "conference-end",
@@ -2685,7 +2748,7 @@
     "location": "Athens, Greece",
     "websiteUrl": "https://2027.eacl.org/",
     "sourceUrl": "https://2027.eacl.org/calls/papers/",
-    "sourceCheckedAt": "2026-11-07",
+    "sourceCheckedAt": "2026-11-27",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2696,6 +2759,24 @@
         "timezone": "AoE",
         "type": "submission",
         "isPrimary": true
+      },
+      {
+        "id": "author-response",
+        "label": "Author Response Deadline",
+        "date": "2026-09-19",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": false
+      },
+      {
+        "id": "author-reviewer-discussion-end",
+        "label": "Author–Reviewer Discussion Ends",
+        "date": "2026-09-24",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": false
       },
       {
         "id": "commitment",
@@ -2757,7 +2838,7 @@
     "location": "San Francisco, CA, USA",
     "websiteUrl": "https://2027.naacl.org/",
     "sourceUrl": "https://2027.naacl.org/calls/main_conference_papers/",
-    "sourceCheckedAt": "2026-11-07",
+    "sourceCheckedAt": "2026-11-27",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2838,7 +2919,7 @@
     "location": "Macau, China",
     "websiteUrl": "https://2027.coling-iccl.org/",
     "sourceUrl": "https://2027.coling-iccl.org/",
-    "sourceCheckedAt": "2026-11-07",
+    "sourceCheckedAt": "2026-11-27",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2902,7 +2983,7 @@
     "location": "Columbia, SC, USA",
     "websiteUrl": "https://icaps27.icaps-conference.org/",
     "sourceUrl": "https://icaps27.icaps-conference.org/calls/cfp/",
-    "sourceCheckedAt": "2026-11-07",
+    "sourceCheckedAt": "2026-11-27",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -2922,6 +3003,15 @@
         "timezone": "AoE",
         "type": "submission",
         "isPrimary": true
+      },
+      {
+        "id": "author-response",
+        "label": "Author Response Deadline",
+        "date": "2027-02-08",
+        "time": null,
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": false
       },
       {
         "id": "notification",
@@ -2965,7 +3055,7 @@
     "location": "Kyoto, Japan",
     "websiteUrl": "https://2027.aclweb.org/",
     "sourceUrl": "https://2027.aclweb.org/calls/main/",
-    "sourceCheckedAt": "2026-11-07",
+    "sourceCheckedAt": "2026-11-27",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -3006,10 +3096,10 @@
       "artificial-intelligence"
     ],
     "subcategory": "general-ai",
-    "location": "Kyoto, Japan",
+    "location": "Kyoto, Japan; Hengqin, China (satellite)",
     "websiteUrl": "https://2027.ijcai.org/",
     "sourceUrl": "https://2027.ijcai.org/ijcai-2027-call-for-papers-main-track/",
-    "sourceCheckedAt": "2026-11-07",
+    "sourceCheckedAt": "2026-11-27",
     "timezone": "AoE",
     "deadlines": [
       {
@@ -3037,6 +3127,15 @@
         "time": "23:59",
         "timezone": "AoE",
         "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "author-response",
+        "label": "Author Response Deadline",
+        "date": "2027-04-02",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
         "isPrimary": false
       },
       {
@@ -3072,6 +3171,24 @@
         "date": "2027-08-13",
         "time": null,
         "timezone": "Asia/Tokyo",
+        "type": "conference-end",
+        "isPrimary": false
+      },
+      {
+        "id": "hengqin-conference-start",
+        "label": "Hengqin Satellite Event Start",
+        "date": "2027-08-15",
+        "time": null,
+        "timezone": "Asia/Shanghai",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "hengqin-conference-end",
+        "label": "Hengqin Satellite Event End",
+        "date": "2027-08-17",
+        "time": null,
+        "timezone": "Asia/Shanghai",
         "type": "conference-end",
         "isPrimary": false
       }
@@ -3190,6 +3307,377 @@
         "date": "2027-07-24",
         "time": null,
         "timezone": "America/Los_Angeles",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "icml-2027",
+    "name": "ICML",
+    "fullName": "International Conference on Machine Learning",
+    "year": 2027,
+    "field": [
+      "machine-learning",
+      "artificial-intelligence"
+    ],
+    "subcategory": "ml",
+    "location": "Rio de Janeiro, Brazil",
+    "websiteUrl": "https://icml.cc/Conferences/2027",
+    "sourceUrl": "https://icml.cc/Conferences/2027/Dates",
+    "sourceCheckedAt": "2026-11-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Abstract Submission",
+        "date": "2027-01-14",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Full Paper Submission",
+        "date": "2027-01-22",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start (All Events)",
+        "date": "2027-07-31",
+        "time": null,
+        "timezone": "America/Sao_Paulo",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-start",
+        "label": "Main Conference Start",
+        "date": "2027-08-02",
+        "time": null,
+        "timezone": "America/Sao_Paulo",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-end",
+        "label": "Main Conference End",
+        "date": "2027-08-04",
+        "time": null,
+        "timezone": "America/Sao_Paulo",
+        "type": "conference-end",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End (All Events)",
+        "date": "2027-08-06",
+        "time": null,
+        "timezone": "America/Sao_Paulo",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "mlsys-2027",
+    "name": "MLSys",
+    "fullName": "Conference on Machine Learning and Systems",
+    "year": 2027,
+    "field": [
+      "machine-learning",
+      "computer-systems"
+    ],
+    "subcategory": "ml",
+    "location": "Bellevue, WA, USA",
+    "websiteUrl": "https://mlsys.org/Conferences/2027",
+    "sourceUrl": "https://mlsys.org/Conferences/2027/Dates",
+    "sourceCheckedAt": "2026-11-27",
+    "timezone": "UTC",
+    "deadlines": [
+      {
+        "id": "full-paper",
+        "label": "Full Paper Submission",
+        "date": "2026-10-30",
+        "time": "21:00",
+        "timezone": "UTC",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "reviews-released",
+        "label": "Author Reviews Available",
+        "date": "2027-01-18",
+        "time": "20:00",
+        "timezone": "UTC",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "author-response",
+        "label": "Author Responses Due",
+        "date": "2027-01-21",
+        "time": "20:00",
+        "timezone": "UTC",
+        "type": "submission",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Author Notification",
+        "date": "2027-02-28",
+        "time": "21:00",
+        "timezone": "UTC",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start (All Events)",
+        "date": "2027-06-21",
+        "time": null,
+        "timezone": "America/Los_Angeles",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-start",
+        "label": "Main Conference Start",
+        "date": "2027-06-22",
+        "time": null,
+        "timezone": "America/Los_Angeles",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "main-conference-end",
+        "label": "Main Conference End",
+        "date": "2027-06-24",
+        "time": null,
+        "timezone": "America/Los_Angeles",
+        "type": "conference-end",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End (All Events)",
+        "date": "2027-06-25",
+        "time": null,
+        "timezone": "America/Los_Angeles",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "icme-2027",
+    "name": "ICME",
+    "fullName": "IEEE International Conference on Multimedia and Expo",
+    "year": 2027,
+    "field": [
+      "multimedia",
+      "computer-vision",
+      "artificial-intelligence"
+    ],
+    "subcategory": "cv",
+    "location": "Xiamen, China",
+    "websiteUrl": "https://2027.ieeeicme.org/",
+    "sourceUrl": "https://ieee-cas.org/files/ieeecass/2026-11/icme27-cfp_web-06.pdf",
+    "sourceCheckedAt": "2026-11-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "full-paper",
+        "label": "Regular Paper Submission Deadline",
+        "date": "2026-12-30",
+        "time": null,
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2027-07-13",
+        "time": null,
+        "timezone": "Asia/Shanghai",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2027-07-17",
+        "time": null,
+        "timezone": "Asia/Shanghai",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "icip-2027",
+    "name": "ICIP",
+    "fullName": "IEEE International Conference on Image Processing",
+    "year": 2027,
+    "field": [
+      "computer-vision",
+      "multimedia"
+    ],
+    "subcategory": "cv",
+    "location": "Singapore",
+    "websiteUrl": "https://2027.ieeeicip.org/",
+    "sourceUrl": "https://2027.ieeeicip.org/important-dates/",
+    "sourceCheckedAt": "2026-11-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "full-paper",
+        "label": "Regular Paper Submission Deadline",
+        "date": "2027-03-31",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "reviews-released",
+        "label": "Reviews Released to Authors",
+        "date": "2027-06-25",
+        "time": null,
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "rebuttal",
+        "label": "Author Rebuttal Deadline",
+        "date": "2027-07-07",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Regular Paper Acceptance Notification",
+        "date": "2027-08-06",
+        "time": null,
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Final Regular Paper Submission Deadline",
+        "date": "2027-08-11",
+        "time": "23:59",
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Conference Start",
+        "date": "2027-11-29",
+        "time": null,
+        "timezone": "Asia/Singapore",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Conference End",
+        "date": "2027-12-03",
+        "time": null,
+        "timezone": "Asia/Singapore",
+        "type": "conference-end",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "id": "kr-2027",
+    "name": "KR",
+    "fullName": "International Conference on Principles of Knowledge Representation and Reasoning",
+    "year": 2027,
+    "field": [
+      "artificial-intelligence",
+      "knowledge-representation",
+      "reasoning"
+    ],
+    "subcategory": "general-ai",
+    "location": "Buenos Aires, Argentina",
+    "websiteUrl": "https://kr.org/KR2027/",
+    "sourceUrl": "https://kr.org/KR2027/dates.html",
+    "sourceCheckedAt": "2026-11-27",
+    "timezone": "AoE",
+    "deadlines": [
+      {
+        "id": "abstract",
+        "label": "Title and Abstract Submission",
+        "date": "2027-04-23",
+        "time": null,
+        "timezone": "AoE",
+        "type": "abstract",
+        "isPrimary": false
+      },
+      {
+        "id": "full-paper",
+        "label": "Paper Submission Deadline",
+        "date": "2027-04-28",
+        "time": null,
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": true
+      },
+      {
+        "id": "author-response",
+        "label": "Author Response Deadline",
+        "date": "2027-06-18",
+        "time": null,
+        "timezone": "AoE",
+        "type": "submission",
+        "isPrimary": false
+      },
+      {
+        "id": "notification",
+        "label": "Notification of Acceptance",
+        "date": "2027-06-30",
+        "time": null,
+        "timezone": "AoE",
+        "type": "notification",
+        "isPrimary": false
+      },
+      {
+        "id": "camera-ready",
+        "label": "Camera-ready Due",
+        "date": "2027-07-14",
+        "time": null,
+        "timezone": "AoE",
+        "type": "camera-ready",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-start",
+        "label": "Main Conference Start",
+        "date": "2027-09-21",
+        "time": null,
+        "timezone": "America/Argentina/Buenos_Aires",
+        "type": "conference-start",
+        "isPrimary": false
+      },
+      {
+        "id": "conference-end",
+        "label": "Main Conference End",
+        "date": "2027-09-24",
+        "time": null,
+        "timezone": "America/Argentina/Buenos_Aires",
         "type": "conference-end",
         "isPrimary": false
       }
